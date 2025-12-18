@@ -1,0 +1,8 @@
+{
+  "values": [
+    "stat-clocks:stat_clock",
+    "stat-clocks:stat_clock_part",
+    "stat-clocks:stat_clock_filter",
+    "stat-clocks:stat_clock_remover"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_resource_for_mobs_sheared": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#minecraft:wool"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "stat-clocks:craft_stat_clock_part_alt_mobs_sheared_tag.item.minecraft.wool"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_resource_for_mobs_sheared"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "stat-clocks:craft_stat_clock_part_alt_mobs_sheared_tag.item.minecraft.wool"
+    ]
+  }
+}

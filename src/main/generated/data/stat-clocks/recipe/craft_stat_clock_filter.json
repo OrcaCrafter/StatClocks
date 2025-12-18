@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "stat-clocks:netherite_counter",
+    "N": "minecraft:iron_nugget",
+    "W": "#minecraft:wool"
+  },
+  "pattern": [
+    "NNN",
+    "NWN",
+    "NCN"
+  ],
+  "result": {
+    "count": 1,
+    "id": "stat-clocks:stat_clock_filter"
+  }
+}

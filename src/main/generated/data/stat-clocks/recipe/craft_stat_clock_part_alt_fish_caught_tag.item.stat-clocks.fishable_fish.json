@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "craft_stat_clock_part_alt",
+  "ingredients": [
+    "stat-clocks:stat_clock_part",
+    "#stat-clocks:fishable_fish"
+  ],
+  "result": {
+    "components": {
+      "minecraft:stat_clock_part_type": {
+        "filter": {
+          "type": "none",
+          "filter": "none"
+        },
+        "id": "stat-clocks:fish_caught"
+      }
+    },
+    "count": 1,
+    "id": "stat-clocks:stat_clock_part"
+  }
+}

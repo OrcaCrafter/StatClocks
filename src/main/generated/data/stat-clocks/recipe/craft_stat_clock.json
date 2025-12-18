@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": "minecraft:gold_ingot",
+    "N": "stat-clocks:netherite_counter",
+    "R": "minecraft:redstone"
+  },
+  "pattern": [
+    "GGG",
+    "NNN",
+    "GRG"
+  ],
+  "result": {
+    "count": 1,
+    "id": "stat-clocks:stat_clock"
+  }
+}

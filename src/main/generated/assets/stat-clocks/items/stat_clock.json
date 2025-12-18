@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "stat-clocks:item/stat_clock"
+  }
+}

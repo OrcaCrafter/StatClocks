@@ -1,0 +1,10 @@
+// 1.21.11	-999999999-01-01T00:00:00	stat-clocks/Tags for minecraft:item
+1015605bda188324bf8e981e41d312083696a4e6 data/stat-clocks/tags/item/consumable.json
+97a89e18af28fd840ad8a2f045e3d0f474b96525 data/stat-clocks/tags/item/fishable.json
+8f30352bc88bb604102fe85458f0fcf898f966f3 data/stat-clocks/tags/item/fishable_fish.json
+5421b1eb8149f88dcd21295ce1892f1ab1d75195 data/stat-clocks/tags/item/fishable_trash.json
+eb84262a0ec14834836925d040932c94c009e79e data/stat-clocks/tags/item/fishable_treasure.json
+d6dbef7755957caa7d30801f1e934084a7d0bab4 data/stat-clocks/tags/item/horse_armor.json
+59563f9d83cd36e2e54e17b82bcd609a45617df6 data/stat-clocks/tags/item/nautilus_armor.json
+cfe2ad1dbbea062bc57f8ae47249e4b0d0369199 data/stat-clocks/tags/item/stat_clock_items.json
+e4c3a4e18369cf60fb060a96d46e4f56e0622f24 data/stat-clocks/tags/item/usable_item.json

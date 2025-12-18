@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "stat-clocks:stat_clock"
+  ],
+  "result": {
+    "count": 1,
+    "id": "stat-clocks:stat_clock"
+  }
+}

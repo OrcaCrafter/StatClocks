@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "#stat-clocks:stat_clock_items",
+    "#stat-clocks:stat_clock_items",
+    "#stat-clocks:stat_clock_items",
+    "#stat-clocks:stat_clock_items"
+  ],
+  "result": {
+    "count": 4,
+    "id": "stat-clocks:netherite_counter"
+  }
+}

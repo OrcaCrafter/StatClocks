@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_resource_for_mined_underwater": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:heart_of_the_sea"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "stat-clocks:craft_stat_clock_part_alt_mined_underwater_heart_of_the_sea"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_resource_for_mined_underwater"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "stat-clocks:craft_stat_clock_part_alt_mined_underwater_heart_of_the_sea"
+    ]
+  }
+}

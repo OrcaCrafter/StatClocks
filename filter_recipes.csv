@@ -1,0 +1,15 @@
+Tool Type,Filter Type,Filter Recipe Item
+shovel,dirt paths made,DEFAULT
+hoe,farmland made,DEFAULT
+hoe,dirt cleared,DEFAULT
+axe,logs stripped,DEFAULT
+armor,damage taken,DEFAULT
+armor,damage resisted,DEFAULT
+
+
+
+
+
+
+
+

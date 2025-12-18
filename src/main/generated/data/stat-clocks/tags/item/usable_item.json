@@ -1,0 +1,23 @@
+{
+  "values": [
+    {
+      "id": "#minecraft:axes",
+      "required": false
+    },
+    {
+      "id": "#minecraft:shovels",
+      "required": false
+    },
+    {
+      "id": "#minecraft:hoes",
+      "required": false
+    },
+    "minecraft:shears",
+    "minecraft:flint_and_steel",
+    "minecraft:brush",
+    "minecraft:carrot_on_a_stick",
+    "minecraft:warped_fungus_on_a_stick",
+    "minecraft:goat_horn",
+    "minecraft:spyglass"
+  ]
+}

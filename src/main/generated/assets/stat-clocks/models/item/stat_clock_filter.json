@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "stat-clocks:item/stat_clock_filter"
+  }
+}
