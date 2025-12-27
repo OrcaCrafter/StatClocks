@@ -1,11 +1,9 @@
 package orca.statclocks.listeners;
 
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.protocol.game.ClientboundSetPlayerInventoryPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -52,12 +50,8 @@ public class ListenerAdapter {
 					
 					serverPlayer.connection.send(packet);
 					
-					StatClocksMod.LOGGER.info("Sent inventory update packet for slot: {}", slotIndex);
-				} else {
-					StatClocksMod.LOGGER.warn("Failed to fin matching item");
 				}
 				
-				StatClocksMod.LOGGER.warn("Player is server side");
 			}
 		}
 		
@@ -81,7 +75,9 @@ public class ListenerAdapter {
 		for (StatClockPartContent part : parts) {
 			if (DETAIL_LOG) StatClocksMod.LOGGER.info("\tStarting part {} application", part.getType().getIdName());
 			
-			added = added || applyToPart(part, target, amount);
+			boolean addedPart = applyToPart(part, target, amount);
+			
+			added = added || addedPart;
 		}
 		
 		statClock.setParts(parts);
@@ -96,6 +92,8 @@ public class ListenerAdapter {
 		StatClockPartType partType = part.getType();
 		
 		boolean matches = false;
+		
+		if (DETAIL_LOG) StatClocksMod.LOGGER.info("\t\tValid for {} parts", allowedTypes.size());
 		
 		for (Pair<StatClockPartType, Filter> pair : allowedTypes) {
 			

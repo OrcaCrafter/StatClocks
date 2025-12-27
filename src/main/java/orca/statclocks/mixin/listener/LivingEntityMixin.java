@@ -40,6 +40,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static orca.statclocks.listeners.DamageListener.WOLF_DAMAGE_BLOCKED_ADAPTER;
+
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
 	
@@ -114,7 +116,12 @@ public abstract class LivingEntityMixin extends Entity {
 		
 		LivingEntity thisEntity = (LivingEntity)(Object)this;
 		
-		StatClocksMod.LOGGER.info("Damage dealt: {} of health: {}", damage, thisEntity.getHealth());
+		if (thisEntity instanceof Wolf wolf) {
+			//Wolf armor is handled differently, only blocking damage
+			ItemStack armor = wolf.getBodyArmorItem();
+			
+			WOLF_DAMAGE_BLOCKED_ADAPTER.applyToPartsNonPlayer(armor, damageSource.getEntity(), (int)(damage * 10));
+		}
 		
 		float damageAfterArmor		= this.getDamageAfterArmor(damageSource, damage);
 		float damageAfterResistance = this.getDamageAfterResistance(damageSource, damageAfterArmor);
@@ -140,15 +147,13 @@ public abstract class LivingEntityMixin extends Entity {
 		} else if (thisEntity instanceof AbstractHorse horse) {
 			//Horse, donkey, mule, zombie horse, skeleton horse, camel, husk
 			DamageListener.HORSE_DAMAGE_LISTENER.onTakeDamage(horse, damageSource, damageBlocked, damageTaken);
-		} else if (thisEntity instanceof Wolf wolf) {
-			DamageListener.WOLF_DAMAGE_LISTENER.onTakeDamage(wolf, damageSource, damageBlocked, damageTaken);
-		}else if (thisEntity instanceof AbstractNautilus nautilus) {
+		} else if (thisEntity instanceof AbstractNautilus nautilus) {
 			DamageListener.NAUTILUS_DAMAGE_LISTENER.onTakeDamage(nautilus, damageSource, damageBlocked, damageTaken);
 		}
 		
 		ItemStack weapon = damageSource.getWeaponItem();
 		
-		if (damageSource.getEntity() instanceof Player player && !(damageSource.getDirectEntity() instanceof Player) && weapon != null) {
+		if (damageSource.getEntity() instanceof Player player && weapon != null) {
 			MiscListeners.DAMAGE_DEALT.applyToParts(player, weapon, thisEntity, (int)damageTaken);
 			
 			if (player.level().dimension() == thisEntity.level().dimension()) {

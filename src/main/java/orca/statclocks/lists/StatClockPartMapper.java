@@ -190,12 +190,15 @@ public class StatClockPartMapper {
 		//Armor general
 		MAPPERS.add((Item item, MapRule rule) -> {
 			boolean humanArmor = isInTags(item, ItemTags.HEAD_ARMOR, ItemTags.CHEST_ARMOR, ItemTags.LEG_ARMOR, ItemTags.FOOT_ARMOR);
-			boolean mobArmor = isInTags(item, StatClocksMod.HORSE_ARMOR, StatClocksMod.NAUTILUS_ARMOR) || item == Items.WOLF_ARMOR;
+			boolean mobArmor = isInTags(item, StatClocksMod.HORSE_ARMOR, StatClocksMod.NAUTILUS_ARMOR);
 			
 			if (humanArmor || mobArmor) {
 				rule.defaultParts.add(StatClockPartTypes.DAMAGE_TAKEN);
 				rule.defaultParts.add(StatClockPartTypes.DAMAGE_REDUCED);
-				
+			}
+			
+			if (item == Items.WOLF_ARMOR) {
+				rule.defaultParts.add(StatClockPartTypes.DAMAGE_REDUCED);
 			}
 		});
 		

@@ -16,7 +16,6 @@ public interface DamageListener <T extends LivingEntity> {
 	
 	ListenerAdapter PLAYER_DAMAGE_TAKEN_ADAPTER = new ListenerAdapter();
 	ListenerAdapter HORSE_DAMAGE_TAKEN_ADAPTER = new ListenerAdapter();
-	ListenerAdapter WOLF_DAMAGE_TAKEN_ADAPTER = new ListenerAdapter();
 	ListenerAdapter NAUTILUS_DAMAGE_TAKEN_ADAPTER = new ListenerAdapter();
 	
 	ListenerAdapter PLAYER_DAMAGE_BLOCKED_ADAPTER = new ListenerAdapter();
@@ -65,14 +64,6 @@ public interface DamageListener <T extends LivingEntity> {
 		HORSE_DAMAGE_TAKEN_ADAPTER.applyToPartsNonPlayer(armor, source.getEntity(), (int)damageTaken);
 		HORSE_DAMAGE_BLOCKED_ADAPTER.applyToPartsNonPlayer(armor, source.getEntity(), (int)damageBlocked);
 	
-	};
-	
-	DamageListener<Wolf> WOLF_DAMAGE_LISTENER = (Wolf wolf, DamageSource source, float damageBlocked, float damageTaken) -> {
-		
-		ItemStack armor = wolf.getBodyArmorItem();
-		
-		WOLF_DAMAGE_TAKEN_ADAPTER.applyToPartsNonPlayer(armor, source.getEntity(), (int)damageTaken);
-		WOLF_DAMAGE_BLOCKED_ADAPTER.applyToPartsNonPlayer(armor, source.getEntity(), (int)damageBlocked);
 	};
 	
 	DamageListener<AbstractNautilus> NAUTILUS_DAMAGE_LISTENER = (AbstractNautilus nautilus, DamageSource source, float damageBlocked, float damageTaken) -> {

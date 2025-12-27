@@ -115,7 +115,6 @@ public class StatClockPartTypes {
 		.setFormat(PartValueFormat.DAMAGE)
 		.addListener(DamageListener.PLAYER_DAMAGE_TAKEN_ADAPTER)
 		.addListener(DamageListener.HORSE_DAMAGE_TAKEN_ADAPTER)
-		.addListener(DamageListener.WOLF_DAMAGE_TAKEN_ADAPTER)
 		.addListener(DamageListener.NAUTILUS_DAMAGE_TAKEN_ADAPTER)
 		.addCraftingResource(Items.IRON_HELMET).setFormat(PartValueFormat.DAMAGE).close();
 	
