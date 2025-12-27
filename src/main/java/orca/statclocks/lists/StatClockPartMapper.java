@@ -77,6 +77,7 @@ public class StatClockPartMapper {
 			}
 			
 			if (item instanceof FlintAndSteelItem) {
+				rule.defaultParts.add(StatClockPartTypes.BLOCKS_IGNITED);
 				rule.defaultParts.add(StatClockPartTypes.MOBS_IGNITED);
 			}
 			

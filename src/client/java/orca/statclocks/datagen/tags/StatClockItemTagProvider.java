@@ -50,7 +50,6 @@ public class StatClockItemTagProvider extends FabricTagProvider.ItemTagProvider 
 	}
 	
 	private static final Item[] MISC_USABLE_ITEMS = new Item[] {
-		Items.FLINT_AND_STEEL,
 		Items.CARROT_ON_A_STICK, Items.WARPED_FUNGUS_ON_A_STICK,
 		Items.GOAT_HORN, Items.SPYGLASS
 		//Brush has its own handling

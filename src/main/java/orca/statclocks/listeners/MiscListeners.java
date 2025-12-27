@@ -22,7 +22,7 @@ public class MiscListeners {
 	
 	public static final ListenerAdapter BRUSH_USE_LISTENER				= new ListenerAdapter();
 	
-	public static final ListenerAdapter FLINT_AND_STEEL_USE_LISTENER	= new ListenerAdapter();
+	public static final ListenerAdapter BLOCKS_IGNITED					= new ListenerAdapter();
 	public static final ListenerAdapter MOBS_IGNITED					= new ListenerAdapter();
 	
 	//TODO block and entity interactors :(

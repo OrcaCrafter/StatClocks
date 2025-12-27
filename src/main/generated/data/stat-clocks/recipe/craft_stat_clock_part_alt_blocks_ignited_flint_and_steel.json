@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "craft_stat_clock_part_alt",
+  "ingredients": [
+    "stat-clocks:stat_clock_part",
+    "minecraft:flint_and_steel"
+  ],
+  "result": {
+    "components": {
+      "minecraft:stat_clock_part_type": {
+        "filter": {
+          "type": "none",
+          "filter": "none"
+        },
+        "id": "stat-clocks:blocks_ignited"
+      }
+    },
+    "count": 1,
+    "id": "stat-clocks:stat_clock_part"
+  }
+}

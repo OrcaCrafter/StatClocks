@@ -42,10 +42,14 @@ public class StatClockPartTypes {
 		.addListener(MiscListeners.AXE_USE_LISTENER)
 		.addListener(MiscListeners.SHOVEL_USE_LISTENER)
 		.addListener(MiscListeners.HOE_USE_LISTENER)
-		.addListener(MiscListeners.FLINT_AND_STEEL_USE_LISTENER)
 		.addListener(MiscListeners.INSTRUMENT_USE_LISTENER)
 		.addListener(MiscListeners.SPYGLASS_USE_LISTENER)
 		.addCraftingResource(Items.SHEARS).close();
+	
+	public static final StatClockPartType BLOCKS_IGNITED = new PartTypeInfo("blocks_ignited")
+		.english("Blocks Ignited").setFilterTypeBlock("%1$s Ignited").addCraftingResource(Items.FLINT_AND_STEEL)
+		.addListener(MiscListeners.BLOCKS_IGNITED)
+		.close();
 	
 	public static final StatClockPartType MOBS_IGNITED = new PartTypeInfo("mobs_ignited")
 		.english("Mobs Ignited").setFilterTypeEntity("%1$s Ignited", StatClocksMod.IGNITABLE_MOBS).addCraftingResource(Items.FIRE_CHARGE)

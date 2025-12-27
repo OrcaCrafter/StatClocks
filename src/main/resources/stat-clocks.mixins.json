@@ -28,7 +28,8 @@
 		"listener.ShearsItemListener",
 		"listener.ShovelItemMixin",
 		"listener.SpyglassItemMixin",
-		"listener.StatEvent"
+		"listener.StatEvent",
+		"listener.TntBlockMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
