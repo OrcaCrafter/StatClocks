@@ -6,6 +6,8 @@
 		"AnvilMenuMixin",
 		"GrindstoneMenuMixin",
 		"VehicleMixin",
+		"VillagerMixin",
+		"WanderingTraderMixin",
 		"listener.ArmadilloMixin",
 		"listener.AxeItemMixin",
 		"listener.BlockMixin",
