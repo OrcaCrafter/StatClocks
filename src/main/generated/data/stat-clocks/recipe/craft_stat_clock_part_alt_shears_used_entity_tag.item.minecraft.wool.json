@@ -13,7 +13,7 @@
           "type": "none",
           "filter": "none"
         },
-        "id": "stat-clocks:mobs_sheared"
+        "id": "stat-clocks:shears_used_entity"
       }
     },
     "count": 1,

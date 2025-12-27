@@ -30,7 +30,7 @@ public class FireworkRocketItemMixin {
 			
 			ItemStack elytra = player.getItemBySlot(EquipmentSlot.CHEST);
 			
-			MiscListeners.FIREWORK_USED_LISTENER.applyToParts(elytra, null, fireworkData.flightDuration());
+			MiscListeners.FIREWORK_USED_LISTENER.applyToParts(player, elytra, null, fireworkData.flightDuration());
 		}
 	}
 }

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_resource_for_mobs_sheared": {
+    "has_resource_for_brush_used": {
       "conditions": {
         "items": [
           {
-            "items": "#minecraft:wool"
+            "items": "minecraft:brush"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "stat-clocks:craft_stat_clock_part_alt_mobs_sheared_tag.item.minecraft.wool"
+        "recipe": "stat-clocks:craft_stat_clock_part_alt_brush_used_brush"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_resource_for_mobs_sheared"
+      "has_resource_for_brush_used"
     ]
   ],
   "rewards": {
     "recipes": [
-      "stat-clocks:craft_stat_clock_part_alt_mobs_sheared_tag.item.minecraft.wool"
+      "stat-clocks:craft_stat_clock_part_alt_brush_used_brush"
     ]
   }
 }

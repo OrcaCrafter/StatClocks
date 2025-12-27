@@ -21,7 +21,7 @@ public abstract class ConsumableMixin {
 		
 		if (livingEntity instanceof Player player) {
 			ItemStack helmet = player.getItemBySlot(EquipmentSlot.HEAD);
-			MiscListeners.PLAYER_CONSUMES.applyToParts(helmet, itemStack, 1);
+			MiscListeners.PLAYER_CONSUMES.applyToParts(player, helmet, itemStack, 1);
 		}
 	}
 }

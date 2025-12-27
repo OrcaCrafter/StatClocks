@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import orca.statclocks.components.StatClockContent;
@@ -25,7 +26,9 @@ public abstract class FoodOnAStickItemMixin extends Item {
 	@WrapOperation(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;hurtAndConvertOnBreak(ILnet/minecraft/world/level/ItemLike;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;"))
 	public ItemStack onFoodOnAStickUsedProper (ItemStack itemInHand, int damage, ItemLike replacement, LivingEntity entity, EquipmentSlot hand, Operation<ItemStack> original) {
 		
-		MiscListeners.FOOD_ON_A_STICK_LISTENER.applyToParts(itemInHand, entity.getVehicle(), 1);
+		if (entity instanceof Player player) {
+			MiscListeners.FOOD_ON_A_STICK_LISTENER.applyToParts(player, itemInHand, entity.getVehicle(), 1);
+		}
 		
 		ItemStack ret = itemInHand.hurtAndConvertOnBreak(this.consumeItemDamage, Items.FISHING_ROD, entity, hand);
 		

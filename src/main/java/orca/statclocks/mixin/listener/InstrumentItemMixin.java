@@ -29,7 +29,7 @@ public abstract class InstrumentItemMixin extends Item {
 		
 		ItemStack tool = StatClockPartTypes.getPriorityHandItem(player, (item) -> item.getItem() instanceof InstrumentItem);
 		
-		MiscListeners.INSTRUMENT_USE_LISTENER.applyToParts(tool, null, 1);
+		MiscListeners.INSTRUMENT_USE_LISTENER.applyToParts(player, tool, null, 1);
 		
 	}
 }

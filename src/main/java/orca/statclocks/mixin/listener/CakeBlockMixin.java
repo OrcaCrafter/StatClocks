@@ -29,7 +29,7 @@ public abstract class CakeBlockMixin extends Block {
 		if (!player.canEat(false)) return;
 		
 		ItemStack helmet = player.getItemBySlot(EquipmentSlot.HEAD);
-		MiscListeners.PLAYER_CONSUMES.applyToParts(helmet, Items.CAKE, 1);
+		MiscListeners.PLAYER_CONSUMES.applyToParts(player, helmet, Items.CAKE, 1);
 	
 	
 	}

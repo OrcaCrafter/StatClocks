@@ -1,0 +1,15 @@
+{
+  "values": [
+    "#stat-clocks:nautilus_armor",
+    "#stat-clocks:horse_armor",
+    "minecraft:saddle",
+    "minecraft:lead",
+    "minecraft:pumpkin_seeds",
+    {
+      "id": "#minecraft:wool",
+      "required": false
+    },
+    "minecraft:brown_mushroom",
+    "minecraft:red_mushroom"
+  ]
+}

@@ -22,14 +22,14 @@ public abstract class FishingRodHookedTriggerMixin extends SimpleCriterionTrigge
 		
 		//Should only be zero or one item, but this is easier and safer
 		for (ItemStack loot : lootCollection) {
-			MiscListeners.FISH_ITEM_LISTENER.applyToParts(rod, loot, 1);
+			MiscListeners.FISH_ITEM_LISTENER.applyToParts(player, rod, loot, 1);
 		}
 		
 		Entity caught = hook.getHookedIn();
 		
 		//Caught an entity
 		if (caught != null) {
-			MiscListeners.FISH_ITEM_LISTENER.applyToParts(rod, caught, 1);
+			MiscListeners.FISH_ITEM_LISTENER.applyToParts(player, rod, caught, 1);
 		}
 		
 	}

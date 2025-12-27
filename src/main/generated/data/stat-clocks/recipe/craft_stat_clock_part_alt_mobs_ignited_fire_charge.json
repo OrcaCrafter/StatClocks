@@ -4,7 +4,7 @@
   "group": "craft_stat_clock_part_alt",
   "ingredients": [
     "stat-clocks:stat_clock_part",
-    "minecraft:amethyst_shard"
+    "minecraft:fire_charge"
   ],
   "result": {
     "components": {
@@ -13,7 +13,7 @@
           "type": "none",
           "filter": "none"
         },
-        "id": "stat-clocks:mobs_spied_on"
+        "id": "stat-clocks:mobs_ignited"
       }
     },
     "count": 1,

@@ -63,6 +63,11 @@ public class StatClockPartMapper {
 				rule.defaultParts.add(StatClockPartTypes.BLOCKS_MINED);
 				rule.allowedParts.add(StatClockPartTypes.BLOCK_LOOT_DROPPED);
 			}
+			
+			if (isInTag(item, ItemTags.SWORDS) || item instanceof ShearsItem) {
+				rule.allowedParts.add(StatClockPartTypes.BLOCKS_MINED);
+				rule.allowedParts.add(StatClockPartTypes.BLOCK_LOOT_DROPPED);
+			}
 		});
 		
 		//Item used rule
@@ -76,15 +81,14 @@ public class StatClockPartMapper {
 			}
 			
 			if (item instanceof ShearsItem) {
-				rule.defaultParts.add(StatClockPartTypes.MOBS_SHEARED);
+				rule.defaultParts.add(StatClockPartTypes.SHEARS_USED);
+				rule.allowedParts.add(StatClockPartTypes.SHEARS_USED_ITEM);
+				rule.allowedParts.add(StatClockPartTypes.SHEARS_USED_BLOCK);
+				rule.allowedParts.add(StatClockPartTypes.SHEARS_USED_ENTITY);
 			}
 			
 			if (item instanceof BrushItem) {
-				rule.defaultParts.add(StatClockPartTypes.MOBS_BRUSHED);
-			}
-			
-			if (item instanceof SpyglassItem) {
-				rule.defaultParts.add(StatClockPartTypes.MOBS_SPIED_ON);
+				rule.defaultParts.add(StatClockPartTypes.BRUSH_USED);
 			}
 		});
 		

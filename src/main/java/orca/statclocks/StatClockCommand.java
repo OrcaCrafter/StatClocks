@@ -264,6 +264,8 @@ public class StatClockCommand {
 	}
 	
 	private static int addPartToStatClock (CommandSourceStack commandSourceStack, Collection<? extends Entity> targets, StatClockPartType type, StatClockFilterType filterType, String filter) throws CommandSyntaxException {
+		//Avoid modifying all instance of this part type
+		type = type.clonePartType();
 		
 		PartTypeInfo typeInfo = type.getInfo();
 		

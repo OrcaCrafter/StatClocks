@@ -135,7 +135,7 @@ public abstract class LivingEntityMixin extends Entity {
 		damageTaken *= 10;
 		
 		if (thisEntity instanceof Player player) {
-			//TODO should humanoids wearing armor be able to count stats for players??
+			//NOTE humanoids should not be able to fake player stats
 			DamageListener.PLAYER_DAMAGE_LISTENER.onTakeDamage(player, damageSource, damageBlocked, damageTaken);
 		} else if (thisEntity instanceof AbstractHorse horse) {
 			//Horse, donkey, mule, zombie horse, skeleton horse, camel, husk
@@ -149,13 +149,13 @@ public abstract class LivingEntityMixin extends Entity {
 		ItemStack weapon = damageSource.getWeaponItem();
 		
 		if (damageSource.getEntity() instanceof Player player && !(damageSource.getDirectEntity() instanceof Player) && weapon != null) {
-			MiscListeners.DAMAGE_DEALT.applyToParts(weapon, thisEntity, (int)damageTaken);
+			MiscListeners.DAMAGE_DEALT.applyToParts(player, weapon, thisEntity, (int)damageTaken);
 			
 			if (player.level().dimension() == thisEntity.level().dimension()) {
 				
 				int distanceCM = (int) (thisEntity.distanceTo(player) * 100f);
 				
-				MiscListeners.DAMAGE_DEALT_DISTANCE.applyToParts(weapon, thisEntity, distanceCM);
+				MiscListeners.DAMAGE_DEALT_DISTANCE.applyToParts(player, weapon, thisEntity, distanceCM);
 			}
 		}
 	}
@@ -240,9 +240,11 @@ public abstract class LivingEntityMixin extends Entity {
 		this.spawnAtLocation(serverLevel, itemStack);
 		
 		ItemStack weapon = source.getWeaponItem();
+		Entity entity = source.getEntity();
 		
 		if (weapon == null) return;
+		if (!(entity instanceof Player player)) return;
 		
-		MiscListeners.MOB_LOOT_LISTENER.applyToParts(weapon, itemStack, itemStack.getCount());
+		MiscListeners.MOB_LOOT_LISTENER.applyToParts(player, weapon, itemStack, itemStack.getCount());
 	}
 }

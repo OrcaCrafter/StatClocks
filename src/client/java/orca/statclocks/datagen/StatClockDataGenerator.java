@@ -2,6 +2,8 @@ package orca.statclocks.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import orca.statclocks.datagen.tags.StatClockBlockTagProvider;
+import orca.statclocks.datagen.tags.StatClockEntityTagProvider;
 import orca.statclocks.datagen.tags.StatClockItemTagProvider;
 
 public class StatClockDataGenerator implements DataGeneratorEntrypoint {
@@ -11,6 +13,8 @@ public class StatClockDataGenerator implements DataGeneratorEntrypoint {
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 		
 		pack.addProvider(StatClockItemTagProvider::new);
+		pack.addProvider(StatClockBlockTagProvider::new);
+		pack.addProvider(StatClockEntityTagProvider::new);
 		
 		pack.addProvider(StatClockRecipeProvider::new);
 		

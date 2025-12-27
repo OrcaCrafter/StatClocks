@@ -230,7 +230,9 @@ public class PartTypeInfo {
 		StatClocksMod.LOGGER.info("Filter type: {}", filterType);
 		
 		if (filterContent.getType() == StatClockFilterType.NONE) return false;
+		
 		if (filterType == StatClockFilterType.NONE) return false;
+		
 		if (filterType != filterContent.getType()) return false;
 		
 		return switch (filterType) {

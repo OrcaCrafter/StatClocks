@@ -26,18 +26,12 @@ public class StatClockEntityTagProvider extends FabricTagProvider.EntityTypeTagP
 		EntityType.SHEEP, EntityType.MOOSHROOM, EntityType.BOGGED
 	};
 	
-	EntityType<?>[] BRUSHABLE_MOBS = new EntityType<?>[] {
-		EntityType.ARMADILLO
-	};
-	
 	@Override
 	protected void addTags (HolderLookup.Provider wrapperLookup) {
 		
 		addAll(StatClocksMod.IGNITABLE_MOBS, IGNITABLE_MOBS);
+		
 		addAll(StatClocksMod.SHEARABLE_MOBS, SHEARABLE_MOBS);
-		addAll(StatClocksMod.BRUSHABLE_MOBS, BRUSHABLE_MOBS);
-		
-		
 	}
 	
 	private void addAll (TagKey<EntityType<?>> tag, EntityType<?>... mobs) {

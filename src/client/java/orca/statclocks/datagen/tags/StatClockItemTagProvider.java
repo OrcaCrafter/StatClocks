@@ -2,13 +2,21 @@ package orca.statclocks.datagen.tags;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.tags.TagAppender;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
+import net.minecraft.world.level.storage.loot.LootTable;
 import orca.statclocks.StatClocksMod;
 
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class StatClockItemTagProvider extends FabricTagProvider.ItemTagProvider {
@@ -34,8 +42,31 @@ public class StatClockItemTagProvider extends FabricTagProvider.ItemTagProvider 
 		
 		addMobArmor();
 		
+		addShearableItems();
+		
 		addFishingTags();
 		
+		addBrushableTags();
+	}
+	
+	private static final Item[] MISC_USABLE_ITEMS = new Item[] {
+		Items.FLINT_AND_STEEL,
+		Items.CARROT_ON_A_STICK, Items.WARPED_FUNGUS_ON_A_STICK,
+		Items.GOAT_HORN, Items.SPYGLASS
+		//Brush has its own handling
+	};
+	
+	private void addUsableItems () {
+		
+		TagAppender<Item, Item> usable = valueLookupBuilder(StatClocksMod.USABLE_ITEM);
+		
+		usable.addOptionalTag(ItemTags.AXES);
+		usable.addOptionalTag(ItemTags.SHOVELS);
+		usable.addOptionalTag(ItemTags.HOES);
+		
+		for (Item item : MISC_USABLE_ITEMS) {
+			usable.add(item);
+		}
 		
 	}
 	
@@ -84,26 +115,6 @@ public class StatClockItemTagProvider extends FabricTagProvider.ItemTagProvider 
 		}
 	}
 	
-	private static final Item[] MISC_USABLE_ITEMS = new Item[] {
-		Items.SHEARS, Items.FLINT_AND_STEEL, Items.BRUSH,
-		Items.CARROT_ON_A_STICK, Items.WARPED_FUNGUS_ON_A_STICK,
-		Items.GOAT_HORN, Items.SPYGLASS
-	};
-	
-	private void addUsableItems () {
-		
-		TagAppender<Item, Item> usable = valueLookupBuilder(StatClocksMod.USABLE_ITEM);
-		
-		usable.addOptionalTag(ItemTags.AXES);
-		usable.addOptionalTag(ItemTags.SHOVELS);
-		usable.addOptionalTag(ItemTags.HOES);
-		
-		for (Item item : MISC_USABLE_ITEMS) {
-			usable.add(item);
-		}
-		
-	}
-	
 	
 	private static final Item[] HORSE_ARMOR = new Item[] {
 		Items.LEATHER_HORSE_ARMOR, Items.COPPER_HORSE_ARMOR, Items.IRON_HORSE_ARMOR,
@@ -131,6 +142,24 @@ public class StatClockItemTagProvider extends FabricTagProvider.ItemTagProvider 
 		
 	}
 	
+	private void addShearableItems () {
+		TagAppender<Item, Item> shearableItems = valueLookupBuilder(StatClocksMod.SHEARABLE_ITEMS);
+		
+		shearableItems.addTag(StatClocksMod.NAUTILUS_ARMOR);
+		shearableItems.addTag(StatClocksMod.HORSE_ARMOR);
+		
+		shearableItems.add(Items.SADDLE);
+		
+		shearableItems.add(Items.LEAD);
+		
+		shearableItems.add(Items.PUMPKIN_SEEDS);
+		
+		shearableItems.addOptionalTag(ItemTags.WOOL);
+		
+		shearableItems.add(Items.BROWN_MUSHROOM);
+		shearableItems.add(Items.RED_MUSHROOM);
+	
+	}
 	
 	private static final Item[] FISHABLE_FISH = new Item[] {
 		Items.COD, Items.SALMON, Items.PUFFERFISH, Items.TROPICAL_FISH
@@ -154,7 +183,7 @@ public class StatClockItemTagProvider extends FabricTagProvider.ItemTagProvider 
 	};
 	
 	private void addFishingTags () {
-		//TODO read from loot tables?
+		//NOTE no way to read from loot tables
 		TagAppender<Item, Item> fishable = valueLookupBuilder(StatClocksMod.FISHABLE);
 		TagAppender<Item, Item> fish = valueLookupBuilder(StatClocksMod.FISHABLE_FISH);
 		TagAppender<Item, Item> treasure = valueLookupBuilder(StatClocksMod.FISHABLE_TREASURE);
@@ -175,5 +204,73 @@ public class StatClockItemTagProvider extends FabricTagProvider.ItemTagProvider 
 			trash.add(add);
 		}
 		
+	}
+	
+	
+	private static final Item[] BRUSHABLE_LOOT = new Item[] {
+		//Warm ocean
+		Items.COAL, Items.EMERALD, Items.WHEAT,
+		Items.WOODEN_HOE, Items.GOLD_NUGGET,
+		Items.ANGLER_POTTERY_SHERD, Items.SHELTER_POTTERY_SHERD,
+		Items.SNORT_POTTERY_SHERD,
+		Items.SNIFFER_EGG, Items.IRON_AXE,
+		
+		//Cold ocean
+		//Items.COAL, Items.EMERALD, Items.WHEAT,
+		//Items.WOODEN_HOE, Items.GOLD_NUGGET,
+		Items.BLADE_POTTERY_SHERD, Items.EXPLORER_POTTERY_SHERD,
+		Items.MOURNER_POTTERY_SHERD, Items.PLENTY_POTTERY_SHERD,
+		//Items.IRON_AXE,
+		
+		
+		//Desert temple
+		Items.ARCHER_POTTERY_SHERD, Items.MINER_POTTERY_SHERD,
+		Items.PRIZE_POTTERY_SHERD, Items.SKULL_POTTERY_SHERD,
+		Items.TNT, Items.DIAMOND, //Items.EMERALD
+		
+		//Desert well
+		Items.ARMS_UP_POTTERY_SHERD, Items.BREWER_POTTERY_SHERD,
+		Items.BRICK, Items.STICK, Items.SUSPICIOUS_STEW, //Items.EMERALD
+		
+		//Trail ruins common
+		//Items.BRICK, Items.WHEAT, Items.EMERALD, Items.GOLD_NUGGET, Items.WOODEN_HOE
+		Items.BLUE_DYE, Items.LIGHT_BLUE_DYE, Items.ORANGE_DYE, Items.WHITE_DYE, Items.YELLOW_DYE,
+		Items.BROWN_CANDLE, Items.GREEN_CANDLE, Items.PURPLE_CANDLE, Items.RED_CANDLE,
+		Items.BLUE_STAINED_GLASS_PANE, Items.LIGHT_BLUE_STAINED_GLASS_PANE,
+		Items.MAGENTA_STAINED_GLASS_PANE, Items.PINK_STAINED_GLASS_PANE,
+		Items.PURPLE_STAINED_GLASS_PANE, Items.RED_STAINED_GLASS_PANE,
+		Items.YELLOW_STAINED_GLASS_PANE,
+		Items.OAK_HANGING_SIGN, Items.SPRUCE_HANGING_SIGN,
+		Items.CLAY_BALL, Items.BEETROOT_SEEDS, Items.DEAD_BUSH,
+		Items.FLOWER_POT, Items.LEAD, Items.STRING,
+		Items.WHEAT_SEEDS,
+		
+		//Trail ruins rare
+		Items.BURN_POTTERY_SHERD,
+		Items.DANGER_POTTERY_SHERD,
+		Items.FRIEND_POTTERY_SHERD,
+		Items.HEART_POTTERY_SHERD,
+		Items.HEARTBREAK_POTTERY_SHERD,
+		Items.HOWL_POTTERY_SHERD,
+		Items.SHEAF_POTTERY_SHERD,
+		
+		Items.HOST_ARMOR_TRIM_SMITHING_TEMPLATE,
+		Items.RAISER_ARMOR_TRIM_SMITHING_TEMPLATE,
+		Items.SHAPER_ARMOR_TRIM_SMITHING_TEMPLATE,
+		Items.WAYFINDER_ARMOR_TRIM_SMITHING_TEMPLATE,
+		
+		Items.MUSIC_DISC_RELIC
+		
+	};
+	
+	private void addBrushableTags () {
+		//NOTE no way to read from loot tables
+		TagAppender<Item, Item> brushable = valueLookupBuilder(StatClocksMod.BRUSHABLE_ITEMS);
+		
+		brushable.add(Items.ARMADILLO_SCUTE);
+		
+		for (Item add : BRUSHABLE_LOOT) {
+			brushable.add(add);
+		}
 	}
 }

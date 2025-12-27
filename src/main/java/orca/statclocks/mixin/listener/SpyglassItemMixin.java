@@ -28,7 +28,7 @@ public abstract class SpyglassItemMixin extends Item {
 		
 		ItemStack tool = StatClockPartTypes.getPriorityHandItem(player, (item) -> item.getItem() instanceof SpyglassItem);
 		
-		MiscListeners.SPYGLASS_USE_LISTENER.applyToParts(tool, null, 1);
+		MiscListeners.SPYGLASS_USE_LISTENER.applyToParts(player, tool, null, 1);
 		
 	}
 }

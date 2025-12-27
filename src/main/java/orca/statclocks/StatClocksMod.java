@@ -18,9 +18,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import orca.statclocks.components.StatClockContent;
 import orca.statclocks.components.StatClockFilterContent;
 import orca.statclocks.components.StatClockPartContent;
@@ -28,7 +25,6 @@ import orca.statclocks.components.StatClockPartType;
 import orca.statclocks.lists.PartTypeInfo;
 import orca.statclocks.lists.StatClockPartTypes;
 import orca.statclocks.loottable.CustomLootRegistries;
-import orca.statclocks.loottable.DataLootItem;
 import orca.statclocks.loottable.LootTableModifications;
 import orca.statclocks.loottable.LootTableModifier;
 import org.slf4j.Logger;
@@ -100,17 +96,23 @@ public class StatClocksMod implements ModInitializer {
 	public static final TagKey<Item> HORSE_ARMOR = itemTag("horse_armor");
 	public static final TagKey<Item> NAUTILUS_ARMOR = itemTag("nautilus_armor");
 	
+	public static final TagKey<Item> BRUSHABLE_ITEMS = itemTag("brushable_items");
+	
+	public static final TagKey<Item> SHEARABLE_ITEMS = itemTag("shearable_items");
+	
 	public static TagKey<Item> itemTag (String name) {
 		return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MOD_ID, name));
 	}
+	
+	public static final TagKey<Block> SHEARABLE_BLOCKS = blockTag("shearable_items");
 	
 	public static TagKey<Block> blockTag (String name) {
 		return TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MOD_ID, name));
 	}
 	
 	public static final TagKey<EntityType<?>> IGNITABLE_MOBS = entityTag("ignitable_mobs");
+	
 	public static final TagKey<EntityType<?>> SHEARABLE_MOBS = entityTag("shearable_mobs");
-	public static final TagKey<EntityType<?>> BRUSHABLE_MOBS = entityTag("brushable_mobs");
 	
 	public static TagKey<EntityType<?>> entityTag (String name) {
 		return TagKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(MOD_ID, name));
@@ -161,8 +163,6 @@ public class StatClocksMod implements ModInitializer {
 		
 		//Loot table setup
 		LootTableEvents.MODIFY.register(LootTableModifier::modify);
-		
-		//TODO grindstone behave weirdly
 	}
 	
 	private void AddToIngredientsTab (Item item) {

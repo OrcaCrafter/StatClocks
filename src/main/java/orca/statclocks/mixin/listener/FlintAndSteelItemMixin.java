@@ -33,7 +33,7 @@ public abstract class FlintAndSteelItemMixin extends Item {
 		
 		ItemStack tool = StatClockPartTypes.getPriorityHandItem(player, (item) -> item.getItem() instanceof FlintAndSteelItem);
 		
-		MiscListeners.FLINT_AND_STEEL_USE_LISTENER.applyToParts(tool, null, 1);
+		MiscListeners.FLINT_AND_STEEL_USE_LISTENER.applyToParts(player, tool, null, 1);
 		
 	}
 }

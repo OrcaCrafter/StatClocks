@@ -4,13 +4,12 @@
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
 		"AnvilMenuMixin",
-		"listener.JukeboxBlockEntityMixin",
-		"listener.LivingEntityMixin",
-		"listener.PlayerMixin",
-		"listener.StatEvent",
+		"GrindstoneMenuMixin",
 		"VehicleMixin",
+		"listener.ArmadilloMixin",
 		"listener.AxeItemMixin",
 		"listener.BlockMixin",
+		"listener.BrushableBlockEntityMixin",
 		"listener.CakeBlockMixin",
 		"listener.ConsumableMixin",
 		"listener.CreeperMixin",
@@ -20,10 +19,14 @@
 		"listener.FoodOnAStickItemMixin",
 		"listener.HoeItemMixin",
 		"listener.InstrumentItemMixin",
+		"listener.JukeboxBlockEntityMixin",
+		"listener.LivingEntityMixin",
 		"listener.MaceItemMixin",
+		"listener.PlayerMixin",
 		"listener.ShearsItemListener",
 		"listener.ShovelItemMixin",
-		"listener.SpyglassItemMixin"
+		"listener.SpyglassItemMixin",
+		"listener.StatEvent"
 	],
 	"injectors": {
 		"defaultRequire": 1

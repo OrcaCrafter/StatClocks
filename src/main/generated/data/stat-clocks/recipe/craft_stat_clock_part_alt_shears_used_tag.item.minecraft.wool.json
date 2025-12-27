@@ -4,7 +4,7 @@
   "group": "craft_stat_clock_part_alt",
   "ingredients": [
     "stat-clocks:stat_clock_part",
-    "minecraft:gunpowder"
+    "#minecraft:wool"
   ],
   "result": {
     "components": {
@@ -13,7 +13,7 @@
           "type": "none",
           "filter": "none"
         },
-        "id": "stat-clocks:mobs_ignited"
+        "id": "stat-clocks:shears_used"
       }
     },
     "count": 1,

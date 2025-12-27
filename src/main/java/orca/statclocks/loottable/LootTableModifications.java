@@ -51,6 +51,8 @@ public class LootTableModifications {
 	
 	private static final Identifier TRAIL_RUIN_RARE = getIdentifier("archaeology/trail_ruins_rare");
 	
+	private static final Identifier TRIAL_CHAMBER_VAULT_OMINOUS_RARE_POOL = getIdentifier("chests/trial_chambers/reward_ominous_rare");
+	
 	private static final Identifier[] COMMON_LOOT_TABLES = new Identifier[] {
 		ABANDONED_MINESHAFT,
 		BURIED_TREASURE,
@@ -173,6 +175,27 @@ public class LootTableModifications {
 				);
 			},
 			END_CITY_TREASURE
+		);
+		
+		//Mace specific in vaults
+		LootTableModifier.AddModifier((tableBuilder, source) -> {
+				tableBuilder.pool(
+					LootPool.lootPool()
+						.add(lootTableItem(STAT_CLOCK).setWeight(4))
+						.add(lootTableItem(STAT_CLOCK_FILTER).setWeight(4))
+						.add(lootTableItem(STAT_CLOCK_PART).setWeight(12))
+						.add(lootTableItem(STAT_CLOCK_REMOVER).setWeight(1))
+						.add(
+							(LootPoolEntryContainer.Builder<?>)
+								lootTableItem(NETHERITE_COUNTER).setWeight(24).apply(
+									SetItemCountFunction.setCount(UniformGenerator.between(3, 8), false)
+								)
+						)
+						.add(dataBuilder(STAT_CLOCK_PART, PART_TYPE_COMPONENT, StatClockPartTypes.FALL_ATTACK_DISTANCE).setWeight(1))
+						.build()
+				);
+			},
+			TRIAL_CHAMBER_VAULT_OMINOUS_RARE_POOL
 		);
 		
 		//Add our loot to the table

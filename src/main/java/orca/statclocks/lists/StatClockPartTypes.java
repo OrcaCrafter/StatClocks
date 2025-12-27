@@ -7,7 +7,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.Block;
 import orca.statclocks.StatClocksMod;
 import orca.statclocks.components.StatClockPartType;
 import orca.statclocks.listeners.DamageListener;
@@ -34,9 +33,7 @@ public class StatClockPartTypes {
 	public static final StatClockPartType BLOCKS_MINED = new PartTypeInfo("blocks_mined")
 		.english("Blocks Mined").setFilterTypeBlock("%1$s Mined")
 		.addCraftingResource(Items.IRON_PICKAXE)
-		.addListener(
-			StatisticsListeners.AddBlockMinedListener((Player player, Block target, ListenerAdapter adapter, int amount) -> adapter.applyToParts(player.getActiveItem(), target, amount))
-		).close();
+		.addListener(MiscListeners.BLOCK_MINED_LISTENER).close();
 	
 	
 	public static final StatClockPartType TIMES_USED = new PartTypeInfo("times_used")
@@ -45,29 +42,44 @@ public class StatClockPartTypes {
 		.addListener(MiscListeners.AXE_USE_LISTENER)
 		.addListener(MiscListeners.SHOVEL_USE_LISTENER)
 		.addListener(MiscListeners.HOE_USE_LISTENER)
-		.addListener(MiscListeners.BRUSH_USE_LISTENER)
 		.addListener(MiscListeners.FLINT_AND_STEEL_USE_LISTENER)
 		.addListener(MiscListeners.INSTRUMENT_USE_LISTENER)
 		.addListener(MiscListeners.SPYGLASS_USE_LISTENER)
-		.addListener(MiscListeners.SHEARS_USE_LISTENER)
 		.addCraftingResource(Items.SHEARS).close();
 	
 	public static final StatClockPartType MOBS_IGNITED = new PartTypeInfo("mobs_ignited")
-		.english("Mobs Ignited").setFilterTypeEntity("%1$s Ignited", StatClocksMod.IGNITABLE_MOBS).addCraftingResource(Items.GUNPOWDER)
+		.english("Mobs Ignited").setFilterTypeEntity("%1$s Ignited", StatClocksMod.IGNITABLE_MOBS).addCraftingResource(Items.FIRE_CHARGE)
 		.addListener(MiscListeners.MOBS_IGNITED)
 		.close();
 	
-	public static final StatClockPartType MOBS_SHEARED = new PartTypeInfo("mobs_sheared")
-		.english("Mobs Sheared").setFilterTypeEntity("%1$s Sheared", StatClocksMod.SHEARABLE_MOBS)
+	public static final StatClockPartType SHEARS_USED = new PartTypeInfo("shears_used")
+		.english("Times Using Shears")
 		.addCraftingResource(ItemTags.WOOL)
-		.addListener(MiscListeners.MOBS_SHEARED)
+		.addListener(MiscListeners.SHEARS_USE_LISTENER)
 		.close();
 	
-	public static final StatClockPartType MOBS_BRUSHED = new PartTypeInfo("mobs_brushed")
-		.english("Mobs Brushed").setFilterTypeEntity("%1$s Brushed", StatClocksMod.BRUSHABLE_MOBS)
-		.addCraftingResource(Items.BRUSH)
-		.addListener(MiscListeners.MOBS_BRUSHED)
+	public static final StatClockPartType SHEARS_USED_ITEM = new PartTypeInfo("shears_used_item")
+		.english("Items Sheared Off").setFilterTypeItem("%1$s Sheared", StatClocksMod.SHEARABLE_ITEMS)
+		.addCraftingResource(ItemTags.WOOL)
+		.addListener(MiscListeners.SHEARS_USE_LISTENER_ITEM)
 		.close();
+	
+	public static final StatClockPartType SHEARS_USED_BLOCK = new PartTypeInfo("shears_used_block")
+		.english("Blocks Sheared").setFilterTypeBlock("%1$s Sheared", StatClocksMod.SHEARABLE_BLOCKS)
+		.addCraftingResource(ItemTags.WOOL)
+		.addListener(MiscListeners.SHEARS_USE_LISTENER_BLOCK)
+		.close();
+	
+	public static final StatClockPartType SHEARS_USED_ENTITY = new PartTypeInfo("shears_used_entity")
+		.english("Times Using Shears").setFilterTypeEntity("%1$s Sheared", StatClocksMod.SHEARABLE_MOBS)
+		.addCraftingResource(ItemTags.WOOL)
+		.addListener(MiscListeners.SHEARS_USE_LISTENER_ENTITY)
+		.close();
+	
+	public static final StatClockPartType BRUSH_USED = new PartTypeInfo("brush_used")
+		.english("Times Brushed").setFilterTypeItem("%1$s Brushed Off", StatClocksMod.BRUSHABLE_ITEMS)
+		.addListener(MiscListeners.BRUSH_USE_LISTENER)
+		.addCraftingResource(Items.BRUSH).close();
 	
 	public static final StatClockPartType BLOCK_LOOT_DROPPED = new PartTypeInfo("block_loot_dropped")
 		.addListener(MiscListeners.BLOCK_LOOT_LISTENER)
@@ -90,9 +102,7 @@ public class StatClockPartTypes {
 	
 	public static final StatClockPartType MOBS_KILLED = new PartTypeInfo("mobs_killed")
 		.english("Mobs Killed").setFilterTypeEntity("%1$s Killed")
-		.addListener(
-			StatisticsListeners.AddEntityKilledListener((Player player, EntityType<?> target, ListenerAdapter adapter, int amount) -> adapter.applyToParts(player.getWeaponItem(), target, amount))
-		)
+		.addListener(MiscListeners.ENTITY_KILLED_LISTENER)
 		.addCraftingResource(Items.DIAMOND_SWORD).close();
 	
 	public static final StatClockPartType MOB_LOOT_DROPPED = new PartTypeInfo("mob_loot_dropped")
@@ -123,7 +133,7 @@ public class StatClockPartTypes {
 				if (target == Stats.DAMAGE_BLOCKED_BY_SHIELD) {
 					ItemStack shield = player.getActiveItem();
 					//Amount is 10 times damage, which is what we want
-					adapter.applyToParts(shield, target, amount);
+					adapter.applyToParts(player, shield, target, amount);
 				}
 			})
 		).close();
@@ -138,7 +148,7 @@ public class StatClockPartTypes {
 				//If any damage has been blocked, increase attacks blocked by 1
 				if (target == Stats.DAMAGE_BLOCKED_BY_SHIELD) {
 					ItemStack shield = player.getActiveItem();
-					adapter.applyToParts(shield, target, 1);
+					adapter.applyToParts(player, shield, target, 1);
 				
 				}
 				
@@ -163,8 +173,8 @@ public class StatClockPartTypes {
 					ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
 					ItemStack legs = player.getItemBySlot(EquipmentSlot.LEGS);
 					
-					adapter.applyToParts(boots, target, amount);
-					adapter.applyToParts(legs, target, amount);
+					adapter.applyToParts(player, boots, target, amount);
+					adapter.applyToParts(player, legs, target, amount);
 				}
 				
 			})
@@ -177,9 +187,9 @@ public class StatClockPartTypes {
 			StatisticsListeners.AddCustomListener((Player player, Identifier target, ListenerAdapter adapter, int amount) -> {
 				
 				if (target == Stats.CROUCH_ONE_CM) {
-					ItemStack Leggings = player.getItemBySlot(EquipmentSlot.LEGS);
+					ItemStack leggings = player.getItemBySlot(EquipmentSlot.LEGS);
 					
-					adapter.applyToParts(Leggings, target, amount);
+					adapter.applyToParts(player, leggings, target, amount);
 				}
 				
 			})
@@ -194,7 +204,7 @@ public class StatClockPartTypes {
 				if (target == Stats.SWIM_ONE_CM) {
 					ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
 					
-					adapter.applyToParts(boots, target, amount);
+					adapter.applyToParts(player, boots, target, amount);
 				}
 				
 			})
@@ -209,7 +219,7 @@ public class StatClockPartTypes {
 				if (target == Stats.WALK_UNDER_WATER_ONE_CM) {
 					ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
 					
-					adapter.applyToParts(boots, target, amount);
+					adapter.applyToParts(player, boots, target, amount);
 				}
 				
 			})
@@ -224,7 +234,7 @@ public class StatClockPartTypes {
 				if (target == Stats.WALK_ON_WATER_ONE_CM) {
 					ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
 					
-					adapter.applyToParts(boots, target, amount);
+					adapter.applyToParts(player, boots, target, amount);
 				}
 				
 			})
@@ -238,16 +248,7 @@ public class StatClockPartTypes {
 	
 	public static final StatClockPartType MINED_UNDERWATER = new PartTypeInfo("mined_underwater")
 		.english("Blocks Mined Underwater").setFilterTypeBlock("%1$s Mined Underwater")
-		.addCraftingResource(Items.HEART_OF_THE_SEA).addListener(
-			StatisticsListeners.AddBlockMinedListener((Player player, Block target, ListenerAdapter adapter, int amount) -> {
-				
-				if (!player.isUnderWater()) return;
-				
-				ItemStack helmet = player.getItemBySlot(EquipmentSlot.HEAD);
-				
-				adapter.applyToParts(helmet, target, amount);
-			})
-		).close();
+		.addCraftingResource(Items.HEART_OF_THE_SEA).addListener(MiscListeners.BLOCK_MINED_UNDERWATER_LISTENER).close();
 	
 	public static final StatClockPartType ITEMS_CONSUMED = new PartTypeInfo("items_consumed")
 		.english("Items Consumed").setFilterTypeItem("%1$s Consumed", StatClocksMod.CONSUMABLE)
@@ -262,7 +263,7 @@ public class StatClockPartTypes {
 				if (target == Stats.FALL_ONE_CM) {
 					ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
 					
-					adapter.applyToParts(boots, target, amount);
+					adapter.applyToParts(player, boots, target, amount);
 				}
 				
 			})
@@ -326,7 +327,7 @@ public class StatClockPartTypes {
 				
 				if (target == Stats.AVIATE_ONE_CM) {
 					ItemStack elytra = player.getItemBySlot(EquipmentSlot.CHEST);
-					adapter.applyToParts(elytra, target, amount);
+					adapter.applyToParts(player, elytra, target, amount);
 				}
 				
 			})
@@ -355,7 +356,7 @@ public class StatClockPartTypes {
 					if (!(vehicleEntity instanceof Mob vehicleMob)) return;
 					
 					ItemStack harness = vehicleMob.getItemBySlot(EquipmentSlot.SADDLE);
-					adapter.applyToParts(harness, vehicleMob.getType(), amount);
+					adapter.applyToParts(player, harness, vehicleMob.getType(), amount);
 				}
 				
 			})
@@ -376,7 +377,7 @@ public class StatClockPartTypes {
 					if (!(vehicleEntity instanceof Mob vehicleMob)) return;
 					
 					ItemStack harness = vehicleMob.getItemBySlot(EquipmentSlot.SADDLE);
-					adapter.applyToParts(harness, vehicleMob.getType(), amount);
+					adapter.applyToParts(player, harness, vehicleMob.getType(), amount);
 				}
 			})
 		).close();
@@ -385,11 +386,6 @@ public class StatClockPartTypes {
 	public static final StatClockPartType VEHICLE_DISTANCE = new PartTypeInfo("vehicle_distance")
 		.english("Distance Traveled")
 		.setFormat(PartValueFormat.DISTANCE).markNoListener().hide().close();
-	
-	//Spyglass
-	public static final StatClockPartType MOBS_SPIED_ON = new PartTypeInfo("mobs_spied_on")
-		.english("Mobs Spied On").setFilterTypeEntity("%1$s Spied On")
-		.addCraftingResource(Items.AMETHYST_SHARD).close();
 	
 	//Music disc
 	public static final StatClockPartType TIME_PLAYED = new PartTypeInfo("time_played")

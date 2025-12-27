@@ -7,6 +7,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.block.state.BlockState;
 import orca.statclocks.listeners.MiscListeners;
 import orca.statclocks.lists.StatClockPartTypes;
 import org.spongepowered.asm.mixin.Mixin;
@@ -33,6 +34,10 @@ public abstract class ShearsItemListener extends Item {
 		
 		ItemStack tool = StatClockPartTypes.getPriorityHandItem(player, (item) -> item.getItem() instanceof ShearsItemListener);
 		
-		MiscListeners.SHEARS_USE_LISTENER.applyToParts(tool, null, 1);
+		BlockState block = useOnContext.getLevel().getBlockState(useOnContext.getClickedPos());
+		
+		//MiscListeners.SHEARS_USE_LISTENER.applyToParts(player, tool, null, 1);
+		MiscListeners.SHEARS_USE_LISTENER.applyToParts(player, tool, block, 1);
+		//TODO dropped items
 	}
 }

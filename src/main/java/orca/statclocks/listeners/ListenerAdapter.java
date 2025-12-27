@@ -1,7 +1,12 @@
 package orca.statclocks.listeners;
 
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.network.protocol.game.ClientboundSetPlayerInventoryPacket;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.SlotAccess;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -25,13 +30,45 @@ public class ListenerAdapter {
 	List<Pair<StatClockPartType, Filter>> allowedTypes = new ArrayList<>();
 	
 	
-	public void applyToParts (ItemStack item, Object target, int amount) {
+	public void applyToParts (Player player, ItemStack item, Object target, int amount) {
 		
-		if (item.isEmpty()) return;
+		if (applyToPartsNonPlayer(item, target, amount)) {
+			if (player == null) {
+				StatClocksMod.LOGGER.warn("Player is null");
+			} else if (!player.isLocalPlayer() && player instanceof ServerPlayer serverPlayer) {
+				
+				int slotIndex = -1;
+				
+				for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+					ItemStack check = player.getInventory().getItem(i);
+					
+					if (check.equals(item)) {
+						slotIndex = i;
+					}
+				}
+				
+				if (slotIndex >= 0) {
+					ClientboundSetPlayerInventoryPacket packet = player.getInventory().createInventoryUpdatePacket(slotIndex);
+					
+					serverPlayer.connection.send(packet);
+					
+					StatClocksMod.LOGGER.info("Sent inventory update packet for slot: {}", slotIndex);
+				} else {
+					StatClocksMod.LOGGER.warn("Failed to fin matching item");
+				}
+				
+				StatClocksMod.LOGGER.warn("Player is server side");
+			}
+		}
+		
+	}
+	
+	public boolean applyToPartsNonPlayer (ItemStack item, Object target, int amount) {
+		if (item == null || item.isEmpty()) return false;
 		
 		StatClockContent statClock = item.get(StatClockContent.STAT_CLOCK_COMPONENT);
 		
-		if (statClock == null) return;
+		if (statClock == null) return false;
 		
 		ArrayList<StatClockPartContent> parts = statClock.getParts();
 		
@@ -39,13 +76,22 @@ public class ListenerAdapter {
 		if (DETAIL_LOG) StatClocksMod.LOGGER.info("");
 		if (DETAIL_LOG) StatClocksMod.LOGGER.info("Starting general application");
 		
+		boolean added = false;
+		
 		for (StatClockPartContent part : parts) {
 			if (DETAIL_LOG) StatClocksMod.LOGGER.info("\tStarting part {} application", part.getType().getIdName());
-			applyToPart(part, target, amount);
+			
+			added = added || applyToPart(part, target, amount);
 		}
+		
+		statClock.setParts(parts);
+		
+		item.set(StatClockContent.STAT_CLOCK_COMPONENT, statClock);
+		
+		return added;
 	}
 	
-	private void applyToPart (StatClockPartContent part, Object target, int amount) {
+	private boolean applyToPart (StatClockPartContent part, Object target, int amount) {
 		
 		StatClockPartType partType = part.getType();
 		
@@ -67,7 +113,7 @@ public class ListenerAdapter {
 			}
 		}
 		
-		if (!matches) return;
+		if (!matches) return false;
 		
 		if (DETAIL_LOG) StatClocksMod.LOGGER.info("\tPassed to next step");
 		
@@ -101,12 +147,13 @@ public class ListenerAdapter {
 			default -> true;
 		};
 		
-		if (!passes) return;
+		if (!passes) return false;
 		
 		if (DETAIL_LOG) StatClocksMod.LOGGER.info("\tAdded!");
 		
 		part.incrementCount(amount);
 		
+		return true;
 	}
 	
 	public void addPartType (StatClockPartType type, Filter filter) {

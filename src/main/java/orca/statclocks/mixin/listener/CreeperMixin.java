@@ -22,7 +22,7 @@ public class CreeperMixin {
 		//CREEPER_IGNITERS does include fire charges by default, but fire charges can't have stat clocks,
 		//so no unintended behavior is expected.
 		if (tool.is(ItemTags.CREEPER_IGNITERS)) {
-			MiscListeners.MOBS_IGNITED.applyToParts(tool, this, 1);
+			MiscListeners.MOBS_IGNITED.applyToParts(player, tool, this, 1);
 		}
 	
 	}

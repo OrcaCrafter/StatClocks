@@ -33,7 +33,7 @@ public abstract class HoeItemMixin extends Item {
 		
 		ItemStack tool = StatClockPartTypes.getPriorityHandItem(player, (item) -> item.getItem() instanceof HoeItem);
 		
-		MiscListeners.HOE_USE_LISTENER.applyToParts(tool, null, 1);
+		MiscListeners.HOE_USE_LISTENER.applyToParts(player, tool, null, 1);
 		
 	}
 }
