@@ -18,8 +18,6 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import static net.minecraft.world.level.block.Block.getDrops;
 import static net.minecraft.world.level.block.Block.popResource;
 
 @Mixin(Block.class)
@@ -61,18 +59,15 @@ public abstract class BlockMixin extends BlockBehaviour {
 			
 			int slot = player.getInventory().findSlotMatchingItem(tool);
 			
-			/*tool = */
 			MiscListeners.BLOCK_MINED_LISTENER.applyToParts(player, tool, (Block) (Object) this, 1);
 			
 			player.getInventory().setItem(slot, tool);
-			
-			StatClocksMod.LOGGER.info("Tool: {}, {}", tool, slot);
 		}
 		
 		if (player.isUnderWater()) {
 			ItemStack helmet = player.getItemBySlot(EquipmentSlot.HEAD);
 			
-			if (helmet.isEmpty()) {
+			if (!helmet.isEmpty()) {
 				MiscListeners.BLOCK_MINED_UNDERWATER_LISTENER.applyToParts(player, helmet, (Block) (Object) this, 1);
 			}
 		}

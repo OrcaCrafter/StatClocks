@@ -225,7 +225,6 @@ public class StatClockPartMapper {
 				rule.allowedParts.add(StatClockPartTypes.DISTANCE_SWAM);		// Depth Strider
 				rule.allowedParts.add(StatClockPartTypes.DISTANCE_FALLEN);		// Feather Falling
 				rule.allowedParts.add(StatClockPartTypes.DISTANCE_WADED);		// Depth strider
-				rule.allowedParts.add(StatClockPartTypes.DISTANCE_FROST_WALKED);// Frost walker
 				rule.allowedParts.add(StatClockPartTypes.DISTANCE_WALKED);		// Soul speed, frost walker & depth strider
 			}
 		});

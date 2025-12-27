@@ -43,11 +43,23 @@ public class StatClockEnglishLangProvider extends FabricLanguageProvider {
 		translationBuilder.add("stat-clocks.tooltip.part_type_filter_tip_2", "Assign to a filter with an Anvil");
 		
 		//Units
-		translationBuilder.add("stat-clocks.tooltip.unit.second", "Second");
-		translationBuilder.add("stat-clocks.tooltip.unit.second_plural", "Seconds");
+		translationBuilder.add("stat-clocks.tooltip.unit.second",			"Second");
+		translationBuilder.add("stat-clocks.tooltip.unit.second_plural",	"Seconds");
+		translationBuilder.add("stat-clocks.tooltip.unit.minute",			"Minute");
+		translationBuilder.add("stat-clocks.tooltip.unit.minute_plural",	"Minutes");
+		translationBuilder.add("stat-clocks.tooltip.unit.hour",				"Hour");
+		translationBuilder.add("stat-clocks.tooltip.unit.hour_plural",		"Hours");
+		translationBuilder.add("stat-clocks.tooltip.unit.day",				"Day");
+		translationBuilder.add("stat-clocks.tooltip.unit.day_plural",		"Days");
+		translationBuilder.add("stat-clocks.tooltip.unit.week",				"Week");
+		translationBuilder.add("stat-clocks.tooltip.unit.week_plural",		"Weeks");
 		
+		translationBuilder.add("stat-clocks.tooltip.unit.centimeter", "Centimeter");
+		translationBuilder.add("stat-clocks.tooltip.unit.centimeter_plural", "Centimeters");
 		translationBuilder.add("stat-clocks.tooltip.unit.meter", "Meter");
 		translationBuilder.add("stat-clocks.tooltip.unit.meter_plural", "Meters");
+		translationBuilder.add("stat-clocks.tooltip.unit.kilometer", "Kilometer");
+		translationBuilder.add("stat-clocks.tooltip.unit.kilometer_plural", "Kilometers");
 		
 		
 		//Add english part type terms

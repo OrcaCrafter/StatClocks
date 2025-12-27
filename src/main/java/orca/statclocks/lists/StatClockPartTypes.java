@@ -1,5 +1,6 @@
 package orca.statclocks.lists;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.EntityTypeTags;
@@ -7,6 +8,8 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import orca.statclocks.StatClocksMod;
 import orca.statclocks.components.StatClockPartType;
 import orca.statclocks.listeners.DamageListener;
@@ -16,6 +19,7 @@ import orca.statclocks.listeners.StatisticsListeners;
 import oshi.util.tuples.Pair;
 
 import java.util.LinkedHashMap;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 public class StatClockPartTypes {
@@ -168,16 +172,26 @@ public class StatClockPartTypes {
 	//Misc armor
 	public static final StatClockPartType DISTANCE_WALKED = new PartTypeInfo("distance_walked")
 		.english("Distance Walked").addCraftingResource(Items.LEATHER_BOOTS)
+		.setFilterTypeBlock("Distance Walked on %1$s")
 		.setFormat(PartValueFormat.DISTANCE)
 		.addListener(
 			StatisticsListeners.AddCustomListener((Player player, Identifier target, ListenerAdapter adapter, int amount) -> {
 				
-				if (target == Stats.WALK_ONE_CM) {
+				Block standing = null;
+				
+				Optional<BlockPos> supportingPos = player.mainSupportingBlockPos;
+				
+				if (supportingPos.isPresent()) {
+					standing = player.level().getBlockState(supportingPos.get()).getBlock();
+				}
+				
+				//TODO should sprint be separate?
+				if (target == Stats.WALK_ONE_CM || target == Stats.SPRINT_ONE_CM) {
 					ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
 					ItemStack legs = player.getItemBySlot(EquipmentSlot.LEGS);
 					
-					adapter.applyToParts(player, boots, target, amount);
-					adapter.applyToParts(player, legs, target, amount);
+					adapter.applyToParts(player, boots, standing, amount);
+					adapter.applyToParts(player, legs, standing, amount);
 				}
 				
 			})
@@ -219,22 +233,7 @@ public class StatClockPartTypes {
 		.addListener(
 			StatisticsListeners.AddCustomListener((Player player, Identifier target, ListenerAdapter adapter, int amount) -> {
 				
-				if (target == Stats.WALK_UNDER_WATER_ONE_CM) {
-					ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
-					
-					adapter.applyToParts(player, boots, target, amount);
-				}
-				
-			})
-		).close();
-	
-	public static final StatClockPartType DISTANCE_FROST_WALKED = new PartTypeInfo("distance_frost_walked")
-		.english("Distance Frost Walked").addCraftingResource(Items.ICE)
-		.setFormat(PartValueFormat.DISTANCE)
-		.addListener(
-			StatisticsListeners.AddCustomListener((Player player, Identifier target, ListenerAdapter adapter, int amount) -> {
-				
-				if (target == Stats.WALK_ON_WATER_ONE_CM) {
+				if (target == Stats.WALK_UNDER_WATER_ONE_CM || target == Stats.WALK_ON_WATER_ONE_CM) {
 					ItemStack boots = player.getItemBySlot(EquipmentSlot.FEET);
 					
 					adapter.applyToParts(player, boots, target, amount);
