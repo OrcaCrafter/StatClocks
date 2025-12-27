@@ -12,9 +12,7 @@ A Minecraft mod that adds a way to track how you use your tools.
 
 <br>
 
-## License:
-<!--TODO decide license Stat Clocks is distributed under the [GNU General Public License v3.0]().-->
-
+## More Info on [orca-design.com](https://orca-design.com/pages/portfolio/mods/minecraft/stat-clocks)
 <br>
 
 ## Disclaimer:
