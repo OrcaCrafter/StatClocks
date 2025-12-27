@@ -46,6 +46,10 @@ public class StatClockContent implements ToolTipComponent {
 		builder -> builder.persistent(CODEC).networkSynchronized(STREAM_CODEC)
 	);
 	
+	public static StatClockContent BlankStatClock (ItemStack item) {
+		return new StatClockContent(item.getItem().toString());
+	}
+	
 	public static StatClockContent DefaultStatClock (ItemStack item) {
 		return ItemStatClock(item, false);
 	}

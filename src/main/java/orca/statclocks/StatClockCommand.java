@@ -289,11 +289,15 @@ public class StatClockCommand {
 					
 					StatClockContent statClock = itemStack.get(StatClockContent.STAT_CLOCK_COMPONENT);
 					
-					if (statClock == null) throw ERROR_INCOMPATIBLE.create(itemStack.getHoverName().getString());
+					if (statClock == null) {
+						statClock = StatClockContent.BlankStatClock(itemStack);
+					}
 					
 					if (!statClock.canAddPart(type, itemStack)) throw ERROR_INCOMPATIBLE.create(itemStack.getHoverName().getString());
 					
 					statClock.addPart(addPart.clonePartContent());
+					
+					itemStack.set(StatClockContent.STAT_CLOCK_COMPONENT, statClock);
 					
 					appliedTo ++;
 				} else if (targets.size() == 1) {
