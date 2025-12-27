@@ -1,4 +1,11 @@
 {
+  "commands.addstatclock.failed": "Nothing Happened %1$s",
+  "commands.addstatclock.failed.entity": "No entity was found",
+  "commands.addstatclock.failed.incompatible": "%1$s cannot have a stat clock added",
+  "commands.addstatclock.failed.invalid_filter": "%1$s:%2$s is not a valid filter for %3$s",
+  "commands.addstatclock.failed.itemless": "%1$s is not holding any item",
+  "commands.addstatclock.success.multiple": "Added %1$n stat clocks",
+  "commands.addstatclock.success.single": "Added stat clock to %1$s",
   "item-group.stat_clock_part_types": "Stat Clock Part Types",
   "item.stat-clocks.netherite_counter": "Netherite Counter",
   "item.stat-clocks.stat_clock": "Stat Clock",

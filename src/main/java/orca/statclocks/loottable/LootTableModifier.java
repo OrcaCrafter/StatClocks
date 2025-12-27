@@ -51,6 +51,6 @@ public interface LootTableModifier {
 	}
 	
 	
-	public abstract void ModifyTable (LootTable.Builder tableBuilder, LootTableSource source);
+	void ModifyTable (LootTable.Builder tableBuilder, LootTableSource source);
 	
 }

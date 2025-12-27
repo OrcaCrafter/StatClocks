@@ -4,7 +4,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
-import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
 import static orca.statclocks.StatClocksMod.MOD_ID;
 
@@ -15,6 +14,6 @@ public class CustomLootRegistries {
 	);
 	
 	
-	public static void init () {};
+	public static void init () {}
 	
 }

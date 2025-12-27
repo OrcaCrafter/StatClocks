@@ -30,8 +30,8 @@ public class PartTypeInfo {
 	boolean visible = true;
 	boolean noListener = false;
 	
-	ArrayList<Item> crafting = new ArrayList<>();
-	ArrayList<TagKey<Item>> craftingTag = new ArrayList<>();
+	final ArrayList<Item> crafting = new ArrayList<>();
+	final ArrayList<TagKey<Item>> craftingTag = new ArrayList<>();
 	
 	PartValueFormat format = PartValueFormat.NONE;
 	
@@ -44,7 +44,7 @@ public class PartTypeInfo {
 	TagKey<Block> blockTag;
 	TagKey<EntityType<?>> entityTag;
 	
-	ArrayList<Pair<ListenerAdapter, ListenerAdapter.Filter>> adapters = new ArrayList<>();
+	final ArrayList<Pair<ListenerAdapter, ListenerAdapter.Filter>> adapters = new ArrayList<>();
 	
 	
 	public PartTypeInfo (String name) {
@@ -55,6 +55,10 @@ public class PartTypeInfo {
 	public PartTypeInfo (String name, String modID) {
 		this.name = name;
 		this.modID = modID;
+	}
+	
+	public String getName () {
+		return modID + ":" + name;
 	}
 	
 	public PartTypeInfo english (String english) {

@@ -1,14 +1,11 @@
 package orca.statclocks.lists;
 
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.equipment.EquipmentAsset;
 import net.minecraft.world.item.equipment.Equippable;
 import orca.statclocks.StatClocksMod;
 import orca.statclocks.components.StatClockPartType;
@@ -53,7 +50,7 @@ public class StatClockPartMapper {
 		}
 	}
 	
-	static ArrayList<RuleMapper> MAPPERS = new ArrayList<>();
+	static final ArrayList<RuleMapper> MAPPERS = new ArrayList<>();
 	
 	static {
 		

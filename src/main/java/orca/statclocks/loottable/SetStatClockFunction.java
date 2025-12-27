@@ -23,13 +23,13 @@ public class SetStatClockFunction extends LootItemConditionalFunction {
 		instance -> commonFields(instance)
 			.and(
 				instance.group(
-					Codec.STRING.fieldOf("filter").<SetStatClockFunction>forGetter(function -> function.filter)
+					Codec.STRING.fieldOf("filter").forGetter(function -> function.filter)
 				).t1()
 			)
 			.apply(instance, SetStatClockFunction::new)
 	);
 	
-	String filter;
+	final String filter;
 	
 	SetStatClockFunction (List<LootItemCondition> list, String filter) {
 		super(list);
@@ -65,7 +65,7 @@ public class SetStatClockFunction extends LootItemConditionalFunction {
 	
 	public static class Builder extends LootItemConditionalFunction.Builder<SetStatClockFunction.Builder> {
 		
-		String filter;
+		final String filter;
 		
 		public Builder (String filter) {
 			this.filter = filter;

@@ -6,7 +6,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.tags.TagAppender;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.Item;
 import orca.statclocks.StatClocksMod;
 
 import java.util.concurrent.CompletableFuture;
@@ -18,11 +17,11 @@ public class StatClockEntityTagProvider extends FabricTagProvider.EntityTypeTagP
 		super(output, registriesFuture);
 	}
 	
-	EntityType<?>[] IGNITABLE_MOBS = new EntityType<?>[] {
+	static final EntityType<?>[] IGNITABLE_MOBS = new EntityType<?>[] {
 		EntityType.CREEPER
 	};
 	
-	EntityType<?>[] SHEARABLE_MOBS = new EntityType<?>[] {
+	static final EntityType<?>[] SHEARABLE_MOBS = new EntityType<?>[] {
 		EntityType.SHEEP, EntityType.MOOSHROOM, EntityType.BOGGED
 	};
 	

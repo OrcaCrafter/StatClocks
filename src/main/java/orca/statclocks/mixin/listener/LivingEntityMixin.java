@@ -22,12 +22,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.LootTable;
-import orca.statclocks.StatClocksMod;
-import orca.statclocks.components.StatClockContent;
-import orca.statclocks.components.StatClockPartContent;
 import orca.statclocks.listeners.DamageListener;
 import orca.statclocks.listeners.MiscListeners;
-import orca.statclocks.lists.StatClockPartTypes;
 import org.jspecify.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -37,7 +33,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 import static orca.statclocks.listeners.DamageListener.WOLF_DAMAGE_BLOCKED_ADAPTER;
@@ -51,45 +46,6 @@ public abstract class LivingEntityMixin extends Entity {
 	public LivingEntityMixin (EntityType<?> entityType, Level level) {
 		super(entityType, level);
 	}
-	
-	/*
-	@Shadow
-	protected abstract <T> boolean applyImplicitComponentIfPresent(DataComponentGetter dataComponentGetter, DataComponentType<T> dataComponentType);
-	
-	@Shadow
-	public float moveDist;*/
-	
-	@Inject(method = "tick", at = @At("HEAD"))
-	public void tick (CallbackInfo ci) {
-		
-		Entity thisEntity = (Entity)(Object)this;
-		
-		StatClockContent clock = thisEntity.get(StatClockContent.STAT_CLOCK_COMPONENT);
-		
-		if (clock == null) return;
-		
-		StatClocksMod.LOGGER.info("IT WORKSSSSSSSSSSSSSSSSSSSS!!!!!!!!!!!!!!!!!!!!!!!");
-		
-		ArrayList<StatClockPartContent> parts = clock.getParts();
-		
-		for (StatClockPartContent part : parts) {
-		
-			if (part.getType() == StatClockPartTypes.VEHICLE_DISTANCE) {
-				//Meters to cm
-				float cm = this.moveDist * 100f;
-				part.incrementCount((int)cm);
-			}
-		}
-	
-	}
-	
-	/*
-	//Add stat clocks as a component to apply
-	@Inject(method = "applyImplicitComponents", at = @At("HEAD"))
-	protected void applyImplicitComponents(DataComponentGetter dataComponentGetter, CallbackInfo ci) {
-		//boolean success = this.applyImplicitComponentIfPresent(dataComponentGetter, DataComponents.CUSTOM_DATA);
-	}*/
-	
 	
 	//
  	//		ARMOR

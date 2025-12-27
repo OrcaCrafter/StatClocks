@@ -2,9 +2,7 @@ package orca.statclocks;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
-import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
+import com.mojang.brigadier.exceptions.*;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -37,8 +35,10 @@ public class StatClockCommand {
 	private static final DynamicCommandExceptionType ERROR_INCOMPATIBLE = new DynamicCommandExceptionType(
 		object -> Component.translatableEscape("commands.addstatclock.failed.incompatible", object)
 	);
-	private static final DynamicCommandExceptionType ERROR_INVALID_FILTER = new DynamicCommandExceptionType(
-		object -> Component.translatableEscape("commands.addstatclock.failed.incompatible", object)
+	private static final Dynamic3CommandExceptionType ERROR_INVALID_FILTER = new Dynamic3CommandExceptionType(
+		(a, b, c) -> {
+			return Component.translatableEscape("commands.addstatclock.failed.invalid_filter", a, b, c);
+		}
 	);
 	private static final SimpleCommandExceptionType ERROR_NOTHING_HAPPENED = new SimpleCommandExceptionType(Component.translatable("commands.addstatclock.failed"));
 	
@@ -236,7 +236,7 @@ public class StatClockCommand {
 			if (targets.size() == 1) {
 				commandSourceStack.sendSuccess(
 					() -> Component.translatable(
-						"commands.addstatclock.success.single", ((Entity)targets.iterator().next()).getDisplayName()
+						"commands.addstatclock.success.single", (targets.iterator().next()).getDisplayName()
 					),
 					true
 				);
@@ -272,7 +272,7 @@ public class StatClockCommand {
 		if (filterType != StatClockFilterType.NONE) {
 			StatClockFilterContent filterContent = new StatClockFilterContent(filterType, filter);
 			
-			if (!typeInfo.allowFilter(filterContent)) throw ERROR_INVALID_FILTER.create(filterType + ":" + filter);
+			if (!typeInfo.allowFilter(filterContent)) throw ERROR_INVALID_FILTER.create(filterType.getName(), filter, typeInfo.getName());
 			
 			type.setFilter(filterContent);
 		}
@@ -310,7 +310,7 @@ public class StatClockCommand {
 			if (targets.size() == 1) {
 				commandSourceStack.sendSuccess(
 					() -> Component.translatable(
-						"commands.addstatclock.success.single", ((Entity)targets.iterator().next()).getDisplayName()
+						"commands.addstatclock.success.single", (targets.iterator().next()).getDisplayName()
 					),
 					true
 				);

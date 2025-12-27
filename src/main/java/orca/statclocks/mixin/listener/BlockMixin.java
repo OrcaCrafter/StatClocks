@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import orca.statclocks.StatClocksMod;
 import orca.statclocks.listeners.MiscListeners;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -59,7 +58,7 @@ public abstract class BlockMixin extends BlockBehaviour {
 			
 			int slot = player.getInventory().findSlotMatchingItem(tool);
 			
-			MiscListeners.BLOCK_MINED_LISTENER.applyToParts(player, tool, (Block) (Object) this, 1);
+			MiscListeners.BLOCK_MINED_LISTENER.applyToParts(player, tool, this, 1);
 			
 			player.getInventory().setItem(slot, tool);
 		}
@@ -68,7 +67,7 @@ public abstract class BlockMixin extends BlockBehaviour {
 			ItemStack helmet = player.getItemBySlot(EquipmentSlot.HEAD);
 			
 			if (!helmet.isEmpty()) {
-				MiscListeners.BLOCK_MINED_UNDERWATER_LISTENER.applyToParts(player, helmet, (Block) (Object) this, 1);
+				MiscListeners.BLOCK_MINED_UNDERWATER_LISTENER.applyToParts(player, helmet, this, 1);
 			}
 		}
 	}

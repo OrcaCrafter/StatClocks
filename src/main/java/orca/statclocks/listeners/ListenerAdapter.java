@@ -17,15 +17,15 @@ import java.util.List;
 
 public class ListenerAdapter {
 	
-	public static boolean DETAIL_LOG = false;
+	public static final boolean DETAIL_LOG = false;
 	
 	public interface Filter {
 		boolean allowApplication (Object target);
 	}
 	
-	public static Filter NO_FILTER = (Object target) -> true;
+	public static final Filter NO_FILTER = (Object target) -> true;
 	
-	List<Pair<StatClockPartType, Filter>> allowedTypes = new ArrayList<>();
+	final List<Pair<StatClockPartType, Filter>> allowedTypes = new ArrayList<>();
 	
 	
 	public void applyToParts (Player player, ItemStack item, Object target, int amount) {

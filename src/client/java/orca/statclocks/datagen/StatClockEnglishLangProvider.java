@@ -61,9 +61,19 @@ public class StatClockEnglishLangProvider extends FabricLanguageProvider {
 		translationBuilder.add("stat-clocks.tooltip.unit.kilometer", "Kilometer");
 		translationBuilder.add("stat-clocks.tooltip.unit.kilometer_plural", "Kilometers");
 		
+		//Command succeeded
+		translationBuilder.add("commands.addstatclock.success.single", "Added stat clock to %1$s");
+		translationBuilder.add("commands.addstatclock.success.multiple", "Added %1$n stat clocks");
+		
+		//Command failed
+		translationBuilder.add("commands.addstatclock.failed.entity", "No entity was found");
+		translationBuilder.add("commands.addstatclock.failed.itemless", "%1$s is not holding any item");
+		translationBuilder.add("commands.addstatclock.failed.incompatible", "%1$s cannot have a stat clock added");
+		translationBuilder.add("commands.addstatclock.failed.invalid_filter", "%1$s:%2$s is not a valid filter for %3$s");
+		translationBuilder.add("commands.addstatclock.failed", "Nothing Happened %1$s");
+		
 		
 		//Add english part type terms
-		
 		translationBuilder.add("stat-clocks.tooltip.part_type_error", "Issue with part type: %1$s!");
 		
 		Set<Identifier> partTypeNames = StatClockPartTypes.STAT_PART_TYPES.keySet();

@@ -8,7 +8,6 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import orca.statclocks.StatClocksMod;
 import orca.statclocks.components.StatClockPartType;
@@ -25,7 +24,7 @@ import java.util.function.Predicate;
 public class StatClockPartTypes {
 	
 	//Used linked hash map so the creative mode inventory is in a proper order
-	public static LinkedHashMap<Identifier, Pair<StatClockPartType, PartTypeInfo>> STAT_PART_TYPES = new LinkedHashMap<>();
+	public static final LinkedHashMap<Identifier, Pair<StatClockPartType, PartTypeInfo>> STAT_PART_TYPES = new LinkedHashMap<>();
 	
 	//Poke to start initializing
 	public static void init () {

@@ -3,23 +3,17 @@ package orca.statclocks.components;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
-import net.fabricmc.fabric.impl.recipe.ingredient.builtin.ComponentsIngredient;
-import net.minecraft.advancements.criterion.ItemDurabilityTrigger;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ExtraCodecs;
-import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.enchantment.effects.ChangeItemDamage;
 import orca.statclocks.StatClocksMod;
 import orca.statclocks.ToolTipComponent;
 import orca.statclocks.lists.StatClockPartMapper;
@@ -113,7 +107,7 @@ public class StatClockContent implements ToolTipComponent {
 		stack.set(StatClockContent.STAT_CLOCK_COMPONENT, merging);
 	}
 	
-	String toolType;
+	final String toolType;
 	
 	ArrayList<StatClockPartContent> parts;
 	

@@ -5,7 +5,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.equine.AbstractHorse;
 import net.minecraft.world.entity.animal.nautilus.AbstractNautilus;
-import net.minecraft.world.entity.animal.wolf.Wolf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
@@ -22,16 +21,6 @@ public interface DamageListener <T extends LivingEntity> {
 	ListenerAdapter HORSE_DAMAGE_BLOCKED_ADAPTER = new ListenerAdapter();
 	ListenerAdapter WOLF_DAMAGE_BLOCKED_ADAPTER = new ListenerAdapter();
 	ListenerAdapter NAUTILUS_DAMAGE_BLOCKED_ADAPTER = new ListenerAdapter();
-	
-	
-	static void OnPlayerBlockedShield (Player player, DamageSource source, float damage) {
-		ItemStack shield = player.getItemBlockingWith();
-		
-		if (player.isBlocking() && shield != null) {
-			//Blocking with shield shouldn't contribute to other stats
-			DamageListener.PLAYER_DAMAGE_BLOCKED_ADAPTER.applyToParts(player, shield, source.getEntity(), (int)damage);
-		}
-	};
 	
 	
 	DamageListener<Player> PLAYER_DAMAGE_LISTENER = (Player player, DamageSource source, float damageBlocked, float damageTaken) -> {

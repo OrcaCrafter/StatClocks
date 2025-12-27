@@ -42,12 +42,12 @@ public class StatClocksMod implements ModInitializer {
 	//      Add items
 	//
 	
-	public static Item STAT_CLOCK = register("stat_clock", Item::new, new Item.Properties().stacksTo(1));
-	public static Item STAT_CLOCK_PART = register("stat_clock_part", Item::new, new Item.Properties().stacksTo(1));
-	public static Item STAT_CLOCK_FILTER = register("stat_clock_filter", StatClockFilterItem::new, new Item.Properties().stacksTo(1)
+	public static final Item STAT_CLOCK = register("stat_clock", Item::new, new Item.Properties().stacksTo(1));
+	public static final Item STAT_CLOCK_PART = register("stat_clock_part", Item::new, new Item.Properties().stacksTo(1));
+	public static final Item STAT_CLOCK_FILTER = register("stat_clock_filter", StatClockFilterItem::new, new Item.Properties().stacksTo(1)
 		.component(StatClockFilterContent.FILTER_COMPONENT, StatClockFilterContent.makeEmpty()));
-	public static Item NETHERITE_COUNTER = register("netherite_counter", Item::new, new Item.Properties());
-	public static Item STAT_CLOCK_REMOVER = register("stat_clock_remover", Item::new, new Item.Properties().stacksTo(1));
+	public static final Item NETHERITE_COUNTER = register("netherite_counter", Item::new, new Item.Properties());
+	public static final Item STAT_CLOCK_REMOVER = register("stat_clock_remover", Item::new, new Item.Properties().stacksTo(1));
 	
 	public static final ResourceKey<Registry<StatClockPartType>> PART_TYPES =
 		ResourceKey.createRegistryKey((Identifier.fromNamespaceAndPath(MOD_ID, "part_types")));

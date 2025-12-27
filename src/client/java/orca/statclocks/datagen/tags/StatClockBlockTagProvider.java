@@ -4,8 +4,6 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.tags.TagAppender;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import orca.statclocks.StatClocksMod;
@@ -20,7 +18,7 @@ public class StatClockBlockTagProvider extends FabricTagProvider.BlockTagProvide
 	}
 	
 	
-	Block[] SHEARABLE_BLOCKS = new Block[] {
+	static final Block[] SHEARABLE_BLOCKS = new Block[] {
 		Blocks.PUMPKIN,
 		Blocks.CAVE_VINES_PLANT
 	};

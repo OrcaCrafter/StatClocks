@@ -2,8 +2,6 @@ package orca.statclocks.lists;
 
 import net.minecraft.network.chat.Component;
 
-import java.util.ArrayList;
-
 public interface PartValueFormat {
 	
 	PartValueFormat NONE = value -> Component.empty().append(Integer.toString(value));
@@ -100,6 +98,6 @@ public interface PartValueFormat {
 	};
 	
 	
-	public Component format (int value);
+	Component format (int value);
 	
 }

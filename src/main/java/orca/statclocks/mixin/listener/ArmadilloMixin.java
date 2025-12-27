@@ -5,7 +5,6 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.animal.armadillo.Armadillo;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
-import orca.statclocks.StatClocksMod;
 import orca.statclocks.listeners.MiscListeners;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

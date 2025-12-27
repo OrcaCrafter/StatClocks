@@ -5,9 +5,9 @@ import net.minecraft.stats.Stat;
 
 public class StatisticListenerWrapper <T> {
 	
-	StatEventListener<T> listener;
-	ListenerAdapter adapter;
-	Identifier customStatFilter;
+	final StatEventListener<T> listener;
+	final ListenerAdapter adapter;
+	final Identifier customStatFilter;
 	
 	
 	public StatisticListenerWrapper (StatEventListener<T> listener) {
@@ -42,4 +42,4 @@ public class StatisticListenerWrapper <T> {
 		return customStatFilter == identifier;
 	
 	}
-};
+}

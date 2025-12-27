@@ -36,7 +36,7 @@ public abstract class VehicleMixin extends Entity {
 		ci.cancel();
 		
 		this.kill(serverLevel);
-		if ((Boolean)serverLevel.getGameRules().get(GameRules.ENTITY_DROPS)) {
+		if (serverLevel.getGameRules().get(GameRules.ENTITY_DROPS)) {
 			ItemStack itemStack = new ItemStack(item);
 			itemStack.set(DataComponents.CUSTOM_NAME, this.getCustomName());
 			

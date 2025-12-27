@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface ToolTipComponent {
 	
-	public void addToTooltip (ItemStack stack, Item.TooltipContext context, TooltipFlag type, List<Component> list);
+	void addToTooltip (ItemStack stack, Item.TooltipContext context, TooltipFlag type, List<Component> list);
 	
 }

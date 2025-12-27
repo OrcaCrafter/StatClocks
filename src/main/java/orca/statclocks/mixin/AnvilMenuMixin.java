@@ -218,7 +218,7 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenu {
 		
 	}
 	
-	
+	@Unique
 	private boolean renaming (ItemStack input, ItemStack output) {
 		
 		//Check if renaming the item

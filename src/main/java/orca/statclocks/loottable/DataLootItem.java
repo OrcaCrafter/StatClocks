@@ -23,7 +23,7 @@ public class DataLootItem extends LootPoolSingletonContainer {
 		return LootItem.simpleBuilder((i, j, list, list2) -> new DataLootItem(stack, i, j, list, list2));
 	}
 	
-	ItemStack stack;
+	final ItemStack stack;
 	
 	protected DataLootItem (ItemStack stack, int i, int j, List<LootItemCondition> list, List<LootItemFunction> list2) {
 		super(i, j, list, list2);
