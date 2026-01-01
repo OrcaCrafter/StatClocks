@@ -237,4 +237,16 @@ public class StatClockContent implements ToolTipComponent {
 			}
 		}
 	}
+
+	public void incrementByDurability (ItemStack stack) {
+
+		for (StatClockPartContent partContent : parts) {
+
+			int increment = partContent.getType().getInfo().incrementByDurability(stack);
+
+			partContent.incrementCount(increment);
+
+		}
+
+	}
 }

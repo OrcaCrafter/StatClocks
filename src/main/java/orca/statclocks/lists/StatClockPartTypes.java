@@ -36,6 +36,7 @@ public class StatClockPartTypes {
 	public static final StatClockPartType BLOCKS_MINED = new PartTypeInfo("blocks_mined")
 		.english("Blocks Mined").setFilterTypeBlock("%1$s Mined")
 		.addCraftingResource(Items.IRON_PICKAXE)
+		.setIncrementByDurabilityFunction(ItemStack::getDamageValue)
 		.addListener(MiscListeners.BLOCK_MINED_LISTENER).close();
 	
 	
@@ -98,6 +99,13 @@ public class StatClockPartTypes {
 		.setFormat(PartValueFormat.DAMAGE)
 		.addListener(MiscListeners.DAMAGE_DEALT)
 		.addCraftingResource(Items.IRON_SWORD)
+		.setIncrementByDurabilityFunction((stack) -> {
+
+			//TODO find itemstack's attack damage
+			int attackDamage = 5;
+
+			return stack.getDamageValue() * attackDamage;
+		})
 		.close();
 	
 	public static final StatClockPartType DAMAGE_DEALT_DISTANCE = new PartTypeInfo("damage_dealt_distance")

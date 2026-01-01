@@ -13,10 +13,15 @@ import java.util.List;
 public interface LootTableModifier {
 	
 	HashMap<Identifier, ArrayList<LootTableModifier>> MODIFIER_DICT = new HashMap<>();
-	
+	List<LootTableModifier> GLOBAL_MODIFIERS = new ArrayList<>();
+
 	static void modify (ResourceKey<LootTable> key, LootTable.Builder tableBuilder, LootTableSource source, HolderLookup.Provider registry) {
 		//Leave data packs and modded tables alone
 		if (!source.isBuiltin()) return;
+
+		for (LootTableModifier modifier : GLOBAL_MODIFIERS) {
+			modifier.ModifyTable(tableBuilder, source);
+		}
 		
 		List<LootTableModifier> modifiers = MODIFIER_DICT.get(key.identifier());
 		
@@ -32,7 +37,11 @@ public interface LootTableModifier {
 	
 	
 	static void AddModifier (LootTableModifier modifier, Identifier... keys) {
-		
+
+		if (keys.length == 0) {
+			GLOBAL_MODIFIERS.add(modifier);
+		}
+
 		for (Identifier key : keys) {
 			
 			ArrayList<LootTableModifier> modifiers;
