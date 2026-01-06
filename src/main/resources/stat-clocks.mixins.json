@@ -5,6 +5,7 @@
 	"mixins": [
 		"AnvilMenuMixin",
 		"GrindstoneMenuMixin",
+		"GrindstoneMenuSlotMixin",
 		"VehicleMixin",
 		"VillagerMixin",
 		"WanderingTraderMixin",

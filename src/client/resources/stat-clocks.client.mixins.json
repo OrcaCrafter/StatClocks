@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "orca.statclocks.mixin.client",
+	"package": "orca.statclocks.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
 	],
