@@ -20,7 +20,21 @@ public class StatClockBlockTagProvider extends FabricTagProvider.BlockTagProvide
 	
 	static final Block[] SHEARABLE_BLOCKS = new Block[] {
 		Blocks.PUMPKIN,
-		Blocks.CAVE_VINES_PLANT
+		
+		Blocks.BEEHIVE,
+		Blocks.BEE_NEST,
+		
+		Blocks.CAVE_VINES,
+		Blocks.CAVE_VINES_PLANT,
+		
+		Blocks.KELP,
+		Blocks.KELP_PLANT,
+		
+		Blocks.TWISTING_VINES,
+		Blocks.WEEPING_VINES_PLANT,
+		
+		Blocks.WEEPING_VINES,
+		Blocks.WEEPING_VINES_PLANT
 	};
 	
 	@Override

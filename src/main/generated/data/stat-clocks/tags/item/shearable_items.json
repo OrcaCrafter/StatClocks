@@ -4,7 +4,12 @@
     "#stat-clocks:horse_armor",
     "minecraft:saddle",
     "minecraft:lead",
+    {
+      "id": "#minecraft:wool_carpets",
+      "required": false
+    },
     "minecraft:pumpkin_seeds",
+    "minecraft:honeycomb",
     {
       "id": "#minecraft:wool",
       "required": false

@@ -16,10 +16,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ShearsItem.class)
-public abstract class ShearsItemListener extends Item {
+public abstract class ShearsItemMixin extends Item {
 	
 	
-	public ShearsItemListener (Properties properties) {
+	public ShearsItemMixin (Properties properties) {
 		super(properties);
 	}
 	
@@ -32,12 +32,11 @@ public abstract class ShearsItemListener extends Item {
 		
 		if (player == null) return;
 		
-		ItemStack tool = StatClockPartTypes.getPriorityHandItem(player, (item) -> item.getItem() instanceof ShearsItemListener);
+		ItemStack tool = StatClockPartTypes.getPriorityHandItem(player, (item) -> item.getItem() instanceof ShearsItemMixin);
 		
 		BlockState block = useOnContext.getLevel().getBlockState(useOnContext.getClickedPos());
 		
-		//MiscListeners.SHEARS_USE_LISTENER.applyToParts(player, tool, null, 1);
-		MiscListeners.SHEARS_USE_LISTENER.applyToParts(player, tool, block, 1);
-		//TODO dropped items
+		MiscListeners.SHEARS_USE_LISTENER.applyToParts(player, tool, null, 1);
+		MiscListeners.SHEARS_USE_LISTENER_BLOCK.applyToParts(player, tool, block, 1);
 	}
 }

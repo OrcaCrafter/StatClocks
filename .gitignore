@@ -40,3 +40,4 @@ replay_*.log
 *.jfr
 *.xcf
 /src/main/generated/.cache
+todo.txt

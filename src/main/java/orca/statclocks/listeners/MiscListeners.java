@@ -25,7 +25,6 @@ public class MiscListeners {
 	public static final ListenerAdapter BLOCKS_IGNITED					= new ListenerAdapter();
 	public static final ListenerAdapter MOBS_IGNITED					= new ListenerAdapter();
 	
-	//TODO block and entity interactors :(
 	public static final ListenerAdapter SHEARS_USE_LISTENER 			= new ListenerAdapter();
 	public static final ListenerAdapter SHEARS_USE_LISTENER_ITEM 		= new ListenerAdapter();
 	public static final ListenerAdapter SHEARS_USE_LISTENER_BLOCK 		= new ListenerAdapter();

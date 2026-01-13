@@ -12,11 +12,14 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import orca.statclocks.components.StatClockContent;
 import orca.statclocks.components.StatClockFilterContent;
@@ -104,7 +107,7 @@ public class StatClocksMod implements ModInitializer {
 		return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MOD_ID, name));
 	}
 	
-	public static final TagKey<Block> SHEARABLE_BLOCKS = blockTag("shearable_items");
+	public static final TagKey<Block> SHEARABLE_BLOCKS = blockTag("shearable_blocks");
 	
 	public static TagKey<Block> blockTag (String name) {
 		return TagKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MOD_ID, name));

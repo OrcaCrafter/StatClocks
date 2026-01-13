@@ -44,7 +44,6 @@ public class StatClockItemTagProvider extends FabricTagProvider.ItemTagProvider 
 	private static final Item[] MISC_USABLE_ITEMS = new Item[] {
 		Items.CARROT_ON_A_STICK, Items.WARPED_FUNGUS_ON_A_STICK,
 		Items.GOAT_HORN, Items.SPYGLASS
-		//Brush has its own handling
 	};
 	
 	private void addUsableItems () {
@@ -136,6 +135,7 @@ public class StatClockItemTagProvider extends FabricTagProvider.ItemTagProvider 
 	private void addShearableItems () {
 		TagAppender<Item, Item> shearableItems = valueLookupBuilder(StatClocksMod.SHEARABLE_ITEMS);
 		
+		//General shearable items
 		shearableItems.addTag(StatClocksMod.NAUTILUS_ARMOR);
 		shearableItems.addTag(StatClocksMod.HORSE_ARMOR);
 		
@@ -143,13 +143,18 @@ public class StatClockItemTagProvider extends FabricTagProvider.ItemTagProvider 
 		
 		shearableItems.add(Items.LEAD);
 		
-		shearableItems.add(Items.PUMPKIN_SEEDS);
+		shearableItems.addOptionalTag(ItemTags.WOOL_CARPETS);
 		
+		//Shearable blocks
+		shearableItems.add(Items.PUMPKIN_SEEDS);
+		shearableItems.add(Items.HONEYCOMB);
+		
+		//Sheep
 		shearableItems.addOptionalTag(ItemTags.WOOL);
 		
+		//Mooshroom and bogged
 		shearableItems.add(Items.BROWN_MUSHROOM);
 		shearableItems.add(Items.RED_MUSHROOM);
-	
 	}
 	
 	private static final Item[] FISHABLE_FISH = new Item[] {
