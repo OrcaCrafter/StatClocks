@@ -29,7 +29,7 @@ public class BrushableBlockEntityMixin {
 			MiscListeners.BRUSH_USE_LISTENER.applyToParts(player, brush, this.item, 1);
 		}
 		
-	
+		
 	}
-
+	
 }

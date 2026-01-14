@@ -40,6 +40,6 @@ public class StatisticListenerWrapper <T> {
 		if (!(value instanceof Identifier identifier)) return false;
 		
 		return customStatFilter == identifier;
-	
+		
 	}
 }

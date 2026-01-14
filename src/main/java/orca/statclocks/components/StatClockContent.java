@@ -25,7 +25,8 @@ import java.util.Optional;
 
 public class StatClockContent implements ToolTipComponent {
 	
-	public static void init () {}
+	public static void init () {
+	}
 	
 	public static final Codec<StatClockContent> CODEC = RecordCodecBuilder.create(
 		instance -> instance.group(
@@ -68,7 +69,7 @@ public class StatClockContent implements ToolTipComponent {
 			
 			System.arraycopy(defaultParts, 0, ret, 0, defaultParts.length);
 			System.arraycopy(allowedParts, 0, ret, defaultParts.length, allowedParts.length);
-		
+			
 			return new StatClockContent(item.getItem().toString(), ret);
 		}
 		
@@ -156,7 +157,7 @@ public class StatClockContent implements ToolTipComponent {
 	}
 	
 	public boolean canApplyToTool (ItemStack tool) {
-	
+		
 		return (tool.getItem().toString().equals(toolType));
 	}
 	
@@ -221,7 +222,7 @@ public class StatClockContent implements ToolTipComponent {
 			
 			toolTypeItemHolder.map(Holder.Reference::value).ifPresent(
 				toolTypeItem ->
-				list.add(Component.translatable("stat-clocks.tooltip.clock_tool_type", toolTypeItem.getName()))
+					list.add(Component.translatable("stat-clocks.tooltip.clock_tool_type", toolTypeItem.getName()))
 			);
 			
 		}
@@ -237,16 +238,16 @@ public class StatClockContent implements ToolTipComponent {
 			}
 		}
 	}
-
+	
 	public void incrementByDurability (ItemStack stack) {
-
+		
 		for (StatClockPartContent partContent : parts) {
-
+			
 			int increment = partContent.getType().getInfo().incrementByDurability(stack);
-
+			
 			partContent.incrementCount(increment);
-
+			
 		}
-
+		
 	}
 }

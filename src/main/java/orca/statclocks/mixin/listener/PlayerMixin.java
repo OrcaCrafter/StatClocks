@@ -29,18 +29,18 @@ public abstract class PlayerMixin extends Avatar {
 		if (isUnderWater()) {
 			
 			ItemStack helmet = getItemBySlot(EquipmentSlot.HEAD);
-			MiscListeners.PLAYER_UNDERWATER.applyToParts((Player)(Object)this, helmet, null, 1);
+			MiscListeners.PLAYER_UNDERWATER.applyToParts((Player) (Object) this, helmet, null, 1);
 		}
-	
+		
 	}
 	
-	@Inject(method="killedEntity", at = @At("TAIL"))
+	@Inject(method = "killedEntity", at = @At("TAIL"))
 	public void killedEntity (ServerLevel serverLevel, LivingEntity target, DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
 		ItemStack weapon = damageSource.getWeaponItem();
 		
-		if (weapon == null ||weapon.isEmpty()) return;
+		if (weapon == null || weapon.isEmpty()) return;
 		
-		MiscListeners.ENTITY_KILLED_LISTENER.applyToParts((Player)(Object)this, weapon, target, 1);
+		MiscListeners.ENTITY_KILLED_LISTENER.applyToParts((Player) (Object) this, weapon, target, 1);
 	}
 	
 }

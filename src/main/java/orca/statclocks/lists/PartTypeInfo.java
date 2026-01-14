@@ -21,7 +21,6 @@ import oshi.util.tuples.Pair;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 
 
@@ -147,9 +146,9 @@ public class PartTypeInfo {
 		visible = false;
 		return this;
 	}
-
+	
 	public Function<ItemStack, Integer> incrementFunction;
-
+	
 	public PartTypeInfo setIncrementByDurabilityFunction (Function<ItemStack, Integer> function) {
 		incrementFunction = function;
 		return this;
@@ -195,14 +194,14 @@ public class PartTypeInfo {
 	public boolean isCraftable () {
 		return !crafting.isEmpty() || !craftingTag.isEmpty();
 	}
-
+	
 	public int incrementByDurability (ItemStack stack) {
 		if (incrementFunction == null) return 0;
-
+		
 		return incrementFunction.apply(stack);
-
+		
 	}
-
+	
 	public void makeCraftingRecipe (RecipeProvider recipeProvider, ItemStack outputItem, RecipeOutput output) {
 		
 		for (Item item : crafting) {

@@ -3,7 +3,6 @@ package orca.statclocks.loottable;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.entries.NestedLootTable;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
@@ -29,7 +28,7 @@ public class LootTableModifications {
 	private static final Identifier SIMPLE_DUNGEON = getIdentifier("chests/simple_dungeon");
 	
 	private static final Identifier STRONGHOLD_ALTAR = getIdentifier("chests/stronghold_corridor");
-	
+
 //	private static final Identifier WOODLAND_MANSION = getIdentifier("chests/woodland_mansion");
 //	private static final Identifier ANCIENT_CITY = getIdentifier("chests/ancient_city");
 	
@@ -41,7 +40,7 @@ public class LootTableModifications {
 	private static final Identifier END_CITY_TREASURE = getIdentifier("chests/end_city_treasure");
 	
 	private static final Identifier FISHING = getIdentifier("gameplay/fishing");
-	
+
 //	private static final Identifier TRAIL_RUIN_RARE = getIdentifier("archaeology/trail_ruins_rare");
 	
 	private static final Identifier TRIAL_CHAMBER_VAULT_OMINOUS_RARE_POOL = getIdentifier("chests/trial_chambers/reward_ominous_rare");
@@ -53,7 +52,7 @@ public class LootTableModifications {
 //	private static final Identifier VILLAGE_WEAPONSMITH = getIdentifier("chests/village/village_weaponsmith");
 //	private static final Identifier VILLAGE_SAVANNA_HOUSE = getIdentifier("chests/village/weaponsmith");
 //	private static final Identifier VILLAGE_TANNER = getIdentifier("chests/village/weaponsmith");
-
+	
 	private static final Identifier[] COMMON_LOOT_TABLES = new Identifier[] {
 		ABANDONED_MINESHAFT,
 		BURIED_TREASURE,
@@ -75,44 +74,44 @@ public class LootTableModifications {
 		
 		//Make most loot containers provide easy early game access to the basics
 		LootTableModifier.AddModifier((tableBuilder, source) -> {
-			tableBuilder.pool(
-				LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-					.add(lootTableItem(STAT_CLOCK).setWeight(4))
-					.add(lootTableItem(STAT_CLOCK_FILTER).setWeight(4))
-					.add(lootTableItem(STAT_CLOCK_PART).setWeight(12))
-					.add(lootTableItem(STAT_CLOCK_REMOVER).setWeight(1))
-					.add(
-						lootTableItem(NETHERITE_COUNTER).setWeight(24).apply(
-							SetItemCountFunction.setCount(UniformGenerator.between(3, 8), false)
+				tableBuilder.pool(
+					LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+						.add(lootTableItem(STAT_CLOCK).setWeight(4))
+						.add(lootTableItem(STAT_CLOCK_FILTER).setWeight(4))
+						.add(lootTableItem(STAT_CLOCK_PART).setWeight(12))
+						.add(lootTableItem(STAT_CLOCK_REMOVER).setWeight(1))
+						.add(
+							lootTableItem(NETHERITE_COUNTER).setWeight(24).apply(
+								SetItemCountFunction.setCount(UniformGenerator.between(3, 8), false)
+							)
 						)
-					)
-					.build()
+						.build()
 				);
 			},
 			COMMON_LOOT_TABLES
 		);
-
-
+		
+		
 		LootTableModifier.AddModifier((tableBuilder, source) -> {
 				tableBuilder.apply(
 					new SetStatClockFunction.Builder().when(LootItemRandomChanceCondition.randomChance(0.5f))
 				);
 			}
 		);
-
+		
 		//Add extra loot to the bastion treasure, fitting with the extra netherite there
 		LootTableModifier.AddModifier((tableBuilder, source) -> {
-			tableBuilder.pool(
-				LootPool.lootPool().setRolls(UniformGenerator.between(1, 5))
-					.add(lootTableItem(STAT_CLOCK).setWeight(8))
-					.add(lootTableItem(STAT_CLOCK_FILTER).setWeight(4))
-					.add(lootTableItem(STAT_CLOCK_PART).setWeight(12))
-					.add(
-						lootTableItem(NETHERITE_COUNTER).setWeight(24).apply(
-							SetItemCountFunction.setCount(UniformGenerator.between(1, 5))
+				tableBuilder.pool(
+					LootPool.lootPool().setRolls(UniformGenerator.between(1, 5))
+						.add(lootTableItem(STAT_CLOCK).setWeight(8))
+						.add(lootTableItem(STAT_CLOCK_FILTER).setWeight(4))
+						.add(lootTableItem(STAT_CLOCK_PART).setWeight(12))
+						.add(
+							lootTableItem(NETHERITE_COUNTER).setWeight(24).apply(
+								SetItemCountFunction.setCount(UniformGenerator.between(1, 5))
+							)
 						)
-					)
-					.build()
+						.build()
 				);
 			},
 			BASTION_TREASURE
@@ -120,18 +119,17 @@ public class LootTableModifications {
 		
 		//Add some extra loot to the other bastion chests
 		LootTableModifier.AddModifier((tableBuilder, source) -> {
-			tableBuilder.pool(
-				LootPool.lootPool().setRolls(UniformGenerator.between(0, 2))
-					.add(lootTableItem(STAT_CLOCK).setWeight(8))
-					.add(lootTableItem(STAT_CLOCK_FILTER).setWeight(4))
-					.add(lootTableItem(STAT_CLOCK_PART).setWeight(12))
-					.add(
-						(LootPoolEntryContainer.Builder<?>)
+				tableBuilder.pool(
+					LootPool.lootPool().setRolls(UniformGenerator.between(0, 2))
+						.add(lootTableItem(STAT_CLOCK).setWeight(8))
+						.add(lootTableItem(STAT_CLOCK_FILTER).setWeight(4))
+						.add(lootTableItem(STAT_CLOCK_PART).setWeight(12))
+						.add(
 							lootTableItem(NETHERITE_COUNTER).setWeight(24).apply(
 								SetItemCountFunction.setCount(UniformGenerator.between(1, 5))
 							)
-					)
-					.build()
+						)
+						.build()
 				);
 			},
 			BASTION_BRIDGE,
@@ -141,20 +139,19 @@ public class LootTableModifications {
 		
 		//Add elytra specific parts to the end city
 		LootTableModifier.AddModifier((tableBuilder, source) -> {
-			tableBuilder.pool(
-				LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-					.add(lootTableItem(STAT_CLOCK).setWeight(4))
-					.add(lootTableItem(STAT_CLOCK_FILTER).setWeight(4))
-					.add(lootTableItem(STAT_CLOCK_PART).setWeight(12))
-					.add(lootTableItem(STAT_CLOCK_REMOVER).setWeight(1))
-					.add(
-						(LootPoolEntryContainer.Builder<?>)
+				tableBuilder.pool(
+					LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+						.add(lootTableItem(STAT_CLOCK).setWeight(4))
+						.add(lootTableItem(STAT_CLOCK_FILTER).setWeight(4))
+						.add(lootTableItem(STAT_CLOCK_PART).setWeight(12))
+						.add(lootTableItem(STAT_CLOCK_REMOVER).setWeight(1))
+						.add(
 							lootTableItem(NETHERITE_COUNTER).setWeight(24).apply(
 								SetItemCountFunction.setCount(UniformGenerator.between(3, 8), false)
 							)
-					)
-					.add(dataBuilder(STAT_CLOCK_PART, PART_TYPE_COMPONENT, StatClockPartTypes.ROCKET_USAGE).setWeight(24))
-					.build()
+						)
+						.add(dataBuilder(STAT_CLOCK_PART, PART_TYPE_COMPONENT, StatClockPartTypes.ROCKET_USAGE).setWeight(24))
+						.build()
 				);
 			},
 			END_CITY_TREASURE
@@ -162,20 +159,19 @@ public class LootTableModifications {
 		
 		//Mace specific in vaults
 		LootTableModifier.AddModifier((tableBuilder, source) -> {
-			tableBuilder.pool(
-				LootPool.lootPool()
-					.add(lootTableItem(STAT_CLOCK).setWeight(4))
-					.add(lootTableItem(STAT_CLOCK_FILTER).setWeight(4))
-					.add(lootTableItem(STAT_CLOCK_PART).setWeight(12))
-					.add(lootTableItem(STAT_CLOCK_REMOVER).setWeight(1))
-					.add(
-						(LootPoolEntryContainer.Builder<?>)
+				tableBuilder.pool(
+					LootPool.lootPool()
+						.add(lootTableItem(STAT_CLOCK).setWeight(4))
+						.add(lootTableItem(STAT_CLOCK_FILTER).setWeight(4))
+						.add(lootTableItem(STAT_CLOCK_PART).setWeight(12))
+						.add(lootTableItem(STAT_CLOCK_REMOVER).setWeight(1))
+						.add(
 							lootTableItem(NETHERITE_COUNTER).setWeight(24).apply(
 								SetItemCountFunction.setCount(UniformGenerator.between(3, 8), false)
 							)
-					)
-					.add(dataBuilder(STAT_CLOCK_PART, PART_TYPE_COMPONENT, StatClockPartTypes.FALL_ATTACK_DISTANCE).setWeight(1))
-					.build()
+						)
+						.add(dataBuilder(STAT_CLOCK_PART, PART_TYPE_COMPONENT, StatClockPartTypes.FALL_ATTACK_DISTANCE).setWeight(1))
+						.build()
 				);
 			},
 			TRIAL_CHAMBER_VAULT_OMINOUS_RARE_POOL
@@ -183,17 +179,17 @@ public class LootTableModifications {
 		
 		//Add our loot to the table
 		LootTableModifier.AddModifier((tableBuilder, source) -> {
-			tableBuilder.modifyPools((builder -> {
-				builder.add(
-					NestedLootTable.inlineLootTable(
-						LootTable.lootTable().pool(
-							LootPool.lootPool().setRolls(ConstantValue.exactly(1))
-								.add(dataBuilder(STAT_CLOCK_PART, PART_TYPE_COMPONENT, StatClockPartTypes.ITEMS_FISHED).setWeight(1))
-								.add(dataBuilder(STAT_CLOCK_PART, PART_TYPE_COMPONENT, StatClockPartTypes.ITEMS_FISHED).setWeight(1)).build()
-						).build()
-					).setWeight(5)//As likely as treasure, unaffected by lure, luke of the sea or open water
-				);
-			}));
+				tableBuilder.modifyPools((builder -> {
+					builder.add(
+						NestedLootTable.inlineLootTable(
+							LootTable.lootTable().pool(
+								LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+									.add(dataBuilder(STAT_CLOCK_PART, PART_TYPE_COMPONENT, StatClockPartTypes.ITEMS_FISHED).setWeight(1))
+									.add(dataBuilder(STAT_CLOCK_PART, PART_TYPE_COMPONENT, StatClockPartTypes.ITEMS_FISHED).setWeight(1)).build()
+							).build()
+						).setWeight(5)//As likely as treasure, unaffected by lure, luke of the sea or open water
+					);
+				}));
 			},
 			FISHING
 		);

@@ -33,5 +33,5 @@ public abstract class FishingRodHookedTriggerMixin extends SimpleCriterionTrigge
 		}
 		
 	}
-
+	
 }

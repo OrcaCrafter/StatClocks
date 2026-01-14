@@ -2,7 +2,10 @@ package orca.statclocks;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.exceptions.*;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.brigadier.exceptions.Dynamic3CommandExceptionType;
+import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
+import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -90,7 +93,7 @@ public class StatClockCommand {
 										.executes(
 											context -> addPartToStatClock(
 												context.getSource(),
-												EntityArgument.getEntities(context,"targets"),
+												EntityArgument.getEntities(context, "targets"),
 												ResourceArgument.getResource(context, "part", StatClocksMod.PART_TYPES).value(),
 												StatClockFilterType.NONE,
 												null
@@ -221,7 +224,7 @@ public class StatClockCommand {
 					
 					StatClockContent.mergeClockInfo(itemStack, add);
 					
-					appliedTo ++;
+					appliedTo++;
 				} else if (targets.size() == 1) {
 					throw ERROR_NO_ITEM.create(livingEntity.getName().getString());
 				}
@@ -272,7 +275,8 @@ public class StatClockCommand {
 		if (filterType != StatClockFilterType.NONE) {
 			StatClockFilterContent filterContent = new StatClockFilterContent(filterType, filter);
 			
-			if (!typeInfo.allowFilter(filterContent)) throw ERROR_INVALID_FILTER.create(filterType.getName(), filter, typeInfo.getName());
+			if (!typeInfo.allowFilter(filterContent))
+				throw ERROR_INVALID_FILTER.create(filterType.getName(), filter, typeInfo.getName());
 			
 			type.setFilter(filterContent);
 		}
@@ -293,13 +297,14 @@ public class StatClockCommand {
 						statClock = StatClockContent.BlankStatClock(itemStack);
 					}
 					
-					if (!statClock.canAddPart(type, itemStack)) throw ERROR_INCOMPATIBLE.create(itemStack.getHoverName().getString());
+					if (!statClock.canAddPart(type, itemStack))
+						throw ERROR_INCOMPATIBLE.create(itemStack.getHoverName().getString());
 					
 					statClock.addPart(addPart.clonePartContent());
 					
 					itemStack.set(StatClockContent.STAT_CLOCK_COMPONENT, statClock);
 					
-					appliedTo ++;
+					appliedTo++;
 				} else if (targets.size() == 1) {
 					throw ERROR_NO_ITEM.create(livingEntity.getName().getString());
 				}

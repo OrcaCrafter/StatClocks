@@ -19,13 +19,13 @@ public abstract class MaceItemMixin extends Item {
 	}
 	
 	@Inject(method = "hurtEnemy", at = @At("RETURN"))
-	public void hurtEnemy(ItemStack mace, LivingEntity target, LivingEntity attacker, CallbackInfo ci) {
+	public void hurtEnemy (ItemStack mace, LivingEntity target, LivingEntity attacker, CallbackInfo ci) {
 		
 		if (MaceItem.canSmashAttack(attacker) && attacker instanceof Player player) {
 			
 			double fallCM = attacker.fallDistance*100;
 			
-			MiscListeners.MACE_FALL_LISTENER.applyToParts(player, mace, target, (int)fallCM);
+			MiscListeners.MACE_FALL_LISTENER.applyToParts(player, mace, target, (int) fallCM);
 			
 		}
 		

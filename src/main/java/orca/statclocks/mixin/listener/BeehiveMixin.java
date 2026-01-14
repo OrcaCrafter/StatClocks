@@ -36,7 +36,6 @@ public class BeehiveMixin extends Block {
 		}
 		
 		
-		
 		BiConsumer<ServerLevel, ItemStack> handelItem = (serverLevelX, loot) -> {
 			
 			MiscListeners.SHEARS_USE_LISTENER_ITEM.applyToParts(player, stack, loot, loot.getCount());

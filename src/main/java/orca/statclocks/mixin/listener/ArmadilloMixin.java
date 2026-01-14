@@ -13,16 +13,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Armadillo.class)
 public class ArmadilloMixin {
-
-
-
-	@Inject(method="mobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;hurtAndBreak(ILnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/EquipmentSlot;)V"))
+	
+	
+	@Inject(method = "mobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;hurtAndBreak(ILnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/EquipmentSlot;)V"))
 	void mobInteract (Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
 		
 		
 		if (!player.isLocalPlayer()) {
 			MiscListeners.BRUSH_USE_LISTENER.applyToParts(player, player.getItemInHand(interactionHand), Items.ARMADILLO_SCUTE, 1);
 		}
-	
+		
 	}
 }

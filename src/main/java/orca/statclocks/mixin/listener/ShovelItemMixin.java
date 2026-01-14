@@ -3,7 +3,9 @@ package orca.statclocks.mixin.listener;
 
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.context.UseOnContext;
 import orca.statclocks.listeners.MiscListeners;
 import orca.statclocks.lists.StatClockPartTypes;

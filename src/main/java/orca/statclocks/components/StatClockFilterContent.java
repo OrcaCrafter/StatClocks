@@ -122,16 +122,16 @@ public class StatClockFilterContent implements ToolTipComponent {
 	}
 	
 	public boolean itemPassesFilter (Item filterItem) {
-		return  (filterItem == getItem());
+		return (filterItem == getItem());
 	}
 	
 	public boolean blockPassesFilter (Block filterBlock) {
-		return  (filterBlock == getBlock());
+		return (filterBlock == getBlock());
 	}
 	
 	public boolean entityPassesFilter (EntityType<?> filterEntity) {
 		StatClocksMod.LOGGER.info("Entity: {} pass filter: {}? {}", filterEntity, getEntity(), filterEntity == getEntity());
-		return  (filterEntity == getEntity());
+		return (filterEntity == getEntity());
 	}
 	
 	public Component getItemTranslation () {

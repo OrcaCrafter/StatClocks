@@ -24,6 +24,6 @@ public class CreeperMixin {
 		if (tool.is(ItemTags.CREEPER_IGNITERS)) {
 			MiscListeners.MOBS_IGNITED.applyToParts(player, tool, this, 1);
 		}
-	
+		
 	}
 }

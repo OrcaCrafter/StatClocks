@@ -127,7 +127,7 @@ public class StatClockPartMapper {
 		//Bows
 		MAPPERS.add((Item item, MapRule rule) -> {
 			//Regular combat items, and damage dealing tools
-			if (item instanceof  BowItem || item instanceof CrossbowItem) {
+			if (item instanceof BowItem || item instanceof CrossbowItem) {
 				rule.defaultParts.add(StatClockPartTypes.DAMAGE_DEALT);
 				rule.defaultParts.add(StatClockPartTypes.MOBS_KILLED);
 				

@@ -21,10 +21,11 @@ public class StatClockScreen extends Screen {
 	
 	}
 	
-	public boolean isPauseScreen() {
+	public boolean isPauseScreen () {
 		return false;
 	}
-	public boolean isInGameUi() {
+	
+	public boolean isInGameUi () {
 		return true;
 	}
 }

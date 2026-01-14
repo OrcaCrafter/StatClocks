@@ -70,13 +70,13 @@ public abstract class LivingEntityMixin extends Entity {
 		
 		//Shields are handled elsewhere
 		
-		LivingEntity thisEntity = (LivingEntity)(Object)this;
+		LivingEntity thisEntity = (LivingEntity) (Object) this;
 		
 		if (thisEntity instanceof Wolf wolf) {
 			//Wolf armor is handled differently, only blocking damage
 			ItemStack armor = wolf.getBodyArmorItem();
 			
-			WOLF_DAMAGE_BLOCKED_ADAPTER.applyToPartsNonPlayer(armor, damageSource.getEntity(), (int)(damage * 10));
+			WOLF_DAMAGE_BLOCKED_ADAPTER.applyToPartsNonPlayer(armor, damageSource.getEntity(), (int) (damage*10));
 		}
 		
 		float damageAfterArmor		= this.getDamageAfterArmor(damageSource, damage);
@@ -110,11 +110,11 @@ public abstract class LivingEntityMixin extends Entity {
 		ItemStack weapon = damageSource.getWeaponItem();
 		
 		if (damageSource.getEntity() instanceof Player player && weapon != null) {
-			MiscListeners.DAMAGE_DEALT.applyToParts(player, weapon, thisEntity, (int)damageTaken);
+			MiscListeners.DAMAGE_DEALT.applyToParts(player, weapon, thisEntity, (int) damageTaken);
 			
 			if (player.level().dimension() == thisEntity.level().dimension()) {
 				
-				int distanceCM = (int) (thisEntity.distanceTo(player) * 100f);
+				int distanceCM = (int) (thisEntity.distanceTo(player)*100f);
 				
 				MiscListeners.DAMAGE_DEALT_DISTANCE.applyToParts(player, weapon, thisEntity, distanceCM);
 			}
@@ -127,9 +127,9 @@ public abstract class LivingEntityMixin extends Entity {
 	@Unique
 	private float getDamageAfterArmor (DamageSource damageSource, float damage) {
 		int armorValue = this.getArmorValue();
-		float armorToughness = (float)this.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
+		float armorToughness = (float) this.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
 		
-		return CombatRules.getDamageAfterAbsorb((LivingEntity)(Object)this, damage, damageSource, armorValue, armorToughness);
+		return CombatRules.getDamageAfterAbsorb((LivingEntity) (Object) this, damage, damageSource, armorValue, armorToughness);
 	}
 	
 	//Can't use this method, as calling it adds to the players stats
@@ -160,7 +160,7 @@ public abstract class LivingEntityMixin extends Entity {
 		if (!damageSource.is(DamageTypeTags.BYPASSES_ENCHANTMENTS)) {
 			
 			if (this.level() instanceof ServerLevel serverLevel) {
-				float protection = EnchantmentHelper.getDamageProtection(serverLevel, (LivingEntity)(Object)this, damageSource);
+				float protection = EnchantmentHelper.getDamageProtection(serverLevel, (LivingEntity) (Object) this, damageSource);
 				
 				if (protection > 0.0F) {
 					damage = CombatRules.getDamageAfterMagicAbsorb(damage, protection);
@@ -174,8 +174,8 @@ public abstract class LivingEntityMixin extends Entity {
 	
 	
 	//
- 	//		LOOT
- 	//
+	//		LOOT
+	//
 	
 	
 	@Inject(
@@ -189,7 +189,7 @@ public abstract class LivingEntityMixin extends Entity {
 	public void dropFromLootTable (ServerLevel serverLevel, DamageSource damageSource, boolean bl, ResourceKey<LootTable> resourceKey, CallbackInfo ci) {
 		ci.cancel();
 		
-		LivingEntity thisEntity = (LivingEntity)(Object)this;
+		LivingEntity thisEntity = (LivingEntity) (Object) this;
 		thisEntity.dropFromLootTable(serverLevel, damageSource, bl, resourceKey, itemStack -> this.spawnAndCount(serverLevel, damageSource, itemStack));
 	}
 	

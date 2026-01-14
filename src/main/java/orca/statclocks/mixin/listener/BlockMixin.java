@@ -17,6 +17,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
 import static net.minecraft.world.level.block.Block.popResource;
 
 @Mixin(Block.class)
@@ -35,10 +36,10 @@ public abstract class BlockMixin extends BlockBehaviour {
 		ci.cancel();
 		
 		if (level instanceof ServerLevel) {
-			Block.getDrops(blockState, (ServerLevel)level, blockPos, blockEntity, entity, itemStack).forEach(
+			Block.getDrops(blockState, (ServerLevel) level, blockPos, blockEntity, entity, itemStack).forEach(
 				drop -> forEachDrop(level, blockPos, entity, drop, itemStack)
 			);
-			blockState.spawnAfterBreak((ServerLevel)level, blockPos, itemStack, true);
+			blockState.spawnAfterBreak((ServerLevel) level, blockPos, itemStack, true);
 		}
 	}
 	

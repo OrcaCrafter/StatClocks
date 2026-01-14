@@ -26,7 +26,7 @@ public abstract class VehicleMixin extends Entity {
 	@Inject(method = "destroy(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/Item;)V", at = @At("HEAD"), cancellable = true)
 	public void destroy (ServerLevel serverLevel, Item item, CallbackInfo ci) {
 		
-		VehicleEntity thisVehicle = (VehicleEntity)(Object)this;
+		VehicleEntity thisVehicle = (VehicleEntity) (Object) this;
 		
 		StatClockContent statClock = thisVehicle.get(StatClockContent.STAT_CLOCK_COMPONENT);
 		

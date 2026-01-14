@@ -9,8 +9,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 public interface DamageListener <T extends LivingEntity> {
-
-
+	
+	
 	void onTakeDamage (T entity, DamageSource source, float damageBlocked, float damageTaken);
 	
 	ListenerAdapter PLAYER_DAMAGE_TAKEN_ADAPTER = new ListenerAdapter();
@@ -31,37 +31,37 @@ public interface DamageListener <T extends LivingEntity> {
 		ItemStack legs = player.getItemBySlot(EquipmentSlot.LEGS);
 		ItemStack feet = player.getItemBySlot(EquipmentSlot.FEET);
 		
-		DamageListener.PLAYER_DAMAGE_BLOCKED_ADAPTER.applyToParts(player,	head,	source.getEntity(), (int)damageBlocked);
-		DamageListener.PLAYER_DAMAGE_TAKEN_ADAPTER.applyToParts(player,		head,	source.getEntity(), (int)damageTaken);
+		DamageListener.PLAYER_DAMAGE_BLOCKED_ADAPTER.applyToParts(player, head, source.getEntity(), (int) damageBlocked);
+		DamageListener.PLAYER_DAMAGE_TAKEN_ADAPTER.applyToParts(player, head, source.getEntity(), (int) damageTaken);
 		
-		DamageListener.PLAYER_DAMAGE_BLOCKED_ADAPTER.applyToParts(player,	chest,	source.getEntity(), (int)damageBlocked);
-		DamageListener.PLAYER_DAMAGE_TAKEN_ADAPTER.applyToParts(player,		chest,	source.getEntity(), (int)damageTaken);
+		DamageListener.PLAYER_DAMAGE_BLOCKED_ADAPTER.applyToParts(player, chest, source.getEntity(), (int) damageBlocked);
+		DamageListener.PLAYER_DAMAGE_TAKEN_ADAPTER.applyToParts(player, chest, source.getEntity(), (int) damageTaken);
 		
-		DamageListener.PLAYER_DAMAGE_BLOCKED_ADAPTER.applyToParts(player,	legs,	source.getEntity(), (int)damageBlocked);
-		DamageListener.PLAYER_DAMAGE_TAKEN_ADAPTER.applyToParts(player,		legs,	source.getEntity(), (int)damageTaken);
+		DamageListener.PLAYER_DAMAGE_BLOCKED_ADAPTER.applyToParts(player, legs, source.getEntity(), (int) damageBlocked);
+		DamageListener.PLAYER_DAMAGE_TAKEN_ADAPTER.applyToParts(player, legs, source.getEntity(), (int) damageTaken);
 		
-		DamageListener.PLAYER_DAMAGE_BLOCKED_ADAPTER.applyToParts(player,	feet, 	source.getEntity(), (int)damageBlocked);
-		DamageListener.PLAYER_DAMAGE_TAKEN_ADAPTER.applyToParts(player,		feet, 	source.getEntity(), (int)damageTaken);
+		DamageListener.PLAYER_DAMAGE_BLOCKED_ADAPTER.applyToParts(player, feet, source.getEntity(), (int) damageBlocked);
+		DamageListener.PLAYER_DAMAGE_TAKEN_ADAPTER.applyToParts(player, feet, source.getEntity(), (int) damageTaken);
 		
 		
 	};
 	
 	DamageListener<AbstractHorse> HORSE_DAMAGE_LISTENER = (AbstractHorse horse, DamageSource source, float damageBlocked, float damageTaken) -> {
-	
+		
 		ItemStack armor = horse.getBodyArmorItem();
 		
-		HORSE_DAMAGE_TAKEN_ADAPTER.applyToPartsNonPlayer(armor, source.getEntity(), (int)damageTaken);
-		HORSE_DAMAGE_BLOCKED_ADAPTER.applyToPartsNonPlayer(armor, source.getEntity(), (int)damageBlocked);
-	
+		HORSE_DAMAGE_TAKEN_ADAPTER.applyToPartsNonPlayer(armor, source.getEntity(), (int) damageTaken);
+		HORSE_DAMAGE_BLOCKED_ADAPTER.applyToPartsNonPlayer(armor, source.getEntity(), (int) damageBlocked);
+		
 	};
 	
 	DamageListener<AbstractNautilus> NAUTILUS_DAMAGE_LISTENER = (AbstractNautilus nautilus, DamageSource source, float damageBlocked, float damageTaken) -> {
 		
 		ItemStack armor = nautilus.getBodyArmorItem();
 		
-		NAUTILUS_DAMAGE_TAKEN_ADAPTER.applyToPartsNonPlayer(armor, source.getEntity(), (int)damageTaken);
-		NAUTILUS_DAMAGE_BLOCKED_ADAPTER.applyToPartsNonPlayer(armor, source.getEntity(), (int)damageBlocked);
+		NAUTILUS_DAMAGE_TAKEN_ADAPTER.applyToPartsNonPlayer(armor, source.getEntity(), (int) damageTaken);
+		NAUTILUS_DAMAGE_BLOCKED_ADAPTER.applyToPartsNonPlayer(armor, source.getEntity(), (int) damageBlocked);
 	};
 	
-
+	
 }

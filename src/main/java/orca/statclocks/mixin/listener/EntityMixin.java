@@ -62,7 +62,6 @@ public abstract class EntityMixin {
 	}
 	
 	
-	
 	@WrapOperation(method = "attemptToShearEquipment",
 		at = @At(value = "INVOKE", target = "Lnet/minecraft/advancements/criterion/PlayerInteractTrigger;trigger(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/Entity;)V"))
 	void attemptToShearEquipment (PlayerInteractTrigger instance, ServerPlayer player, ItemStack drop, Entity entity, Operation<Void> original) {

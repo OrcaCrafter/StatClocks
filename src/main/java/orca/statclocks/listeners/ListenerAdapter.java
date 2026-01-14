@@ -102,10 +102,12 @@ public class ListenerAdapter {
 			if (DETAIL_LOG) StatClocksMod.LOGGER.info("\t\t{} and {}", partType.getIdName(), allowedType.getIdName());
 			
 			if (allowedType.sameType(partType) && target != null)
-				if (DETAIL_LOG) StatClocksMod.LOGGER.info("\t\t\t{} allowed? {}", target.getClass().getSimpleName(), pair.getB().allowApplication(target) ? "Allowed" : "Not Allowed");
+				if (DETAIL_LOG)
+					StatClocksMod.LOGGER.info("\t\t\t{} allowed? {}", target.getClass().getSimpleName(), pair.getB().allowApplication(target) ? "Allowed" : "Not Allowed");
 			
 			if (allowedType.sameType(partType) && pair.getB().allowApplication(target)) {
-				if (DETAIL_LOG) StatClocksMod.LOGGER.info("\t\t\tPassed: {} and {}", partType.getIdName(), allowedType.getIdName());
+				if (DETAIL_LOG)
+					StatClocksMod.LOGGER.info("\t\t\tPassed: {} and {}", partType.getIdName(), allowedType.getIdName());
 				matches = true;
 				break;
 			}

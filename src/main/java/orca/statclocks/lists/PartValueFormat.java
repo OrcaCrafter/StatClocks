@@ -15,7 +15,7 @@ public interface PartValueFormat {
 		return Component.empty().append(String.format(formatString, valueAdjusted));
 	};
 	
-	record FormatEntry (int minValue, float scalar, String suffix, String format) {
+	record FormatEntry(int minValue, float scalar, String suffix, String format) {
 		
 		private static final String LOCAL_PREFIX = "stat-clocks.tooltip.unit.";
 		
@@ -25,12 +25,12 @@ public interface PartValueFormat {
 			this.suffix = LOCAL_PREFIX + suffix;
 			this.format = format;
 		}
-	
+		
 	}
 	
 	static FormatEntry findFormat (int value, FormatEntry[] entries, FormatEntry def) {
 		
-		for (int i = entries.length - 1; i >= 0; i --) {
+		for (int i = entries.length - 1; i >= 0; i--) {
 			FormatEntry entry = entries[i];
 			
 			if (entry.minValue <= value) {
@@ -42,16 +42,16 @@ public interface PartValueFormat {
 	}
 	
 	FormatEntry[] DISTANCE_FORMATS = new FormatEntry[] {
-		new FormatEntry(0, 1,  "centimeter", "%.0f"),
-		new FormatEntry(100, 1f/100f,  "meter", "%.2f"),
-		new FormatEntry(100000, 1f/100000,  "kilometer", "%.1f")
+		new FormatEntry(0, 1, "centimeter", "%.0f"),
+		new FormatEntry(100, 1f/100f, "meter", "%.2f"),
+		new FormatEntry(100000, 1f/100000, "kilometer", "%.1f")
 	};
 	
 	PartValueFormat DISTANCE = value -> {
 		
 		FormatEntry formatEntry = findFormat(value, DISTANCE_FORMATS, DISTANCE_FORMATS[0]);
 		
-		float valueAdjusted = (float)value * formatEntry.scalar;
+		float valueAdjusted = (float) value*formatEntry.scalar;
 		String suffix = formatEntry.suffix;
 		
 		if (valueAdjusted != 1) suffix = suffix + "_plural";
@@ -74,11 +74,11 @@ public interface PartValueFormat {
 	int TPW = TPD*DPW;// ticks per week = ticks per day * days per week
 	
 	FormatEntry[] TIME_FORMATS = new FormatEntry[] {
-		new FormatEntry(0, 1f/TPS,  "second", "%.2f"),
-		new FormatEntry(TPM, 1f/TPM,  "minute", "%.1f"),
-		new FormatEntry(TPH,1f/TPH,  "hour", "%.1f"),
-		new FormatEntry(TPD, 1f/TPD,  "day", "%.1f"),
-		new FormatEntry(TPW, 1f/TPW,  "week", "%.1f")
+		new FormatEntry(0, 1f/TPS, "second", "%.2f"),
+		new FormatEntry(TPM, 1f/TPM, "minute", "%.1f"),
+		new FormatEntry(TPH, 1f/TPH, "hour", "%.1f"),
+		new FormatEntry(TPD, 1f/TPD, "day", "%.1f"),
+		new FormatEntry(TPW, 1f/TPW, "week", "%.1f")
 	};
 	
 	PartValueFormat TIME = value -> {
@@ -86,7 +86,7 @@ public interface PartValueFormat {
 		//Ticks to seconds
 		FormatEntry formatEntry = findFormat(value, TIME_FORMATS, TIME_FORMATS[0]);
 		
-		float valueAdjusted = (float)value * formatEntry.scalar;
+		float valueAdjusted = (float) value*formatEntry.scalar;
 		String suffix = formatEntry.suffix;
 		
 		if (valueAdjusted != 1) suffix = suffix + "_plural";

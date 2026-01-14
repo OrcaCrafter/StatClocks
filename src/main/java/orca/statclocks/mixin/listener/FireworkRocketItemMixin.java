@@ -19,8 +19,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(FireworkRocketItem.class)
 public class FireworkRocketItemMixin {
 	
-	@Inject(method="use", at = @At("HEAD"))
-	public void use(Level level, Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
+	@Inject(method = "use", at = @At("HEAD"))
+	public void use (Level level, Player player, InteractionHand interactionHand, CallbackInfoReturnable<InteractionResult> cir) {
 		if (player.isFallFlying()) {
 			ItemStack fireworkStack = player.getItemInHand(interactionHand);
 			

@@ -60,7 +60,7 @@ public abstract class JukeboxBlockEntityMixin extends BlockEntity {
 	}
 	
 	
-	@Inject(method="setTheItem", at = @At("HEAD"))
+	@Inject(method = "setTheItem", at = @At("HEAD"))
 	public void setTheItem (ItemStack itemStack, CallbackInfo ci, @Local(argsOnly = true) LocalRef<ItemStack> localRef) {
 		//Fixes creative players keeping the same item stack reference when putting a disc in
 		localRef.set(itemStack.copy());

@@ -5,9 +5,12 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import orca.statclocks.StatClocksMod;
 import orca.statclocks.components.StatClockPartType;
@@ -100,11 +103,11 @@ public class StatClockPartTypes {
 		.addListener(MiscListeners.DAMAGE_DEALT)
 		.addCraftingResource(Items.IRON_SWORD)
 		.setIncrementByDurabilityFunction((stack) -> {
-
+			
 			//TODO find itemstack's attack damage
 			int attackDamage = 5;
-
-			return stack.getDamageValue() * attackDamage;
+			
+			return stack.getDamageValue()*attackDamage;
 		})
 		.close();
 	
@@ -163,7 +166,7 @@ public class StatClockPartTypes {
 				if (target == Stats.DAMAGE_BLOCKED_BY_SHIELD) {
 					ItemStack shield = player.getActiveItem();
 					adapter.applyToParts(player, shield, target, 1);
-				
+					
 				}
 				
 			})
@@ -403,8 +406,6 @@ public class StatClockPartTypes {
 	
 	public static final StatClockPartType TIMES_FINISHED = new PartTypeInfo("times_finished")
 		.english("Times Finished").markNoListener().hide().close();
-	
-	
 	
 	
 	public static ItemStack getPriorityHandItem (Player player, Predicate<ItemStack> condition) {

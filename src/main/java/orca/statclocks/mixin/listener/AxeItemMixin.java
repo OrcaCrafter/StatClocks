@@ -34,6 +34,6 @@ public abstract class AxeItemMixin extends Item {
 		
 		MiscListeners.AXE_USE_LISTENER.applyToParts(player, tool, null, 1);
 		
-	
+		
 	}
 }

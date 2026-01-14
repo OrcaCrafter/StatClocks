@@ -11,7 +11,6 @@ public class StatClocksClient implements ClientModInitializer {
 		// This entrypoint is suitable for setting up client-specific logic, such as rendering
 		
 		
-		
 		//Add a callback to append tool tips to items from components
 		ItemTooltipCallback.EVENT.register((stack, context, type, list) -> {
 			
