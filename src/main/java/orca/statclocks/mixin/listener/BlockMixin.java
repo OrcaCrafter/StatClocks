@@ -56,12 +56,7 @@ public abstract class BlockMixin extends BlockBehaviour {
 	public void playerDestroy (Level level, Player player, BlockPos blockPos, BlockState blockState, BlockEntity blockEntity, ItemStack tool, CallbackInfo ci) {
 		
 		if (tool != null && !tool.isEmpty()) {
-			
-			int slot = player.getInventory().findSlotMatchingItem(tool);
-			
 			MiscListeners.BLOCK_MINED_LISTENER.applyToParts(player, tool, this, 1);
-			
-			player.getInventory().setItem(slot, tool);
 		}
 		
 		if (player.isUnderWater()) {
