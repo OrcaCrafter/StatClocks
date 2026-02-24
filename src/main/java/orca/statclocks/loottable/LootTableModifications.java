@@ -160,7 +160,7 @@ public class LootTableModifications {
 						.add(dataBuilder(STAT_CLOCK_PART, PART_TYPE_COMPONENT, StatClockPartTypes.ITEMS_FISHED).setWeight(1))
 						.add(dataBuilder(STAT_CLOCK_PART, PART_TYPE_COMPONENT, StatClockPartTypes.ITEMS_FISHED).setWeight(1)).build()
 				).build()
-			).setWeight(5)//As likely as treasure, unaffected by lure, luke of the sea or open water
+			).setWeight(5)//As likely as treasure, unaffected by lure, luck of the sea or open water
 		))),
 			FISHING
 		);
