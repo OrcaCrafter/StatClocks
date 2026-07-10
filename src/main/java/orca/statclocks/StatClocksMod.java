@@ -91,6 +91,9 @@ public class StatClocksMod implements ModInitializer {
 	public static final TagKey<Item> USABLE_ITEM = itemTag("usable_item");
 	public static final TagKey<Item> CONSUMABLE = itemTag("consumable");
 	
+	public static final TagKey<Item> SHEARS = itemTag("shears");
+	public static final TagKey<Item> WOLF_ARMOR = itemTag("wolf_armor");
+	
 	public static final TagKey<Item> FISHABLE = itemTag("fishable");
 	public static final TagKey<Item> FISHABLE_FISH = itemTag("fishable_fish");
 	public static final TagKey<Item> FISHABLE_TREASURE = itemTag("fishable_treasure");

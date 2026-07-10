@@ -9,6 +9,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.FishingRodItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -300,7 +301,7 @@ public class StatClockPartTypes {
 			if (!(target instanceof ItemStack item)) return false;
 			
 			//Sort trash rods from treasure rods
-			if (item.getItem() == Items.FISHING_ROD) {
+			if (item.getItem() instanceof FishingRodItem) {
 				return item.isEnchanted();
 			}
 			
@@ -314,7 +315,7 @@ public class StatClockPartTypes {
 			if (!(target instanceof ItemStack item)) return false;
 			
 			//Sort trash rods from treasure rods
-			if (item.getItem() == Items.FISHING_ROD) {
+			if (item.getItem() instanceof FishingRodItem) {
 				return !item.isEnchanted();
 			}
 			

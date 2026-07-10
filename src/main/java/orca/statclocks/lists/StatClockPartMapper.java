@@ -195,7 +195,7 @@ public class StatClockPartMapper {
 				rule.defaultParts.add(StatClockPartTypes.DAMAGE_REDUCED);
 			}
 			
-			if (item == Items.WOLF_ARMOR) {
+			if (new ItemStack(item).is(StatClocksMod.WOLF_ARMOR)) {
 				rule.defaultParts.add(StatClockPartTypes.DAMAGE_REDUCED);
 			}
 		});
@@ -227,7 +227,7 @@ public class StatClockPartMapper {
 		});
 	}
 	
-	private static <T> boolean isEquippableSlot (Item item, EquipmentSlot slot) {
+	private static boolean isEquippableSlot (Item item, EquipmentSlot slot) {
 		Equippable equippable = item.components().get(DataComponents.EQUIPPABLE);
 		
 		if (equippable == null) return false;
@@ -243,15 +243,6 @@ public class StatClockPartMapper {
 	private static boolean isInTags (Item item, TagKey<Item>... tags) {
 		for (TagKey<Item> tag : tags) {
 			if (BuiltInRegistries.ITEM.wrapAsHolder(item).is(tag))
-				return true;
-		}
-		
-		return false;
-	}
-	
-	private static boolean isItem (Item item, Item... items) {
-		for (Item check : items) {
-			if (item == check)
 				return true;
 		}
 		

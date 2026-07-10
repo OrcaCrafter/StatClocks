@@ -9,6 +9,7 @@ import net.minecraft.world.entity.Leashable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import orca.statclocks.StatClocksMod;
 import orca.statclocks.listeners.MiscListeners;
 import orca.statclocks.lists.StatClockPartTypes;
 import org.spongepowered.asm.mixin.Mixin;
@@ -30,8 +31,10 @@ public abstract class EntityMixin {
 		
 		boolean sheared = original.call(instance, player);
 		
+		if (player == null) return sheared;
+		
 		if (sheared) {
-			ItemStack shears = StatClockPartTypes.getPriorityHandItem(player, tool -> tool.is(Items.SHEARS));
+			ItemStack shears = StatClockPartTypes.getPriorityHandItem(player, tool -> tool.is(StatClocksMod.SHEARS));
 			
 			MiscListeners.SHEARS_USE_LISTENER.applyToParts(player, shears, null, 1);
 			MiscListeners.SHEARS_USE_LISTENER_ENTITY.applyToParts(player, shears, instance, 1);
@@ -42,8 +45,10 @@ public abstract class EntityMixin {
 	
 	@Inject(method = "dropAllLeashConnections", at = @At("HEAD"))
 	void dropAllLeashConnectionsHEAD (Player player, CallbackInfoReturnable<Boolean> cir) {
-		shearingPlayer = player;
-		shears = StatClockPartTypes.getPriorityHandItem(player, tool -> tool.is(Items.SHEARS));
+		if (player != null) {
+			shearingPlayer = player;
+			shears = StatClockPartTypes.getPriorityHandItem(player, tool -> tool.is(StatClocksMod.SHEARS));
+		}
 	}
 	
 	@WrapOperation(method = "dropAllLeashConnections", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Leashable;dropLeash()V"))
@@ -67,7 +72,7 @@ public abstract class EntityMixin {
 	void attemptToShearEquipment (PlayerInteractTrigger instance, ServerPlayer player, ItemStack drop, Entity entity, Operation<Void> original) {
 		original.call(instance, player, drop, entity);
 		
-		ItemStack shears = StatClockPartTypes.getPriorityHandItem(player, tool -> tool.is(Items.SHEARS));
+		ItemStack shears = StatClockPartTypes.getPriorityHandItem(player, tool -> tool.is(StatClocksMod.SHEARS));
 		
 		MiscListeners.SHEARS_USE_LISTENER.applyToParts(player, shears, null, 1);
 		MiscListeners.SHEARS_USE_LISTENER_ENTITY.applyToParts(player, shears, entity, 1);

@@ -27,6 +27,8 @@ public class StatClockItemTagProvider extends FabricTagProvider.ItemTagProvider 
 		statClockItems.add(StatClocksMod.STAT_CLOCK_FILTER);
 		statClockItems.add(StatClocksMod.STAT_CLOCK_REMOVER);
 		
+		valueLookupBuilder(StatClocksMod.SHEARS).add(Items.SHEARS);
+		valueLookupBuilder(StatClocksMod.WOLF_ARMOR).add(Items.WOLF_ARMOR);
 		
 		addUsableItems();
 		
