@@ -3,23 +3,21 @@ package orca.statclocks.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import orca.statclocks.StatClocksMod;
 import orca.statclocks.components.StatClockPartType;
-import orca.statclocks.lists.PartTypeInfo;
-import orca.statclocks.lists.StatClockPartTypes;
 import org.jetbrains.annotations.NotNull;
-import oshi.util.tuples.Pair;
 
-import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+
+import static orca.statclocks.lists.StatClockPartTypes.*;
 
 public class StatClockRecipeProvider extends FabricRecipeProvider {
 	public StatClockRecipeProvider (FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
@@ -31,8 +29,6 @@ public class StatClockRecipeProvider extends FabricRecipeProvider {
 		return new RecipeProvider(registryLookup, exporter) {
 			@Override
 			public void buildRecipes () {
-				HolderLookup.RegistryLookup<Item> itemLookup = registries.lookupOrThrow(Registries.ITEM);
-				
 				//Deconstruct misc parts
 				shapeless(RecipeCategory.MISC, StatClocksMod.NETHERITE_COUNTER, 4)
 					.requires(StatClocksMod.STAT_CLOCKS_ITEMS)
@@ -84,18 +80,40 @@ public class StatClockRecipeProvider extends FabricRecipeProvider {
 				
 				
 				//Craft stat part
-				Set<Identifier> keys = StatClockPartTypes.STAT_PART_TYPES.keySet();
-				
-				for (Identifier key : keys) {
-					Pair<StatClockPartType, PartTypeInfo> pair = StatClockPartTypes.STAT_PART_TYPES.get(key);
-					
-					StatClockPartType partType = pair.getA();
-					PartTypeInfo info = pair.getB();
-					
-					if (!info.isCraftable()) continue;
-					
-					info.makeCraftingRecipe(this, partType.GetOutputItem(), output);
-				}
+				craftPart(BLOCKS_MINED, output, Items.IRON_PICKAXE);
+				craftPart(TIMES_USED, output, Items.SHEARS);
+				craftPart(BLOCKS_IGNITED, output, Items.FLINT_AND_STEEL);
+				craftPart(MOBS_IGNITED, output, Items.FIRE_CHARGE);
+				craftPart(SHEARS_USED, output, ItemTags.WOOL);
+				craftPart(SHEARS_USED_ITEM, output, ItemTags.WOOL);
+				craftPart(SHEARS_USED_BLOCK, output, ItemTags.WOOL);
+				craftPart(SHEARS_USED_ENTITY, output, ItemTags.WOOL);
+				craftPart(BRUSH_USED, output, Items.BRUSH);
+				craftPart(BLOCK_LOOT_DROPPED, output, Items.CHEST);
+				craftPart(DAMAGE_DEALT, output, Items.IRON_SWORD);
+				craftPart(DAMAGE_DEALT_DISTANCE, output, Items.BOW);
+				craftPart(MOBS_KILLED, output, Items.DIAMOND_SWORD);
+				craftPart(MOB_LOOT_DROPPED, output, Items.BUNDLE);
+				craftPart(DAMAGE_TAKEN, output, Items.IRON_HELMET);
+				craftPart(DAMAGE_REDUCED, output, Items.GOLDEN_HELMET);
+				craftPart(ATTACKS_BLOCKED, output, Items.SHIELD);
+				craftPart(FALL_ATTACK_DISTANCE, output, Items.WIND_CHARGE);
+				craftPart(DISTANCE_WALKED, output, Items.LEATHER_BOOTS);
+				craftPart(DISTANCE_CROUCHED, output, Items.ECHO_SHARD);
+				craftPart(DISTANCE_SWAM, output, Items.PRISMARINE_SHARD);
+				craftPart(DISTANCE_WADED, output, Items.WATER_BUCKET);
+				craftPart(TIME_UNDERWATER, output, Items.TURTLE_SCUTE);
+				craftPart(MINED_UNDERWATER, output, Items.HEART_OF_THE_SEA);
+				craftPart(ITEMS_CONSUMED, output, Items.BREAD);
+				craftPart(DISTANCE_FALLEN, output, Items.FEATHER);
+				craftPart(ITEMS_FISHED, output, ItemTags.FISHES);
+				craftPart(FISH_CAUGHT, output, StatClocksMod.FISHABLE_FISH);
+				craftPart(TREASURE_CAUGHT, output, StatClocksMod.FISHABLE_TREASURE);
+				craftPart(TRASH_CAUGHT, output, StatClocksMod.FISHABLE_TRASH);
+				craftPart(MOBS_FISHED, output, Items.FISHING_ROD);
+				craftPart(ROCKET_USAGE, output, Items.FIREWORK_ROCKET);
+				craftPart(DISTANCE_RODE, output, Items.SADDLE);
+				craftPart(DISTANCE_FLOATED, output, ItemTags.HARNESSES);
 				
 				//Reset stat clock part
 				shapeless(RecipeCategory.MISC, StatClocksMod.STAT_CLOCK_PART)
@@ -129,6 +147,44 @@ public class StatClockRecipeProvider extends FabricRecipeProvider {
 					.unlockedBy(getHasName(StatClocksMod.STAT_CLOCK), has(StatClocksMod.STAT_CLOCK))
 					.save(output, "craft_stat_clock_remover");
 				
+			}
+			
+			private void craftPart (StatClockPartType partType, RecipeOutput output, ItemLike item) {
+				//TODO make shaped recipes with item stack outputs possible
+//			recipeProvider.shapeless(RecipeCategory.MISC, outputItem)
+//				.requires(StatClocksMod.NETHERITE_COUNTER)
+//				.requires(Items.GOLD_INGOT, 3)
+//				.requires(item)
+//				.group("craft_stat_clock_part")
+//				.unlockedBy("has_resource_for_" + id, recipeProvider.has(item))
+//				.save(output, "craft_stat_clock_part_" + id + "_" + RecipeProvider.getItemName(item));
+				
+				//Lets you change the part type
+				shapeless(RecipeCategory.MISC, partType.GetOutputItem())
+					.requires(StatClocksMod.STAT_CLOCK_PART)
+					.requires(item)
+					.group("craft_stat_clock_part_alt")
+					.unlockedBy("has_resource_for_" + partType.getId().getPath(), has(item))
+					.save(output, "craft_stat_clock_part_alt_" + partType.getId().getPath() + "_" + RecipeProvider.getItemName(item));
+			}
+			
+			private void craftPart (StatClockPartType partType, RecipeOutput output, TagKey<Item> tag) {
+				//TODO make shaped recipes with item stack outputs possible
+//				recipeProvider.shapeless(RecipeCategory.MISC, outputItem)
+//				.requires(StatClocksMod.NETHERITE_COUNTER)
+//				.requires(Items.GOLD_INGOT, 3)
+//				.requires(tag)
+//				.group("craft_stat_clock_part")
+//				.unlockedBy("has_resource_for_" + id, recipeProvider.has(tag))
+//				.save(output, "craft_stat_clock_part_" + id + "_" + tag.getTranslationKey());
+				
+				//Lets you change the part type
+				shapeless(RecipeCategory.MISC, partType.GetOutputItem())
+					.requires(StatClocksMod.STAT_CLOCK_PART)
+					.requires(tag)
+					.group("craft_stat_clock_part_alt")
+					.unlockedBy("has_resource_for_" + partType.getId().getPath(), has(tag))
+					.save(output, "craft_stat_clock_part_alt_" + partType.getId().getPath() + "_" + tag.getTranslationKey());
 			}
 		};
 	}

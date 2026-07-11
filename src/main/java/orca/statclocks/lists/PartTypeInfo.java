@@ -2,9 +2,6 @@ package orca.statclocks.lists;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.Identifier;
@@ -31,13 +28,7 @@ public class PartTypeInfo {
 	boolean visible = true;
 	boolean noListener = false;
 	
-	final ArrayList<Item> crafting = new ArrayList<>();
-	final ArrayList<TagKey<Item>> craftingTag = new ArrayList<>();
-	
 	PartValueFormat format = PartValueFormat.NONE;
-	
-	String english;
-	String englishFilter;
 	
 	StatClockFilterType filterType = StatClockFilterType.NONE;
 	
@@ -62,19 +53,12 @@ public class PartTypeInfo {
 		return modID + ":" + name;
 	}
 	
-	public PartTypeInfo english (String english) {
-		this.english = english;
-		return this;
-	}
-	
-	public PartTypeInfo setFilterTypeItem (String englishFilter) {
-		this.englishFilter = englishFilter;
+	public PartTypeInfo setFilterTypeItem () {
 		filterType = StatClockFilterType.ITEM;
 		return this;
 	}
 	
-	public PartTypeInfo setFilterTypeItem (String englishFilter, TagKey<Item> itemTag) {
-		this.englishFilter = englishFilter;
+	public PartTypeInfo setFilterTypeItem (TagKey<Item> itemTag) {
 		filterType = StatClockFilterType.ITEM;
 		
 		this.itemTag = itemTag;
@@ -83,13 +67,11 @@ public class PartTypeInfo {
 	}
 	
 	public PartTypeInfo setFilterTypeBlock (String englishFilter) {
-		this.englishFilter = englishFilter;
 		filterType = StatClockFilterType.BLOCK;
 		return this;
 	}
 	
-	public PartTypeInfo setFilterTypeBlock (String englishFilter, TagKey<Block> blockTag) {
-		this.englishFilter = englishFilter;
+	public PartTypeInfo setFilterTypeBlock (TagKey<Block> blockTag) {
 		filterType = StatClockFilterType.ITEM;
 		
 		this.blockTag = blockTag;
@@ -97,14 +79,12 @@ public class PartTypeInfo {
 		return this;
 	}
 	
-	public PartTypeInfo setFilterTypeEntity (String englishFilter) {
-		this.englishFilter = englishFilter;
+	public PartTypeInfo setFilterTypeEntity () {
 		filterType = StatClockFilterType.ENTITY;
 		return this;
 	}
 	
-	public PartTypeInfo setFilterTypeEntity (String englishFilter, TagKey<EntityType<?>> entityTag) {
-		this.englishFilter = englishFilter;
+	public PartTypeInfo setFilterTypeEntity (TagKey<EntityType<?>> entityTag) {
 		filterType = StatClockFilterType.ENTITY;
 		
 		this.entityTag = entityTag;
@@ -114,16 +94,6 @@ public class PartTypeInfo {
 	
 	public PartTypeInfo setFormat (PartValueFormat format) {
 		this.format = format;
-		return this;
-	}
-	
-	public PartTypeInfo addCraftingResource (TagKey<Item> itemTag) {
-		craftingTag.add(itemTag);
-		return this;
-	}
-	
-	public PartTypeInfo addCraftingResource (Item item) {
-		crafting.add(item);
 		return this;
 	}
 	
@@ -178,70 +148,14 @@ public class PartTypeInfo {
 		return type;
 	}
 	
-	
-	public String getEnglish () {
-		return english;
-	}
-	
-	public String getEnglishFilter () {
-		return englishFilter;
-	}
-	
 	public Component getFormatted (int value) {
 		return format.format(value);
-	}
-	
-	public boolean isCraftable () {
-		return !crafting.isEmpty() || !craftingTag.isEmpty();
 	}
 	
 	public int incrementByDurability (ItemStack stack) {
 		if (incrementFunction == null) return 0;
 		
 		return incrementFunction.apply(stack);
-		
-	}
-	
-	public void makeCraftingRecipe (RecipeProvider recipeProvider, ItemStack outputItem, RecipeOutput output) {
-		
-		for (Item item : crafting) {
-			//TODO make shaped recipes with item stack outputs possible
-//			recipeProvider.shapeless(RecipeCategory.MISC, outputItem)
-//				.requires(StatClocksMod.NETHERITE_COUNTER)
-//				.requires(Items.GOLD_INGOT, 3)
-//				.requires(item)
-//				.group("craft_stat_clock_part")
-//				.unlockedBy("has_resource_for_" + id, recipeProvider.has(item))
-//				.save(output, "craft_stat_clock_part_" + id + "_" + RecipeProvider.getItemName(item));
-			
-			//Lets you change the part type
-			recipeProvider.shapeless(RecipeCategory.MISC, outputItem)
-				.requires(StatClocksMod.STAT_CLOCK_PART)
-				.requires(item)
-				.group("craft_stat_clock_part_alt")
-				.unlockedBy("has_resource_for_" + name, recipeProvider.has(item))
-				.save(output, "craft_stat_clock_part_alt_" + name + "_" + RecipeProvider.getItemName(item));
-		}
-		
-		for (TagKey<Item> tag : craftingTag) {
-			//TODO make shaped recipes with item stack outputs possible
-//			recipeProvider.shapeless(RecipeCategory.MISC, outputItem)
-//				.requires(StatClocksMod.NETHERITE_COUNTER)
-//				.requires(Items.GOLD_INGOT, 3)
-//				.requires(tag)
-//				.group("craft_stat_clock_part")
-//				.unlockedBy("has_resource_for_" + id, recipeProvider.has(tag))
-//				.save(output, "craft_stat_clock_part_" + id + "_" + tag.getTranslationKey());
-			
-			//Lets you change the part type
-			recipeProvider.shapeless(RecipeCategory.MISC, outputItem)
-				.requires(StatClocksMod.STAT_CLOCK_PART)
-				.requires(tag)
-				.group("craft_stat_clock_part_alt")
-				.unlockedBy("has_resource_for_" + name, recipeProvider.has(tag))
-				.save(output, "craft_stat_clock_part_alt_" + name + "_" + tag.getTranslationKey());
-		}
-		
 		
 	}
 	

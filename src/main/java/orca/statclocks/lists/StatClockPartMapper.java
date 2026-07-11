@@ -52,6 +52,8 @@ public class StatClockPartMapper {
 	
 	static final ArrayList<RuleMapper> MAPPERS = new ArrayList<>();
 	
+	//TODO replace with proper tag mapping
+	
 	static {
 		
 		//Block breaking rule

@@ -1,6 +1,5 @@
 package orca.statclocks;
 
-import com.mojang.blaze3d.pipeline.RenderPipeline;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.DrawItemStackOverlayCallback;
@@ -9,7 +8,6 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.TypedDataComponent;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.ItemStack;
 import orca.statclocks.components.StatClockContent;
 
 import static orca.statclocks.StatClocksMod.MOD_ID;

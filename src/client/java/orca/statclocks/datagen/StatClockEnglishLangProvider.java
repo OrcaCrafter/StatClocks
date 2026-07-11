@@ -3,12 +3,11 @@ package orca.statclocks.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.resources.Identifier;
-import orca.statclocks.lists.PartTypeInfo;
-import orca.statclocks.lists.StatClockPartTypes;
+import orca.statclocks.components.StatClockPartType;
 
-import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+
+import static orca.statclocks.lists.StatClockPartTypes.*;
 
 
 public class StatClockEnglishLangProvider extends FabricLanguageProvider {
@@ -76,15 +75,56 @@ public class StatClockEnglishLangProvider extends FabricLanguageProvider {
 		//Add english part type terms
 		translationBuilder.add("stat-clocks.tooltip.part_type_error", "Issue with part type: %1$s!");
 		
-		Set<Identifier> partTypeNames = StatClockPartTypes.STAT_PART_TYPES.keySet();
-		for (Identifier id : partTypeNames) {
-			PartTypeInfo info = StatClockPartTypes.STAT_PART_TYPES.get(id).getB();
-			translationBuilder.add("stat-clocks.tooltip.part_type:" + id, info.getEnglish());
-			
-			if (info.isFilterable()) {
-				translationBuilder.add("stat-clocks.tooltip.part_type_filtered:" + id, info.getEnglishFilter());
-			}
-		}
+		translatePartType(translationBuilder, EMPTY, "Blank Stat Clock");
+		translatePartType(translationBuilder, BLOCKS_MINED, "Blocks Mined", "%1$s Mined");
+		translatePartType(translationBuilder, TIMES_USED, "Times Used");
+		translatePartType(translationBuilder, BLOCKS_IGNITED, "Blocks Ignited", "%1$s Ignited");
+		translatePartType(translationBuilder, MOBS_IGNITED, "Mobs Ignited", "%1$s Ignited");
+		translatePartType(translationBuilder, SHEARS_USED, "Times Using Shears");
+		translatePartType(translationBuilder, SHEARS_USED_ITEM, "Items Sheared Off", "%1$s Sheared");
+		translatePartType(translationBuilder, SHEARS_USED_BLOCK, "Blocks Sheared", "%1$s Sheared");
+		translatePartType(translationBuilder, SHEARS_USED_ENTITY, "Times Using Shears", "%1$s Sheared");
+		translatePartType(translationBuilder, BRUSH_USED, "Times Brushed", "%1$s Brushed Off");
+		translatePartType(translationBuilder, BLOCK_LOOT_DROPPED,  "Block Loot Dropped", "%1$s Dropped");
+		translatePartType(translationBuilder, DAMAGE_DEALT, "Damage Dealt", "Damage Dealt to %1$s");
+		translatePartType(translationBuilder, DAMAGE_DEALT_DISTANCE, "Damage Dealt", "Damage Dealt to %1$s");
+		translatePartType(translationBuilder, MOBS_KILLED, "Mobs Killed", "%1$s Killed");
+		translatePartType(translationBuilder, MOB_LOOT_DROPPED, "Mob Loot Dropped", "%1$s Dropped");
+		translatePartType(translationBuilder, DAMAGE_TAKEN, "Damage Taken", "Damage Taken from %1$s");
+		translatePartType(translationBuilder, DAMAGE_REDUCED, "Damage Blocked", "Damage Taken from %1$s Blocked");
+		translatePartType(translationBuilder, ATTACKS_BLOCKED, "Attacks Blocked", "Attacks from %1$s Blocked");
+		translatePartType(translationBuilder, FALL_ATTACK_DISTANCE, "Distance Fallen Attacking", "Distance Fallen Attacking %1$s");
+		translatePartType(translationBuilder, DISTANCE_WALKED, "Distance Walked", "Distance Walked on %1$s");
+		translatePartType(translationBuilder, DISTANCE_CROUCHED, "Distance Crouched");
+		translatePartType(translationBuilder, DISTANCE_SWAM, "Distance Swam");
+		translatePartType(translationBuilder, DISTANCE_WADED, "Distance Waded");
+		translatePartType(translationBuilder, TIME_UNDERWATER, "Time Underwater");
+		translatePartType(translationBuilder, MINED_UNDERWATER, "Blocks Mined Underwater", "%1$s Mined Underwater");
+		translatePartType(translationBuilder, ITEMS_CONSUMED, "Items Consumed", "%1$s Consumed");
+		translatePartType(translationBuilder, DISTANCE_FALLEN, "Distance Fallen");
+		translatePartType(translationBuilder, ITEMS_FISHED, "Times Fished", "Fished up %1$s");
+		translatePartType(translationBuilder, FISH_CAUGHT, "Fish Caught");
+		translatePartType(translationBuilder, TREASURE_CAUGHT, "Treasure Caught");
+		translatePartType(translationBuilder, TRASH_CAUGHT, "Trash Caught");
+		translatePartType(translationBuilder, MOBS_FISHED, "Mobs Fished", "%1$s Yoinked");
+		translatePartType(translationBuilder, DISTANCE_FLOWN, "Distance Flown");
+		translatePartType(translationBuilder, ROCKET_USAGE, "Rocket Duration Used");
+		translatePartType(translationBuilder, DISTANCE_RODE, "Distance Rode", "Distance Rode on %1$s");
+		translatePartType(translationBuilder, DISTANCE_FLOATED, "Distance by Happy Ghast");
+		translatePartType(translationBuilder, VEHICLE_DISTANCE, "Distance Traveled");
+		translatePartType(translationBuilder, TIME_PLAYED, "Time Played For");
+		translatePartType(translationBuilder, TIMES_FINISHED, "Times Finished");
 		
+	}
+	
+	private void translatePartType (FabricLanguageProvider.TranslationBuilder builder, StatClockPartType type, String english, String filter) {
+		
+		builder.add("stat-clocks.tooltip.part_type_filtered:" + type.getId(), filter);
+		
+		translatePartType(builder, type, english);
+	}
+	
+	private void translatePartType (FabricLanguageProvider.TranslationBuilder builder, StatClockPartType type, String english) {
+		builder.add("stat-clocks.tooltip.part_type:" + type.getId(), english);
 	}
 }
