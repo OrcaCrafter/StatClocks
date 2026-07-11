@@ -174,33 +174,29 @@ public class StatClocksMod implements ModInitializer {
 		}
 		
 		ItemGroupEvents.modifyEntriesEvent(STAT_CLOCK_TOOLS_TAB)
-			.register((itemGroup) -> {
+			.register((itemGroup) -> BuiltInRegistries.ITEM.forEach((item) -> {
+				if (!new ItemStack(item).is(STAT_CLOCKABLE)) return;
 				
-				BuiltInRegistries.ITEM.forEach((item) -> {
-					if (!new ItemStack(item).is(STAT_CLOCKABLE)) return;
-					
-					StatClockContent defaultParts = StatClockContent.ItemStatClock(new ItemStack(item), false);
-					StatClockContent allParts = StatClockContent.ItemStatClock(new ItemStack(item), true);
-					
-					if (defaultParts == null || allParts == null) return;
-					
-					ItemStack defaultPartStack = new ItemStack(item);
-					
-					defaultPartStack.set(StatClockContent.STAT_CLOCK_COMPONENT, defaultParts);
-					
-					itemGroup.accept(defaultPartStack);
-					
-					if (defaultParts.partCount() != allParts.partCount()) {
-						ItemStack allPartsStack = new ItemStack(item);
-						
-						allPartsStack.set(StatClockContent.STAT_CLOCK_COMPONENT, allParts);
-						
-						itemGroup.accept(allPartsStack);
-					}
-					
-				});
+				StatClockContent defaultParts = StatClockContent.ItemStatClock(new ItemStack(item), false);
+				StatClockContent allParts = StatClockContent.ItemStatClock(new ItemStack(item), true);
 				
-			});
+				if (defaultParts == null || allParts == null) return;
+				
+				ItemStack defaultPartStack = new ItemStack(item);
+				
+				defaultPartStack.set(StatClockContent.STAT_CLOCK_COMPONENT, defaultParts);
+				
+				itemGroup.accept(defaultPartStack);
+				
+				if (defaultParts.partCount() != allParts.partCount()) {
+					ItemStack allPartsStack = new ItemStack(item);
+					
+					allPartsStack.set(StatClockContent.STAT_CLOCK_COMPONENT, allParts);
+					
+					itemGroup.accept(allPartsStack);
+				}
+				
+			}));
 		
 		//Register commands
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> StatClockCommand.register(dispatcher, registryAccess));

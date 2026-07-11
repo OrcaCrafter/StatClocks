@@ -233,16 +233,6 @@ public class PartTypeInfo {
 			} else {
 				color = ERROR_COLOR;
 			}
-			
-//			StatClockPartMapper.MapRule rule = StatClockPartMapper.GetItemMapping(item.getItem());
-//
-//			if (rule.getDefaultParts().contains(statClockPartContent.getType())) {
-//				color = DEFAULT_COLOR;
-//			} else if (rule.getAllowedParts().contains(statClockPartContent.getType())) {
-//				color = ALLOWED_COLOR;
-//			} else {
-//				color = ERROR_COLOR;
-//			}
 		}
 		
 		toolTip.withColor(color.getRGB());

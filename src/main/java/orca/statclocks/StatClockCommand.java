@@ -39,9 +39,7 @@ public class StatClockCommand {
 		object -> Component.translatableEscape("commands.addstatclock.failed.incompatible", object)
 	);
 	private static final Dynamic3CommandExceptionType ERROR_INVALID_FILTER = new Dynamic3CommandExceptionType(
-		(a, b, c) -> {
-			return Component.translatableEscape("commands.addstatclock.failed.invalid_filter", a, b, c);
-		}
+		(a, b, c) -> Component.translatableEscape("commands.addstatclock.failed.invalid_filter", a, b, c)
 	);
 	private static final SimpleCommandExceptionType ERROR_NOTHING_HAPPENED = new SimpleCommandExceptionType(Component.translatable("commands.addstatclock.failed"));
 	

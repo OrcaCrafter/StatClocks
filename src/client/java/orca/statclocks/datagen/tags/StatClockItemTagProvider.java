@@ -196,9 +196,8 @@ public class StatClockItemTagProvider extends FabricTagProvider.ItemTagProvider 
 		buildPartTags(DISTANCE_WALKED).addAllowedItemTags(ItemTags.FOOT_ARMOR);
 		
 		
-		STAT_PART_TYPES.forEach((id, pair) -> {
-			valueLookupBuilder(StatClocksMod.STAT_CLOCKABLE).addOptionalTag(pair.getB().defaultItemsTag).addOptionalTag(pair.getB().allowedItemsTag);
-		});
+		STAT_PART_TYPES.forEach((id, pair) ->
+			valueLookupBuilder(StatClocksMod.STAT_CLOCKABLE).addOptionalTag(pair.getB().defaultItemsTag).addOptionalTag(pair.getB().allowedItemsTag));
 		
 	}
 	

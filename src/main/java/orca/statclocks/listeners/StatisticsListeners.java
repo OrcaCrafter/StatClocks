@@ -58,35 +58,31 @@ public interface StatisticsListeners {
 			assert (value instanceof Identifier);
 			Identifier location = (Identifier) value;
 			
-			CUSTOM_STATISTIC_LISTENERS.forEach((pair) -> {
-				pair.listener().statEvent(player, location, pair.adapter(), amount);
-			});
+			CUSTOM_STATISTIC_LISTENERS.forEach((pair) ->
+				pair.listener().statEvent(player, location, pair.adapter(), amount));
 			
 		} else if (stat.getType() == Stats.ITEM_USED) {
 			//Item used listener
 			assert (value instanceof Item);
 			Item item = (Item) value;
 			
-			ITEM_STATISTIC_LISTENERS.forEach((pair) -> {
-				pair.listener().statEvent(player, item, pair.adapter(), amount);
-			});
+			ITEM_STATISTIC_LISTENERS.forEach((pair) ->
+				pair.listener().statEvent(player, item, pair.adapter(), amount));
 			
 		} else if (stat.getType() == Stats.BLOCK_MINED) {
 			//Block mined listener
 			assert (value instanceof Block);
 			Block block = (Block) value;
 			
-			BLOCK_STATISTIC_LISTENERS.forEach((pair) -> {
-				pair.listener().statEvent(player, block, pair.adapter(), amount);
-			});
+			BLOCK_STATISTIC_LISTENERS.forEach((pair) ->
+				pair.listener().statEvent(player, block, pair.adapter(), amount));
 		} else if (stat.getType() == Stats.ENTITY_KILLED) {
 			//Entity killed listener
 			assert (value instanceof EntityType<?>);
 			EntityType<?> entityType = (EntityType<?>) value;
 			
-			ENTITY_STATISTIC_LISTENERS.forEach((pair) -> {
-				pair.listener().statEvent(player, entityType, pair.adapter(), amount);
-			});
+			ENTITY_STATISTIC_LISTENERS.forEach((pair) ->
+				pair.listener().statEvent(player, entityType, pair.adapter(), amount));
 			
 		}
 	}
