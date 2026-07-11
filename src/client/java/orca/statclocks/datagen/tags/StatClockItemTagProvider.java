@@ -5,11 +5,15 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.tags.TagAppender;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import orca.statclocks.StatClocksMod;
+import orca.statclocks.components.StatClockPartType;
 
 import java.util.concurrent.CompletableFuture;
+
+import static orca.statclocks.lists.StatClockPartTypes.*;
 
 public class StatClockItemTagProvider extends FabricTagProvider.ItemTagProvider {
 	
@@ -27,14 +31,81 @@ public class StatClockItemTagProvider extends FabricTagProvider.ItemTagProvider 
 		statClockItems.add(StatClocksMod.STAT_CLOCK_FILTER);
 		statClockItems.add(StatClocksMod.STAT_CLOCK_REMOVER);
 		
+		addPartTypeTags();
+		
 		valueLookupBuilder(StatClocksMod.SHEARS).add(Items.SHEARS);
-		valueLookupBuilder(StatClocksMod.WOLF_ARMOR).add(Items.WOLF_ARMOR);
 		
-		addUsableItems();
+		valueLookupBuilder(StatClocksMod.MUSIC_DISC).add(
+			Items.MUSIC_DISC_13, Items.MUSIC_DISC_CAT, Items.MUSIC_DISC_BLOCKS,
+			Items.MUSIC_DISC_CHIRP, Items.MUSIC_DISC_FAR, Items.MUSIC_DISC_MALL,
+			Items.MUSIC_DISC_MELLOHI, Items.MUSIC_DISC_STAL, Items.MUSIC_DISC_STRAD,
+			Items.MUSIC_DISC_WARD, Items.MUSIC_DISC_11, Items.MUSIC_DISC_CREATOR_MUSIC_BOX,
+			Items.MUSIC_DISC_WAIT, Items.MUSIC_DISC_CREATOR, Items.MUSIC_DISC_PRECIPICE,
+			Items.MUSIC_DISC_OTHERSIDE, Items.MUSIC_DISC_RELIC, Items.MUSIC_DISC_5,
+			Items.MUSIC_DISC_PIGSTEP, Items.MUSIC_DISC_TEARS, Items.MUSIC_DISC_LAVA_CHICKEN
+		);
 		
-		addConsumable();
+		valueLookupBuilder(StatClocksMod.CONSUMABLE).add(
+			Items.APPLE, Items.GOLDEN_APPLE, Items.ENCHANTED_GOLDEN_APPLE,
+			Items.CARROT, Items.GOLDEN_CARROT,
+			Items.POTATO, Items.BAKED_POTATO,
+			Items.BEETROOT, Items.BEETROOT_SOUP,
+			Items.BREAD, Items.COOKIE,
+			Items.MUSHROOM_STEW, Items.SUSPICIOUS_STEW,
+			
+			Items.BEEF, Items.COOKED_BEEF,
+			Items.CHICKEN, Items.COOKED_CHICKEN,
+			Items.MUTTON, Items.COOKED_MUTTON,
+			Items.PORKCHOP, Items.COOKED_PORKCHOP,
+			Items.RABBIT, Items.COOKED_RABBIT, Items.RABBIT_STEW,
+			
+			Items.COD, Items.COOKED_COD,
+			Items.SALMON, Items.COOKED_SALMON,
+			Items.PUFFERFISH, Items.TROPICAL_FISH,
+			
+			Items.GLOW_BERRIES, Items.SWEET_BERRIES,
+			Items.PUMPKIN_PIE, Items.MELON_SLICE,
+			Items.DRIED_KELP,
+			
+			Items.CHORUS_FRUIT,
+			
+			Items.ROTTEN_FLESH, Items.SPIDER_EYE,
+			
+			//Special case
+			Items.CAKE,
+			
+			//Drinks
+			Items.MILK_BUCKET, Items.HONEY_BOTTLE,
+			Items.POTION, Items.OMINOUS_BOTTLE
+		);
 		
-		addMobArmor();
+		valueLookupBuilder(StatClocksMod.HORSE_ARMOR).add(
+			Items.LEATHER_HORSE_ARMOR, Items.COPPER_HORSE_ARMOR, Items.IRON_HORSE_ARMOR,
+			Items.GOLDEN_HORSE_ARMOR, Items.DIAMOND_HORSE_ARMOR, Items.NETHERITE_HORSE_ARMOR
+		);
+		
+		valueLookupBuilder(StatClocksMod.NAUTILUS_ARMOR).add(
+			Items.COPPER_NAUTILUS_ARMOR, Items.IRON_NAUTILUS_ARMOR, Items.GOLDEN_NAUTILUS_ARMOR,
+			Items.DIAMOND_NAUTILUS_ARMOR, Items.NETHERITE_NAUTILUS_ARMOR
+		);
+		
+		valueLookupBuilder(StatClocksMod.BOAT).add(
+			Items.OAK_BOAT,			Items.OAK_BOAT,
+			Items.SPRUCE_BOAT,		Items.SPRUCE_BOAT,
+			Items.BIRCH_BOAT,		Items.BIRCH_BOAT,
+			Items.JUNGLE_BOAT,		Items.JUNGLE_CHEST_BOAT,
+			Items.ACACIA_BOAT,		Items.ACACIA_CHEST_BOAT,
+			Items.DARK_OAK_BOAT,	Items.DARK_OAK_CHEST_BOAT,
+			Items.MANGROVE_BOAT,	Items.MANGROVE_CHEST_BOAT,
+			Items.CHERRY_BOAT,		Items.CHERRY_CHEST_BOAT,
+			Items.PALE_OAK_BOAT,	Items.PALE_OAK_CHEST_BOAT,
+			Items.BAMBOO_RAFT,		Items.BAMBOO_CHEST_RAFT
+		);
+		
+		valueLookupBuilder(StatClocksMod.MINECART).add(
+			Items.MINECART, Items.CHEST_MINECART, Items.HOPPER_MINECART,
+			Items.TNT_MINECART, Items.FURNACE_MINECART, Items.COMMAND_BLOCK_MINECART
+		);
 		
 		addShearableItems();
 		
@@ -43,94 +114,91 @@ public class StatClockItemTagProvider extends FabricTagProvider.ItemTagProvider 
 		addBrushableTags();
 	}
 	
-	private static final Item[] MISC_USABLE_ITEMS = new Item[] {
-		Items.CARROT_ON_A_STICK, Items.WARPED_FUNGUS_ON_A_STICK,
-		Items.GOAT_HORN, Items.SPYGLASS
-	};
-	
-	private void addUsableItems () {
+	private void addPartTypeTags () {
 		
-		TagAppender<Item, Item> usable = valueLookupBuilder(StatClocksMod.USABLE_ITEM);
+		buildPartTags(BLOCKS_MINED)
+			.addDefaultItemTags(ItemTags.PICKAXES, ItemTags.AXES, ItemTags.SHOVELS, ItemTags.HOES)
+			.addAllowedItemTags(ItemTags.SWORDS, StatClocksMod.SHEARS);
 		
-		usable.addOptionalTag(ItemTags.AXES);
-		usable.addOptionalTag(ItemTags.SHOVELS);
-		usable.addOptionalTag(ItemTags.HOES);
+		buildPartTags(BLOCK_LOOT_DROPPED)
+			.addAllowedItemTags(ItemTags.PICKAXES, ItemTags.AXES, ItemTags.SHOVELS, ItemTags.HOES, ItemTags.SWORDS, StatClocksMod.SHEARS);
 		
-		for (Item item : MISC_USABLE_ITEMS) {
-			usable.add(item);
-		}
+		buildPartTags(TIMES_USED)
+			.addDefaultItems(Items.CARROT_ON_A_STICK, Items.WARPED_FUNGUS_ON_A_STICK, Items.GOAT_HORN, Items.SPYGLASS)
+			.addDefaultItemTags(ItemTags.AXES, ItemTags.SHOVELS, ItemTags.HOES);
 		
-	}
-	
-	private static final Item[] CONSUMABLE = new Item[] {
+		buildPartTags(BLOCKS_IGNITED).addDefaultItems(Items.FLINT_AND_STEEL);
+		buildPartTags(MOBS_IGNITED).addDefaultItems(Items.FLINT_AND_STEEL);
 		
-		//Foods
-		Items.APPLE, Items.GOLDEN_APPLE, Items.ENCHANTED_GOLDEN_APPLE,
-		Items.CARROT, Items.GOLDEN_CARROT,
-		Items.POTATO, Items.BAKED_POTATO,
-		Items.BEETROOT, Items.BEETROOT_SOUP,
-		Items.BREAD, Items.COOKIE,
-		Items.MUSHROOM_STEW, Items.SUSPICIOUS_STEW,
+		buildPartTags(SHEARS_USED).addDefaultItemTags(StatClocksMod.SHEARS);
+		buildPartTags(SHEARS_USED_ITEM).addDefaultItemTags(StatClocksMod.SHEARS);
+		buildPartTags(SHEARS_USED_BLOCK).addDefaultItemTags(StatClocksMod.SHEARS);
+		buildPartTags(SHEARS_USED_ENTITY).addDefaultItemTags(StatClocksMod.SHEARS);
 		
-		Items.BEEF, Items.COOKED_BEEF,
-		Items.CHICKEN, Items.COOKED_CHICKEN,
-		Items.MUTTON, Items.COOKED_MUTTON,
-		Items.PORKCHOP, Items.COOKED_PORKCHOP,
-		Items.RABBIT, Items.COOKED_RABBIT, Items.RABBIT_STEW,
+		buildPartTags(BRUSH_USED).addDefaultItems(Items.BRUSH);
 		
-		Items.COD, Items.COOKED_COD,
-		Items.SALMON, Items.COOKED_SALMON,
-		Items.PUFFERFISH, Items.TROPICAL_FISH,
+		buildPartTags(DAMAGE_DEALT)
+			.addDefaultItemTags(ItemTags.SWORDS, ItemTags.AXES, ItemTags.SPEARS)
+			.addDefaultItems(Items.MACE, Items.TRIDENT, Items.BOW, Items.CROSSBOW)
+			.addAllowedItemTags(ItemTags.PICKAXES, ItemTags.SHOVELS, ItemTags.HOES);
 		
-		Items.GLOW_BERRIES, Items.SWEET_BERRIES,
-		Items.PUMPKIN_PIE, Items.MELON_SLICE,
-		Items.DRIED_KELP,
+		buildPartTags(MOBS_KILLED)
+			.addDefaultItemTags(ItemTags.SWORDS, ItemTags.AXES, ItemTags.SPEARS)
+			.addDefaultItems(Items.MACE, Items.TRIDENT, Items.BOW, Items.CROSSBOW)
+			.addAllowedItemTags(ItemTags.PICKAXES, ItemTags.SHOVELS, ItemTags.HOES);
 		
-		Items.CHORUS_FRUIT,
+		buildPartTags(MOB_LOOT_DROPPED)
+			.addAllowedItemTags(ItemTags.SWORDS, ItemTags.AXES, ItemTags.SPEARS, ItemTags.PICKAXES, ItemTags.SHOVELS, ItemTags.HOES)
+			.addAllowedItems(Items.MACE, Items.TRIDENT, Items.BOW, Items.CROSSBOW);
 		
-		Items.ROTTEN_FLESH, Items.SPIDER_EYE,
+		buildPartTags(FALL_ATTACK_DISTANCE)
+			.addDefaultItems(Items.MACE);
 		
-		//Special case
-		Items.CAKE,
+		buildPartTags(DAMAGE_DEALT_DISTANCE)
+			.addAllowedItems(Items.BOW, Items.CROSSBOW, Items.TRIDENT);
 		
-		//Drinks
-		Items.MILK_BUCKET, Items.HONEY_BOTTLE,
-		Items.POTION, Items.OMINOUS_BOTTLE
-	};
-	
-	private void addConsumable () {
+		buildPartTags(ITEMS_FISHED).addDefaultItems(Items.FISHING_ROD);
+		buildPartTags(FISH_CAUGHT).addDefaultItems(Items.FISHING_ROD);
+		buildPartTags(TREASURE_CAUGHT).addDefaultItems(Items.FISHING_ROD);
+		buildPartTags(TRASH_CAUGHT).addDefaultItems(Items.FISHING_ROD);
+		buildPartTags(MOBS_FISHED).addAllowedItems(Items.FISHING_ROD);
 		
-		TagAppender<Item, Item> usable = valueLookupBuilder(StatClocksMod.CONSUMABLE);
+		buildPartTags(TIME_PLAYED).addDefaultItemTags(StatClocksMod.MUSIC_DISC);
+		buildPartTags(TIMES_FINISHED).addDefaultItemTags(StatClocksMod.MUSIC_DISC);
 		
-		for (Item item : CONSUMABLE) {
-			usable.add(item);
-		}
-	}
-	
-	
-	private static final Item[] HORSE_ARMOR = new Item[] {
-		Items.LEATHER_HORSE_ARMOR, Items.COPPER_HORSE_ARMOR, Items.IRON_HORSE_ARMOR,
-		Items.GOLDEN_HORSE_ARMOR, Items.DIAMOND_HORSE_ARMOR, Items.NETHERITE_HORSE_ARMOR
-	};
-	
-	private static final Item[] NAUTILUS_ARMOR = new Item[] {
-		Items.COPPER_NAUTILUS_ARMOR, Items.IRON_NAUTILUS_ARMOR, Items.GOLDEN_NAUTILUS_ARMOR,
-		Items.DIAMOND_NAUTILUS_ARMOR, Items.NETHERITE_NAUTILUS_ARMOR
-	};
-	
-	private void addMobArmor () {
+		buildPartTags(DISTANCE_FLOWN).addDefaultItems(Items.ELYTRA);
+		buildPartTags(ROCKET_USAGE).addAllowedItems(Items.ELYTRA);
 		
-		TagAppender<Item, Item> horseArmor = valueLookupBuilder(StatClocksMod.HORSE_ARMOR);
+		buildPartTags(DISTANCE_FLOATED).addDefaultItemTags(ItemTags.HARNESSES);
+		buildPartTags(DISTANCE_RODE).addDefaultItems(Items.SADDLE);
 		
-		for (Item item : HORSE_ARMOR) {
-			horseArmor.add(item);
-		}
+		buildPartTags(VEHICLE_DISTANCE).addDefaultItemTags(StatClocksMod.BOAT, StatClocksMod.MINECART);
 		
-		TagAppender<Item, Item> nautilusArmor = valueLookupBuilder(StatClocksMod.NAUTILUS_ARMOR);
+		buildPartTags(DAMAGE_TAKEN)
+			.addDefaultItemTags(ItemTags.HEAD_ARMOR, ItemTags.CHEST_ARMOR, ItemTags.LEG_ARMOR, ItemTags.FOOT_ARMOR, StatClocksMod.HORSE_ARMOR, StatClocksMod.NAUTILUS_ARMOR);
 		
-		for (Item item : NAUTILUS_ARMOR) {
-			nautilusArmor.add(item);
-		}
+		buildPartTags(DAMAGE_REDUCED)
+			.addDefaultItemTags(ItemTags.HEAD_ARMOR, ItemTags.CHEST_ARMOR, ItemTags.LEG_ARMOR, ItemTags.FOOT_ARMOR, StatClocksMod.HORSE_ARMOR, StatClocksMod.NAUTILUS_ARMOR)
+				.addDefaultItems(Items.WOLF_ARMOR, Items.SHIELD);
+		
+		buildPartTags(ATTACKS_BLOCKED).addDefaultItems(Items.SHIELD);
+		
+		buildPartTags(TIME_UNDERWATER).addAllowedItemTags(ItemTags.HEAD_ARMOR);
+		buildPartTags(MINED_UNDERWATER).addAllowedItemTags(ItemTags.HEAD_ARMOR);
+		buildPartTags(ITEMS_CONSUMED).addAllowedItemTags(ItemTags.HEAD_ARMOR);
+		
+		buildPartTags(DISTANCE_CROUCHED).addAllowedItemTags(ItemTags.LEG_ARMOR);
+		buildPartTags(DISTANCE_WALKED).addAllowedItemTags(ItemTags.LEG_ARMOR);
+		
+		buildPartTags(DISTANCE_SWAM).addAllowedItemTags(ItemTags.FOOT_ARMOR);
+		buildPartTags(DISTANCE_FALLEN).addAllowedItemTags(ItemTags.FOOT_ARMOR);
+		buildPartTags(DISTANCE_WADED).addAllowedItemTags(ItemTags.FOOT_ARMOR);
+		buildPartTags(DISTANCE_WALKED).addAllowedItemTags(ItemTags.FOOT_ARMOR);
+		
+		
+		STAT_PART_TYPES.forEach((id, pair) -> {
+			valueLookupBuilder(StatClocksMod.STAT_CLOCKABLE).addOptionalTag(pair.getB().defaultItemsTag).addOptionalTag(pair.getB().allowedItemsTag);
+		});
 		
 	}
 	
@@ -269,6 +337,40 @@ public class StatClockItemTagProvider extends FabricTagProvider.ItemTagProvider 
 		
 		for (Item add : BRUSHABLE_LOOT) {
 			brushable.add(add);
+		}
+	}
+	
+	
+	private Builder buildPartTags (StatClockPartType type) {
+		return new Builder(valueLookupBuilder(type.getInfo().defaultItemsTag), valueLookupBuilder(type.getInfo().allowedItemsTag));
+	}
+	
+	private record Builder (TagAppender<Item, Item> defaultAppender, TagAppender<Item, Item> allowedAppender) {
+		
+		private Builder addDefaultItems (Item... items) {
+			defaultAppender.add(items);
+			return this;
+		}
+		
+		@SafeVarargs
+		private Builder addDefaultItemTags (TagKey<Item>... tags) {
+			for (TagKey<Item> tag : tags) {
+				defaultAppender.addOptionalTag(tag);
+			}
+			return this;
+		}
+		
+		private Builder addAllowedItems (Item... items) {
+			allowedAppender.add(items);
+			return this;
+		}
+		
+		@SafeVarargs
+		private Builder addAllowedItemTags (TagKey<Item>... tags) {
+			for (TagKey<Item> tag : tags) {
+				allowedAppender.addOptionalTag(tag);
+			}
+			return this;
 		}
 	}
 }

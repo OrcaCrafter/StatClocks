@@ -1,0 +1,32 @@
+{
+  "values": [
+    {
+      "id": "#minecraft:swords",
+      "required": false
+    },
+    {
+      "id": "#minecraft:axes",
+      "required": false
+    },
+    {
+      "id": "#minecraft:spears",
+      "required": false
+    },
+    {
+      "id": "#minecraft:pickaxes",
+      "required": false
+    },
+    {
+      "id": "#minecraft:shovels",
+      "required": false
+    },
+    {
+      "id": "#minecraft:hoes",
+      "required": false
+    },
+    "minecraft:mace",
+    "minecraft:trident",
+    "minecraft:bow",
+    "minecraft:crossbow"
+  ]
+}

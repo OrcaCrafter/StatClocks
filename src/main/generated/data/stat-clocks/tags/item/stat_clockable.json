@@ -1,0 +1,316 @@
+{
+  "values": [
+    {
+      "id": "#stat-clocks:none_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:none_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:blocks_mined_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:blocks_mined_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:times_used_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:times_used_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:blocks_ignited_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:blocks_ignited_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:mobs_ignited_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:mobs_ignited_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:shears_used_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:shears_used_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:shears_used_item_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:shears_used_item_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:shears_used_block_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:shears_used_block_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:shears_used_entity_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:shears_used_entity_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:brush_used_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:brush_used_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:block_loot_dropped_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:block_loot_dropped_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:damage_dealt_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:damage_dealt_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:damage_dealt_distance_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:damage_dealt_distance_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:mobs_killed_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:mobs_killed_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:mob_loot_dropped_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:mob_loot_dropped_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:damage_taken_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:damage_taken_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:damage_blocked_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:damage_blocked_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:attacks_blocked_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:attacks_blocked_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:fall_attack_distance_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:fall_attack_distance_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:distance_walked_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:distance_walked_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:distance_crouched_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:distance_crouched_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:distance_swam_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:distance_swam_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:distance_waded_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:distance_waded_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:time_underwater_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:time_underwater_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:mined_underwater_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:mined_underwater_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:items_consumed_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:items_consumed_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:distance_fallen_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:distance_fallen_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:items_fished_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:items_fished_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:fish_caught_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:fish_caught_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:treasure_caught_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:treasure_caught_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:trash_caught_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:trash_caught_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:mobs_fished_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:mobs_fished_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:distance_flown_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:distance_flown_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:rocket_usage_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:rocket_usage_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:distance_rode_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:distance_rode_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:distance_floated_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:distance_floated_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:vehicle_distance_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:vehicle_distance_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:time_played_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:time_played_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:times_finished_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:times_finished_allowed_on",
+      "required": false
+    }
+  ]
+}

@@ -16,10 +16,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import orca.statclocks.components.StatClockContent;
 import orca.statclocks.components.StatClockFilterContent;
@@ -81,6 +78,12 @@ public class StatClocksMod implements ModInitializer {
 		.title(Component.translatable("item-group.stat_clock_part_types"))
 		.build();
 	
+	public static final ResourceKey<CreativeModeTab> STAT_CLOCK_TOOLS_TAB = ResourceKey.create(BuiltInRegistries.CREATIVE_MODE_TAB.key(), Identifier.fromNamespaceAndPath(MOD_ID, "stat_clock_tools"));
+	public static final CreativeModeTab STAT_CLOCK_TOOLS_GROUP = FabricItemGroup.builder()
+		.icon(() -> new ItemStack(STAT_CLOCK))
+		.title(Component.translatable("item-group.stat_clock_tools"))
+		.build();
+	
 	
 	//
 	//      Custom tags
@@ -88,11 +91,14 @@ public class StatClocksMod implements ModInitializer {
 	
 	public static final TagKey<Item> STAT_CLOCKS_ITEMS = itemTag("stat_clock_items");
 	
-	public static final TagKey<Item> USABLE_ITEM = itemTag("usable_item");
 	public static final TagKey<Item> CONSUMABLE = itemTag("consumable");
 	
 	public static final TagKey<Item> SHEARS = itemTag("shears");
-	public static final TagKey<Item> WOLF_ARMOR = itemTag("wolf_armor");
+	
+	public static final TagKey<Item> BOAT = itemTag("boat");
+	public static final TagKey<Item> MINECART = itemTag("boat");
+	
+	public static final TagKey<Item> MUSIC_DISC = itemTag("music_disc");
 	
 	public static final TagKey<Item> FISHABLE = itemTag("fishable");
 	public static final TagKey<Item> FISHABLE_FISH = itemTag("fishable_fish");
@@ -105,6 +111,8 @@ public class StatClocksMod implements ModInitializer {
 	public static final TagKey<Item> BRUSHABLE_ITEMS = itemTag("brushable_items");
 	
 	public static final TagKey<Item> SHEARABLE_ITEMS = itemTag("shearable_items");
+	
+	public static final TagKey<Item> STAT_CLOCKABLE = itemTag("stat_clockable");
 	
 	public static TagKey<Item> itemTag (String name) {
 		return TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MOD_ID, name));
@@ -142,6 +150,7 @@ public class StatClocksMod implements ModInitializer {
 		CustomLootRegistries.init();
 		
 		Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, STAT_CLOCK_PART_TAB, STAT_CLOCK_PART_GROUP);
+		Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, STAT_CLOCK_TOOLS_TAB, STAT_CLOCK_TOOLS_GROUP);
 		
 		AddToIngredientsTab(STAT_CLOCK);
 		AddToTabWithData(CreativeModeTabs.INGREDIENTS, STAT_CLOCK_PART, StatClockPartType.PART_TYPE_COMPONENT, StatClockPartTypes.EMPTY);
@@ -163,6 +172,35 @@ public class StatClocksMod implements ModInitializer {
 			AddToTabWithData(STAT_CLOCK_PART_TAB, STAT_CLOCK_PART, StatClockPartType.PART_TYPE_COMPONENT, type);
 			
 		}
+		
+		ItemGroupEvents.modifyEntriesEvent(STAT_CLOCK_TOOLS_TAB)
+			.register((itemGroup) -> {
+				
+				BuiltInRegistries.ITEM.forEach((item) -> {
+					if (!new ItemStack(item).is(STAT_CLOCKABLE)) return;
+					
+					StatClockContent defaultParts = StatClockContent.ItemStatClock(new ItemStack(item), false);
+					StatClockContent allParts = StatClockContent.ItemStatClock(new ItemStack(item), true);
+					
+					if (defaultParts == null || allParts == null) return;
+					
+					ItemStack defaultPartStack = new ItemStack(item);
+					
+					defaultPartStack.set(StatClockContent.STAT_CLOCK_COMPONENT, defaultParts);
+					
+					itemGroup.accept(defaultPartStack);
+					
+					if (defaultParts.partCount() != allParts.partCount()) {
+						ItemStack allPartsStack = new ItemStack(item);
+						
+						allPartsStack.set(StatClockContent.STAT_CLOCK_COMPONENT, allParts);
+						
+						itemGroup.accept(allPartsStack);
+					}
+					
+				});
+				
+			});
 		
 		//Register commands
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> StatClockCommand.register(dispatcher, registryAccess));

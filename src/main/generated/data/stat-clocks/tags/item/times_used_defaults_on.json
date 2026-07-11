@@ -1,5 +1,9 @@
 {
   "values": [
+    "minecraft:carrot_on_a_stick",
+    "minecraft:warped_fungus_on_a_stick",
+    "minecraft:goat_horn",
+    "minecraft:spyglass",
     {
       "id": "#minecraft:axes",
       "required": false
@@ -11,10 +15,6 @@
     {
       "id": "#minecraft:hoes",
       "required": false
-    },
-    "minecraft:carrot_on_a_stick",
-    "minecraft:warped_fungus_on_a_stick",
-    "minecraft:goat_horn",
-    "minecraft:spyglass"
+    }
   ]
 }

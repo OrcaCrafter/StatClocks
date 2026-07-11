@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "#minecraft:swords",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:shears",
+      "required": false
+    }
+  ]
+}

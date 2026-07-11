@@ -38,6 +38,8 @@ public class PartTypeInfo {
 	
 	final ArrayList<Pair<ListenerAdapter, ListenerAdapter.Filter>> adapters = new ArrayList<>();
 	
+	public TagKey<Item> defaultItemsTag;
+	public TagKey<Item> allowedItemsTag;
 	
 	public PartTypeInfo (String name) {
 		this.name = name;
@@ -131,6 +133,9 @@ public class PartTypeInfo {
 		
 		Registry.register(StatClocksMod.PART_TYPE_REGISTRY, id, type);
 		
+		defaultItemsTag = StatClocksMod.itemTag(name + "_defaults_on");
+		allowedItemsTag = StatClocksMod.itemTag(name + "_allowed_on");
+		
 		if (adapters.isEmpty() && !noListener) {
 			StatClocksMod.LOGGER.warn("Part type: {} has no listeners", name);
 		}
@@ -215,19 +220,29 @@ public class PartTypeInfo {
 		
 		Color color;
 		
+		
+		
 		if (statClockPartContent.getType().getFilter().getType() != StatClockFilterType.NONE) {
 			color = FILTERED_COLOR;
 		} else {
 			
-			StatClockPartMapper.MapRule rule = StatClockPartMapper.GetItemMapping(item.getItem());
-			
-			if (rule.getDefaultParts().contains(statClockPartContent.getType())) {
+			if (item.is(statClockPartContent.getType().getInfo().defaultItemsTag)) {
 				color = DEFAULT_COLOR;
-			} else if (rule.getAllowedParts().contains(statClockPartContent.getType())) {
+			} else if (item.is(statClockPartContent.getType().getInfo().allowedItemsTag)) {
 				color = ALLOWED_COLOR;
 			} else {
 				color = ERROR_COLOR;
 			}
+			
+//			StatClockPartMapper.MapRule rule = StatClockPartMapper.GetItemMapping(item.getItem());
+//
+//			if (rule.getDefaultParts().contains(statClockPartContent.getType())) {
+//				color = DEFAULT_COLOR;
+//			} else if (rule.getAllowedParts().contains(statClockPartContent.getType())) {
+//				color = ALLOWED_COLOR;
+//			} else {
+//				color = ERROR_COLOR;
+//			}
 		}
 		
 		toolTip.withColor(color.getRGB());

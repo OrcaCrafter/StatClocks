@@ -16,7 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import orca.statclocks.StatClocksMod;
 import orca.statclocks.ToolTipComponent;
-import orca.statclocks.lists.StatClockPartMapper;
+import orca.statclocks.lists.StatClockPartTypes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,14 +56,25 @@ public class StatClockContent implements ToolTipComponent {
 	}
 	
 	public static StatClockContent ItemStatClock (ItemStack item, boolean all) {
-		StatClockPartMapper.MapRule rule = StatClockPartMapper.GetItemMapping(item.getItem());
 		
-		if (rule.isEmpty()) return null;
+		ArrayList<StatClockPartType> defaultPartsArray = new ArrayList<>();
+		ArrayList<StatClockPartType> allowedPartsArray = new ArrayList<>();
+		
+		StatClockPartTypes.STAT_PART_TYPES.forEach((identifier, pair) -> {
+			
+			if (item.is(pair.getB().defaultItemsTag)) {
+				defaultPartsArray.add(pair.getA());
+			} else if (item.is(pair.getB().allowedItemsTag)) {
+				allowedPartsArray.add(pair.getA());
+			}
+		});
+		
+		if (defaultPartsArray.isEmpty() && allowedPartsArray.isEmpty()) return null;
 		
 		
 		if (all) {
-			StatClockPartType[] defaultParts = rule.defaultPartsArray();
-			StatClockPartType[] allowedParts = rule.allowedPartsArray();
+			StatClockPartType[] defaultParts = defaultPartsArray.toArray(new StatClockPartType[0]);
+			StatClockPartType[] allowedParts = allowedPartsArray.toArray(new StatClockPartType[0]);
 			
 			StatClockPartType[] ret = new StatClockPartType[defaultParts.length + allowedParts.length];
 			
@@ -73,7 +84,7 @@ public class StatClockContent implements ToolTipComponent {
 			return new StatClockContent(item.getItem().toString(), ret);
 		}
 		
-		return new StatClockContent(item.getItem().toString(), rule.defaultPartsArray());
+		return new StatClockContent(item.getItem().toString(), defaultPartsArray.toArray(new StatClockPartType[0]));
 		
 	}
 	
@@ -167,27 +178,8 @@ public class StatClockContent implements ToolTipComponent {
 			if (content.getType().equals(partType)) return false;
 		}
 		
-		StatClockPartMapper.MapRule rule = StatClockPartMapper.GetItemMapping(tool.getItem());
-		
-		//Avoid adding disallowed part types
-		boolean allowed = false;
-		
-		for (StatClockPartType allowedPart : rule.allowedPartsArray()) {
-			if (partType.sameType(allowedPart)) {
-				allowed = true;
-				break;
-			}
-		}
-		
-		//Check default parts for filtered addition
-		for (StatClockPartType allowedPart : rule.defaultPartsArray()) {
-			if (partType.sameType(allowedPart)) {
-				allowed = true;
-				break;
-			}
-		}
-		
-		return allowed;
+		if (tool.is(partType.getInfo().defaultItemsTag)) return true;
+		return (tool.is(partType.getInfo().allowedItemsTag));
 	}
 	
 	public StatClockPartContent getPart (StatClockPartType type) {
@@ -249,5 +241,9 @@ public class StatClockContent implements ToolTipComponent {
 			
 		}
 		
+	}
+	
+	public int partCount () {
+		return parts.size();
 	}
 }

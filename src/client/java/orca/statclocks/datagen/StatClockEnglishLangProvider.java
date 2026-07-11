@@ -20,6 +20,7 @@ public class StatClockEnglishLangProvider extends FabricLanguageProvider {
 	public void generateTranslations (HolderLookup.Provider wrapperLookup, FabricLanguageProvider.TranslationBuilder translationBuilder) {
 		
 		translationBuilder.add("item-group.stat_clock_part_types", "Stat Clock Part Types");
+		translationBuilder.add("item-group.stat_clock_tools", "Stat Clock Tools");
 		
 		translationBuilder.add("item.stat-clocks.stat_clock", "Stat Clock");
 		translationBuilder.add("item.stat-clocks.stat_clock_part", "Stat Clock Part");
