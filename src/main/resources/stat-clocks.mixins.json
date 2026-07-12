@@ -3,6 +3,8 @@
 	"package": "orca.statclocks.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
+		"AbstractBoatMixin",
+		"AbstractMinecartMixin",
 		"AnvilMenuMixin",
 		"GrindstoneMenuMixin",
 		"GrindstoneMenuSlotMixin",

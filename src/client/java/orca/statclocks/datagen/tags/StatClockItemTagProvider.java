@@ -195,6 +195,10 @@ public class StatClockItemTagProvider extends FabricTagProvider.ItemTagProvider 
 		buildPartTags(DISTANCE_WADED).addAllowedItemTags(ItemTags.FOOT_ARMOR);
 		buildPartTags(DISTANCE_WALKED).addAllowedItemTags(ItemTags.FOOT_ARMOR);
 		
+		buildPartTags(ITEMS_DEPOSITED)
+			.addDefaultItemTags(ItemTags.SHULKER_BOXES, ItemTags.BUNDLES)
+			.addAllowedItemTags(ItemTags.CHEST_BOATS)
+			.addAllowedItems(Items.HOPPER_MINECART, Items.CHEST_MINECART);
 		
 		STAT_PART_TYPES.forEach((id, pair) ->
 			valueLookupBuilder(StatClocksMod.STAT_CLOCKABLE).addOptionalTag(pair.getB().defaultItemsTag).addOptionalTag(pair.getB().allowedItemsTag));

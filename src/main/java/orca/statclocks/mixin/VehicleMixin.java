@@ -1,15 +1,23 @@
 package orca.statclocks.mixin;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.vehicle.VehicleEntity;
+import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gamerules.GameRules;
+import net.minecraft.world.phys.Vec3;
+import orca.statclocks.StatClocksMod;
 import orca.statclocks.components.StatClockContent;
+import orca.statclocks.components.StatClockPartContent;
+import orca.statclocks.components.StatClockPartType;
+import orca.statclocks.lists.StatClockPartTypes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,33 +26,43 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(VehicleEntity.class)
 public abstract class VehicleMixin extends Entity {
 	
+	
 	public VehicleMixin (EntityType<?> entityType, Level level) {
 		super(entityType, level);
 	}
 	
 	//Replace dropping logic with our own to add stat clock data to vehicles
-	@Inject(method = "destroy(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/Item;)V", at = @At("HEAD"), cancellable = true)
-	public void destroy (ServerLevel serverLevel, Item item, CallbackInfo ci) {
+	@Inject(method = "destroy(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/Item;)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/vehicle/VehicleEntity;spawnAtLocation(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/entity/item/ItemEntity;"))
+	public void destroy (ServerLevel serverLevel, Item item, CallbackInfo ci, @Local ItemStack itemStack) {
 		
-		VehicleEntity thisVehicle = (VehicleEntity) (Object) this;
-		
-		StatClockContent statClock = thisVehicle.get(StatClockContent.STAT_CLOCK_COMPONENT);
-		
+		StatClockContent statClock = this.get(StatClockContent.STAT_CLOCK_COMPONENT);
 		if (statClock == null) return;
 		
-		//Replace with our code
-		ci.cancel();
+		itemStack.set(StatClockContent.STAT_CLOCK_COMPONENT, statClock);
 		
-		this.kill(serverLevel);
-		if (serverLevel.getGameRules().get(GameRules.ENTITY_DROPS)) {
-			ItemStack itemStack = new ItemStack(item);
-			itemStack.set(DataComponents.CUSTOM_NAME, this.getCustomName());
-			
-			//Add stat clock data to dropped item
-			itemStack.set(StatClockContent.STAT_CLOCK_COMPONENT, statClock);
-			
-			this.spawnAtLocation(serverLevel, itemStack);
-		}
 	}
 	
+	public void move (MoverType moverType, Vec3 vec3) {
+		
+		StatClockContent statClock = this.get(StatClockContent.STAT_CLOCK_COMPONENT);
+		
+		if (statClock != null) {
+			
+			StatClockPartContent content = statClock.getPart(StatClockPartTypes.VEHICLE_DISTANCE);
+			
+			if (content != null) {
+				int distance = (int)Math.round(vec3.length() * 100);
+				
+				StatClocksMod.LOGGER.info("Moved: {} cast to {}cm", vec3.length(), distance);
+				
+				content.incrementCount(distance);
+			}
+		}
+		
+		
+		super.move(moverType, vec3);
+	}
+	
+	
+	//TODO pick result
 }

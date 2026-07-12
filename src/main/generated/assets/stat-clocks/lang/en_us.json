@@ -75,6 +75,7 @@
   "stat-clocks.tooltip.part_type_filtered:stat-clocks:distance_walked": "Distance Walked on %1$s",
   "stat-clocks.tooltip.part_type_filtered:stat-clocks:fall_attack_distance": "Distance Fallen Attacking %1$s",
   "stat-clocks.tooltip.part_type_filtered:stat-clocks:items_consumed": "%1$s Consumed",
+  "stat-clocks.tooltip.part_type_filtered:stat-clocks:items_deposited": "%1$s Deposited",
   "stat-clocks.tooltip.part_type_filtered:stat-clocks:items_fished": "Fished up %1$s",
   "stat-clocks.tooltip.part_type_filtered:stat-clocks:mined_underwater": "%1$s Mined Underwater",
   "stat-clocks.tooltip.part_type_filtered:stat-clocks:mob_loot_dropped": "%1$s Dropped",
