@@ -68,7 +68,7 @@ public class PartTypeInfo {
 		return this;
 	}
 	
-	public PartTypeInfo setFilterTypeBlock (String englishFilter) {
+	public PartTypeInfo setFilterTypeBlock () {
 		filterType = StatClockFilterType.BLOCK;
 		return this;
 	}
