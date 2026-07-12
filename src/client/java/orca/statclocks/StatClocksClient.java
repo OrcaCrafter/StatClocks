@@ -5,16 +5,21 @@ import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.client.rendering.v1.DrawItemStackOverlayCallback;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.item.properties.select.SelectItemModelProperties;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.TypedDataComponent;
 import net.minecraft.resources.Identifier;
 import orca.statclocks.components.StatClockContent;
+import orca.statclocks.components.StatClockFilterType;
+import orca.statclocks.components.StatClockPartType;
+import orca.statclocks.datagen.ContextPartType;
 
 import static orca.statclocks.StatClocksMod.MOD_ID;
 
 public class StatClocksClient implements ClientModInitializer {
 	
 	public static final Identifier STAT_CLOCK_SPRITE_ID = Identifier.fromNamespaceAndPath(MOD_ID, "textures/gui/stat_clock_icon.png");
+	public static final Identifier STAT_CLOCK_FILTER_SPRITE_ID = Identifier.fromNamespaceAndPath(MOD_ID, "textures/gui/stat_clock_filter_icon.png");
 	
 	@Override
 	public void onInitializeClient () {
@@ -43,6 +48,14 @@ public class StatClocksClient implements ClientModInitializer {
 				graphics.blit(RenderPipelines.GUI_TEXTURED, STAT_CLOCK_SPRITE_ID, i + 10, j + 10, 0, 0, 6, 6, 16, 16, 16, 16);
 			}
 			
+			StatClockPartType type = stack.get(StatClockPartType.PART_TYPE_COMPONENT);
+			
+			if (type != null) {
+				
+				if (type.filter.getType() != StatClockFilterType.NONE) {
+					graphics.blit(RenderPipelines.GUI_TEXTURED, STAT_CLOCK_FILTER_SPRITE_ID, i + 10, j + 10, 0, 0, 6, 6, 16, 16, 16, 16);
+				}
+			}
 		});
 	}
 }
