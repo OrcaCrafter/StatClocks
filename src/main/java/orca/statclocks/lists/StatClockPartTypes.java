@@ -3,6 +3,7 @@ package orca.statclocks.lists;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
@@ -36,6 +37,7 @@ public class StatClockPartTypes {
 	//General
 	public static final StatClockPartType BLOCKS_MINED = new PartTypeInfo("blocks_mined")
 		.setIncrementByDurabilityFunction(ItemStack::getDamageValue)
+		.setFilterTypeBlock()
 		.addListener(MiscListeners.BLOCK_MINED_LISTENER).close();
 	
 	
@@ -50,39 +52,48 @@ public class StatClockPartTypes {
 	
 	public static final StatClockPartType BLOCKS_IGNITED = new PartTypeInfo("blocks_ignited")
 		.addListener(MiscListeners.BLOCKS_IGNITED)
+		.setFilterTypeBlock()
 		.close();
 	
 	public static final StatClockPartType MOBS_IGNITED = new PartTypeInfo("mobs_ignited")
 		.addListener(MiscListeners.MOBS_IGNITED)
+		.setFilterTypeEntity(StatClocksMod.IGNITABLE_MOBS)
 		.close();
 	
 	public static final StatClockPartType SHEARS_USED = new PartTypeInfo("shears_used")
 		.addListener(MiscListeners.SHEARS_USE_LISTENER)
+		.hide()
 		.close();
 	
 	public static final StatClockPartType SHEARS_USED_ITEM = new PartTypeInfo("shears_used_item")
 		.addListener(MiscListeners.SHEARS_USE_LISTENER_ITEM)
+		.setFilterTypeItem(StatClocksMod.SHEARABLE_ITEMS)
 		.close();
 	
 	public static final StatClockPartType SHEARS_USED_BLOCK = new PartTypeInfo("shears_used_block")
 		.addListener(MiscListeners.SHEARS_USE_LISTENER_BLOCK)
+		.setFilterTypeBlock(StatClocksMod.SHEARABLE_BLOCKS)
 		.close();
 	
 	public static final StatClockPartType SHEARS_USED_ENTITY = new PartTypeInfo("shears_used_entity")
 		.addListener(MiscListeners.SHEARS_USE_LISTENER_ENTITY)
+		.setFilterTypeEntity(StatClocksMod.SHEARABLE_MOBS)
 		.close();
 	
 	public static final StatClockPartType BRUSH_USED = new PartTypeInfo("brush_used")
 		.addListener(MiscListeners.BRUSH_USE_LISTENER)
+		.setFilterTypeItem(StatClocksMod.BRUSHABLE_ITEMS)
 		.close();
 	
 	public static final StatClockPartType BLOCK_LOOT_DROPPED = new PartTypeInfo("block_loot_dropped")
 		.addListener(MiscListeners.BLOCK_LOOT_LISTENER)
+		.setFilterTypeItem()
 		.close();
 	
 	public static final StatClockPartType DAMAGE_DEALT = new PartTypeInfo("damage_dealt")
 		.setFormat(PartValueFormat.DAMAGE)
 		.addListener(MiscListeners.DAMAGE_DEALT)
+		.setFilterTypeEntity()
 		.setIncrementByDurabilityFunction((stack) -> {
 			
 			//TODO find itemstack's attack damage
@@ -95,14 +106,17 @@ public class StatClockPartTypes {
 	public static final StatClockPartType DAMAGE_DEALT_DISTANCE = new PartTypeInfo("damage_dealt_distance")
 		.setFormat(PartValueFormat.DISTANCE)
 		.addListener(MiscListeners.DAMAGE_DEALT_DISTANCE)
+		.setFilterTypeEntity()
 		.close();
 	
 	public static final StatClockPartType MOBS_KILLED = new PartTypeInfo("mobs_killed")
 		.addListener(MiscListeners.ENTITY_KILLED_LISTENER)
+		.setFilterTypeEntity()
 		.close();
 	
 	public static final StatClockPartType MOB_LOOT_DROPPED = new PartTypeInfo("mob_loot_dropped")
 		.addListener(MiscListeners.MOB_LOOT_LISTENER)
+		.setFilterTypeItem()
 		.close();
 	
 	public static final StatClockPartType DAMAGE_TAKEN = new PartTypeInfo("damage_taken")
@@ -110,6 +124,7 @@ public class StatClockPartTypes {
 		.addListener(DamageListener.PLAYER_DAMAGE_TAKEN_ADAPTER)
 		.addListener(DamageListener.HORSE_DAMAGE_TAKEN_ADAPTER)
 		.addListener(DamageListener.NAUTILUS_DAMAGE_TAKEN_ADAPTER)
+		.setFilterTypeEntity()
 		.setFormat(PartValueFormat.DAMAGE).close();
 	
 	public static final StatClockPartType DAMAGE_REDUCED = new PartTypeInfo("damage_blocked")
@@ -118,6 +133,7 @@ public class StatClockPartTypes {
 		.addListener(DamageListener.HORSE_DAMAGE_BLOCKED_ADAPTER)
 		.addListener(DamageListener.WOLF_DAMAGE_BLOCKED_ADAPTER)
 		.addListener(DamageListener.NAUTILUS_DAMAGE_BLOCKED_ADAPTER)
+		.setFilterTypeEntity()
 		.addListener(
 			StatisticsListeners.AddCustomListener((Player player, Identifier target, ListenerAdapter adapter, int amount) -> {
 				
@@ -143,16 +159,17 @@ public class StatClockPartTypes {
 				}
 				
 			})
-		).close();
+		).setFilterTypeEntity().close();
 	
 	//Mace
 	public static final StatClockPartType FALL_ATTACK_DISTANCE = new PartTypeInfo("fall_attack_distance")
 		.addListener(MiscListeners.MACE_FALL_LISTENER)
-		.setFormat(PartValueFormat.DISTANCE).close();
+		.setFormat(PartValueFormat.DISTANCE).setFilterTypeEntity().close();
 	
 	//Misc armor
 	public static final StatClockPartType DISTANCE_WALKED = new PartTypeInfo("distance_walked")
 		.setFormat(PartValueFormat.DISTANCE)
+		.setFilterTypeBlock()
 		.addListener(
 			StatisticsListeners.AddCustomListener((Player player, Identifier target, ListenerAdapter adapter, int amount) -> {
 				
@@ -224,10 +241,10 @@ public class StatClockPartTypes {
 		.close();
 	
 	public static final StatClockPartType MINED_UNDERWATER = new PartTypeInfo("mined_underwater")
-		.addListener(MiscListeners.BLOCK_MINED_UNDERWATER_LISTENER).close();
+		.addListener(MiscListeners.BLOCK_MINED_UNDERWATER_LISTENER).setFilterTypeBlock().close();
 	
 	public static final StatClockPartType ITEMS_CONSUMED = new PartTypeInfo("items_consumed")
-		.addListener(MiscListeners.PLAYER_CONSUMES).close();
+		.addListener(MiscListeners.PLAYER_CONSUMES).setFilterTypeItem(StatClocksMod.CONSUMABLE).close();
 	
 	public static final StatClockPartType DISTANCE_FALLEN = new PartTypeInfo("distance_fallen")
 		.setFormat(PartValueFormat.DISTANCE)
@@ -246,7 +263,7 @@ public class StatClockPartTypes {
 	//Fishing Rod
 	public static final StatClockPartType ITEMS_FISHED = new PartTypeInfo("items_fished")
 		.addListener(MiscListeners.FISH_ITEM_LISTENER, (Object target) -> target instanceof ItemStack)
-		.close();
+		.setFilterTypeItem(StatClocksMod.FISHABLE).close();
 	
 	public static final StatClockPartType FISH_CAUGHT = new PartTypeInfo("fish_caught")
 		.addListener(MiscListeners.FISH_ITEM_LISTENER, (Object target) -> {
@@ -289,7 +306,7 @@ public class StatClockPartTypes {
 			
 			return true;
 		})
-		.close();
+		.setFilterTypeEntity().close();
 	
 	
 	//Elytra
@@ -312,6 +329,7 @@ public class StatClockPartTypes {
 	//Saddle
 	public static final StatClockPartType DISTANCE_RODE = new PartTypeInfo("distance_rode")
 		.setFormat(PartValueFormat.DISTANCE)
+		.setFilterTypeEntity(EntityTypeTags.CAN_EQUIP_SADDLE)
 		.addListener(
 			StatisticsListeners.AddCustomListener((Player player, Identifier target, ListenerAdapter adapter, int amount) -> {
 				
