@@ -50,7 +50,7 @@
   "stat-clocks.tooltip.part_type:stat-clocks:rocket_usage": "Rocket Duration Used",
   "stat-clocks.tooltip.part_type:stat-clocks:shears_used": "Times Using Shears",
   "stat-clocks.tooltip.part_type:stat-clocks:shears_used_block": "Blocks Sheared",
-  "stat-clocks.tooltip.part_type:stat-clocks:shears_used_entity": "Times Using Shears",
+  "stat-clocks.tooltip.part_type:stat-clocks:shears_used_entity": "Mobs Sheared",
   "stat-clocks.tooltip.part_type:stat-clocks:shears_used_item": "Items Sheared Off",
   "stat-clocks.tooltip.part_type:stat-clocks:time_played": "Time Played For",
   "stat-clocks.tooltip.part_type:stat-clocks:time_underwater": "Time Underwater",
