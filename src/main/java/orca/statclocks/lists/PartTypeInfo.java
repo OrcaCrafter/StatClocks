@@ -3,7 +3,6 @@ package orca.statclocks.lists;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
@@ -216,11 +215,8 @@ public class PartTypeInfo {
 	public static final Color ERROR_COLOR = Color.red;
 	
 	@NotNull
-	public MutableComponent applyFormatting (MutableComponent toolTip, ItemStack item, StatClockContent statClock, StatClockPartContent statClockPartContent) {
-		
+	public Color getToolTipColor (ItemStack item, StatClockPartContent statClockPartContent) {
 		Color color;
-		
-		
 		
 		if (statClockPartContent.getType().getFilter().getType() != StatClockFilterType.NONE) {
 			color = FILTERED_COLOR;
@@ -235,8 +231,6 @@ public class PartTypeInfo {
 			}
 		}
 		
-		toolTip.withColor(color.getRGB());
-		
-		return toolTip;
+		return color;
 	}
 }

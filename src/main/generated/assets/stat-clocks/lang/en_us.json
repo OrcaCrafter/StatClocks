@@ -84,6 +84,7 @@
   "stat-clocks.tooltip.part_type_filtered:stat-clocks:shears_used_block": "%1$s Sheared",
   "stat-clocks.tooltip.part_type_filtered:stat-clocks:shears_used_entity": "%1$s Sheared",
   "stat-clocks.tooltip.part_type_filtered:stat-clocks:shears_used_item": "%1$s Sheared",
+  "stat-clocks.tooltip.stat_clock_header": "Tool Statisitics",
   "stat-clocks.tooltip.unit.centimeter": "Centimeter",
   "stat-clocks.tooltip.unit.centimeter_plural": "Centimeters",
   "stat-clocks.tooltip.unit.day": "Day",

@@ -78,12 +78,16 @@ public class StatClockPartContent {
 		return new StatClockPartContent(type.clonePartType(), count);
 	}
 	
-	public MutableComponent getComponent (ItemStack item, StatClockContent statClock) {
+	public MutableComponent getComponent (ItemStack item) {
 		
 		if (StatClockPartTypes.STAT_PART_TYPES.containsKey(type.getId())) {
 			PartTypeInfo info = StatClockPartTypes.STAT_PART_TYPES.get(type.getId()).getB();
 			
-			return info.applyFormatting(type.getComponent().append(": ").append(info.getFormatted(count)), item, statClock, this);
+			Color color = info.getToolTipColor(item, this);
+			
+			Component countText = Component.empty().append(": ").append(info.getFormatted(count)).withColor(color.getRGB());
+			
+			return type.getComponent(color).append(countText);
 		}
 		
 		return Component.translatable("stat-clocks.tooltip.part_type_error", type.getId().toString()).withColor(Color.RED.getRGB());

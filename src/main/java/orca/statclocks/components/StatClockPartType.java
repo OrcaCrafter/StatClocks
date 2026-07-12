@@ -5,8 +5,10 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.data.AtlasIds;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.objects.AtlasSprite;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
@@ -20,6 +22,7 @@ import orca.statclocks.lists.PartTypeInfo;
 import orca.statclocks.lists.StatClockPartTypes;
 import oshi.util.tuples.Pair;
 
+import java.awt.*;
 import java.util.List;
 
 public class StatClockPartType implements ToolTipComponent {
@@ -104,12 +107,28 @@ public class StatClockPartType implements ToolTipComponent {
 		return filter.equals(compare.filter);
 	}
 	
-	public MutableComponent getComponent () {
+	public MutableComponent getComponent (Color color) {
+		Component icon = Component.object(new AtlasSprite(AtlasIds.GUI, id.withPrefix("gui/stat_clock_part_icons/")));
+		Component text;
+		
 		if (filter.getType() == StatClockFilterType.NONE) {
-			return Component.translatable("stat-clocks.tooltip.part_type:" + id);
+			text = Component.translatable("stat-clocks.tooltip.part_type:" + id).withColor(color.getRGB());
+			
 		} else {
-			return Component.translatable("stat-clocks.tooltip.part_type_filtered:" + id, filter.getFilterTranslation().getString());
+			text = Component.translatable("stat-clocks.tooltip.part_type_filtered:" + id, filter.getFilterTranslation().getString()).withColor(color.getRGB());
+			
+			//TODO filter icon
+//			Component filterIcon = switch (filter.getType()) {
+//				case ITEM -> Component.object(new AtlasSprite(AtlasIds.ITEMS, Identifier.parse(filter.filter).withPrefix("item/")));
+//				case BLOCK -> Component.object(new AtlasSprite(AtlasIds.BLOCKS, Identifier.parse(filter.filter).withPrefix("block/")));
+//				//case ENTITY -> Component.object(new AtlasSprite(AtlasIds.ITEMS, id.withPrefix("gui/stat_clock_part_icons/")));
+//				default -> null;
+//			};
+//
+//			if (filterIcon != null) return Component.empty().append(icon).append(filterIcon).append(" ").append(text);
 		}
+		
+		return Component.empty().append(icon).append(" ").append(text);
 	}
 	
 	public PartTypeInfo getInfo () {
@@ -118,7 +137,7 @@ public class StatClockPartType implements ToolTipComponent {
 	
 	@Override
 	public void addToTooltip (ItemStack stack, Item.TooltipContext context, TooltipFlag type, List<Component> list) {
-		list.add(getComponent());
+		list.add(getComponent(filter.type == StatClockFilterType.NONE ? PartTypeInfo.DEFAULT_COLOR : PartTypeInfo.FILTERED_COLOR));
 		
 		if (filter.getType() != StatClockFilterType.NONE) return;
 		

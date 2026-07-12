@@ -225,8 +225,11 @@ public class StatClockContent implements ToolTipComponent {
 			
 		} else {
 			
+			list.add(Component.empty());
+			list.add(Component.translatable("stat-clocks.tooltip.stat_clock_header"));
+			
 			for (StatClockPartContent part : parts) {
-				list.add(part.getComponent(stack, this));
+				list.add(part.getComponent(stack));
 			}
 		}
 	}

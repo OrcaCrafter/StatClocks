@@ -31,6 +31,7 @@ public class StatClockEnglishLangProvider extends FabricLanguageProvider {
 		translationBuilder.add("stat-clocks.view.title", "Stat Clock View");
 		
 		translationBuilder.add("stat-clocks.tooltip.blank_clock", "No Parts on Stat Clock");
+		translationBuilder.add("stat-clocks.tooltip.stat_clock_header", "Tool Statisitics");
 		translationBuilder.add("stat-clocks.tooltip.clock_tool_type", "Clock is for %1$s");
 		
 		translationBuilder.add("stat-clocks.tooltip.filter_type:item", "Filtering for item:");
@@ -84,7 +85,7 @@ public class StatClockEnglishLangProvider extends FabricLanguageProvider {
 		translatePartType(translationBuilder, SHEARS_USED, "Times Using Shears");
 		translatePartType(translationBuilder, SHEARS_USED_ITEM, "Items Sheared Off", "%1$s Sheared");
 		translatePartType(translationBuilder, SHEARS_USED_BLOCK, "Blocks Sheared", "%1$s Sheared");
-		translatePartType(translationBuilder, SHEARS_USED_ENTITY, "Times Using Shears", "%1$s Sheared");
+		translatePartType(translationBuilder, SHEARS_USED_ENTITY, "Mobs Sheared", "%1$s Sheared");
 		translatePartType(translationBuilder, BRUSH_USED, "Times Brushed", "%1$s Brushed Off");
 		translatePartType(translationBuilder, BLOCK_LOOT_DROPPED,  "Block Loot Dropped", "%1$s Dropped");
 		translatePartType(translationBuilder, DAMAGE_DEALT, "Damage Dealt", "Damage Dealt to %1$s");

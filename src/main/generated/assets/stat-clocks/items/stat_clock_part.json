@@ -1,6 +1,294 @@
 {
   "model": {
-    "type": "minecraft:model",
-    "model": "stat-clocks:item/stat_clock_part"
+    "type": "minecraft:composite",
+    "models": [
+      {
+        "type": "minecraft:model",
+        "model": "stat-clocks:item/stat_clock_part"
+      },
+      {
+        "type": "minecraft:select",
+        "cases": [
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/none"
+            },
+            "when": "stat-clocks:none"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/blocks_mined"
+            },
+            "when": "stat-clocks:blocks_mined"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/times_used"
+            },
+            "when": "stat-clocks:times_used"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/blocks_ignited"
+            },
+            "when": "stat-clocks:blocks_ignited"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/mobs_ignited"
+            },
+            "when": "stat-clocks:mobs_ignited"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/shears_used"
+            },
+            "when": "stat-clocks:shears_used"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/shears_used_item"
+            },
+            "when": "stat-clocks:shears_used_item"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/shears_used_block"
+            },
+            "when": "stat-clocks:shears_used_block"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/shears_used_entity"
+            },
+            "when": "stat-clocks:shears_used_entity"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/brush_used"
+            },
+            "when": "stat-clocks:brush_used"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/block_loot_dropped"
+            },
+            "when": "stat-clocks:block_loot_dropped"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/damage_dealt"
+            },
+            "when": "stat-clocks:damage_dealt"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/damage_dealt_distance"
+            },
+            "when": "stat-clocks:damage_dealt_distance"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/mobs_killed"
+            },
+            "when": "stat-clocks:mobs_killed"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/mob_loot_dropped"
+            },
+            "when": "stat-clocks:mob_loot_dropped"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/damage_taken"
+            },
+            "when": "stat-clocks:damage_taken"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/damage_blocked"
+            },
+            "when": "stat-clocks:damage_blocked"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/attacks_blocked"
+            },
+            "when": "stat-clocks:attacks_blocked"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/fall_attack_distance"
+            },
+            "when": "stat-clocks:fall_attack_distance"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/distance_walked"
+            },
+            "when": "stat-clocks:distance_walked"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/distance_crouched"
+            },
+            "when": "stat-clocks:distance_crouched"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/distance_swam"
+            },
+            "when": "stat-clocks:distance_swam"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/distance_waded"
+            },
+            "when": "stat-clocks:distance_waded"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/time_underwater"
+            },
+            "when": "stat-clocks:time_underwater"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/mined_underwater"
+            },
+            "when": "stat-clocks:mined_underwater"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/items_consumed"
+            },
+            "when": "stat-clocks:items_consumed"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/distance_fallen"
+            },
+            "when": "stat-clocks:distance_fallen"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/items_fished"
+            },
+            "when": "stat-clocks:items_fished"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/fish_caught"
+            },
+            "when": "stat-clocks:fish_caught"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/treasure_caught"
+            },
+            "when": "stat-clocks:treasure_caught"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/trash_caught"
+            },
+            "when": "stat-clocks:trash_caught"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/mobs_fished"
+            },
+            "when": "stat-clocks:mobs_fished"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/distance_flown"
+            },
+            "when": "stat-clocks:distance_flown"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/rocket_usage"
+            },
+            "when": "stat-clocks:rocket_usage"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/distance_rode"
+            },
+            "when": "stat-clocks:distance_rode"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/distance_floated"
+            },
+            "when": "stat-clocks:distance_floated"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/vehicle_distance"
+            },
+            "when": "stat-clocks:vehicle_distance"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/time_played"
+            },
+            "when": "stat-clocks:time_played"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/times_finished"
+            },
+            "when": "stat-clocks:times_finished"
+          }
+        ],
+        "fallback": {
+          "type": "minecraft:model",
+          "model": "stat-clocks:item/stat_clock_part"
+        },
+        "property": "stat-clocks:stat_clock_part_type"
+      }
+    ]
   }
 }

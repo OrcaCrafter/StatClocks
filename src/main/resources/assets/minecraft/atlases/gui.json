@@ -1,0 +1,9 @@
+{
+	"sources": [
+		{
+			"type": "minecraft:directory",
+			"prefix": "gui/stat_clock_part_icons/",
+			"source": "gui/stat_clock_part_icons"
+		}
+	]
+}

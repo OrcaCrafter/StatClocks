@@ -23,6 +23,9 @@ public class StatClocksClient implements ClientModInitializer {
 	
 	@Override
 	public void onInitializeClient () {
+		
+		SelectItemModelProperties.ID_MAPPER.put(Identifier.fromNamespaceAndPath(MOD_ID, "stat_clock_part_type"), ContextPartType.TYPE);
+		
 		// This entrypoint is suitable for setting up client-specific logic, such as rendering
 		
 		
