@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
@@ -383,6 +384,22 @@ public class StatClockPartTypes {
 	public static final StatClockPartType TIMES_FINISHED = new PartTypeInfo("times_finished")
 		.markNoListener().hide().close();
 	
+	//Container
+	public static final StatClockPartType ITEMS_DEPOSITED = new PartTypeInfo("items_deposited")
+		.setFilterTypeItem().close();
+	
+	//Banner patterns, shulker boxes, bundles and leather armor
+	public static final StatClockPartType DYE_USED = new PartTypeInfo("dye_used")
+		.setFilterTypeItem(StatClocksMod.DYE)
+		.addListener(MiscListeners.DYE_USED_LISTENER).close();
+	
+	public static final StatClockPartType MINECART_FUELED = new PartTypeInfo("minecart_fueled")
+		.setFilterTypeItem(ItemTags.FURNACE_MINECART_FUEL).close();
+	
+	public static final StatClockPartType SPYED_ON = new PartTypeInfo("spyed_on")
+		.addListener(MiscListeners.SPYED_ON_LISTENER)
+		.setFilterTypeEntity()
+		.close();
 	
 	public static ItemStack getPriorityHandItem (Player player, Predicate<ItemStack> condition) {
 		ItemStack ret = player.getMainHandItem();

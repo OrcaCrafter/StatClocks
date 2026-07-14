@@ -45,6 +45,21 @@ public class StatClockItemTagProvider extends FabricTagProvider.ItemTagProvider 
 			Items.MUSIC_DISC_PIGSTEP, Items.MUSIC_DISC_TEARS, Items.MUSIC_DISC_LAVA_CHICKEN
 		);
 		
+		valueLookupBuilder(StatClocksMod.DYE).add(
+			Items.WHITE_DYE, Items.LIGHT_GRAY_DYE, Items.GRAY_DYE, Items.BLACK_DYE,
+			Items.BROWN_DYE, Items.RED_DYE, Items.ORANGE_DYE, Items.YELLOW_DYE,
+			Items.LIME_DYE, Items.GREEN_DYE, Items.CYAN_DYE, Items.LIGHT_BLUE_DYE,
+			Items.BLUE_DYE, Items.PURPLE_DYE, Items.MAGENTA_DYE, Items.PINK_DYE
+		);
+		
+		valueLookupBuilder(StatClocksMod.BANNER_PATTERN).add(
+			Items.FIELD_MASONED_BANNER_PATTERN, Items.BORDURE_INDENTED_BANNER_PATTERN,
+			Items.FLOWER_BANNER_PATTERN, Items.CREEPER_BANNER_PATTERN,
+			Items.SKULL_BANNER_PATTERN, Items.MOJANG_BANNER_PATTERN,
+			Items.GLOBE_BANNER_PATTERN, Items.PIGLIN_BANNER_PATTERN,
+			Items.FLOW_BANNER_PATTERN, Items.GUSTER_BANNER_PATTERN
+		);
+		
 		valueLookupBuilder(StatClocksMod.CONSUMABLE).add(
 			Items.APPLE, Items.GOLDEN_APPLE, Items.ENCHANTED_GOLDEN_APPLE,
 			Items.CARROT, Items.GOLDEN_CARROT,
@@ -199,6 +214,16 @@ public class StatClockItemTagProvider extends FabricTagProvider.ItemTagProvider 
 			.addDefaultItemTags(ItemTags.SHULKER_BOXES, ItemTags.BUNDLES)
 			.addAllowedItemTags(ItemTags.CHEST_BOATS)
 			.addAllowedItems(Items.HOPPER_MINECART, Items.CHEST_MINECART);
+		
+		buildPartTags(DYE_USED)
+			.addDefaultItemTags(StatClocksMod.BANNER_PATTERN)
+			.addAllowedItemTags(ItemTags.SHULKER_BOXES, ItemTags.BUNDLES, ItemTags.HARNESSES, ItemTags.DYEABLE);
+		
+		buildPartTags(MINECART_FUELED)
+			.addAllowedItems(Items.FURNACE_MINECART);
+		
+		buildPartTags(SPYED_ON)
+			.addAllowedItems(Items.SPYGLASS);
 		
 		STAT_PART_TYPES.forEach((id, pair) ->
 			valueLookupBuilder(StatClocksMod.STAT_CLOCKABLE).addOptionalTag(pair.getB().defaultItemsTag).addOptionalTag(pair.getB().allowedItemsTag));

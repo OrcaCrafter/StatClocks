@@ -32,12 +32,13 @@ public class MiscListeners {
 	
 	public static final ListenerAdapter INSTRUMENT_USE_LISTENER			= new ListenerAdapter();
 	public static final ListenerAdapter SPYGLASS_USE_LISTENER			= new ListenerAdapter();
-	
+	public static final ListenerAdapter SPYED_ON_LISTENER				= new ListenerAdapter();
 	
 	public static final ListenerAdapter MACE_FALL_LISTENER				= new ListenerAdapter();
 	
 	public static final ListenerAdapter FIREWORK_USED_LISTENER			= new ListenerAdapter();
 	
+	public static final ListenerAdapter DYE_USED_LISTENER				= new ListenerAdapter();
 	
 	//Replacements for statistics
 	public static final ListenerAdapter ENTITY_KILLED_LISTENER			= new ListenerAdapter();

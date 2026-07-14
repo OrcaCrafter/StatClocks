@@ -25,6 +25,7 @@ public class StatClockDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(StatClockEntityTagProvider::new);
 		
 		pack.addProvider(StatClockRecipeProvider::new);
+		pack.addProvider(MinecraftRecipeProvider::new);
 		
 		pack.addProvider(StatClockEnglishLangProvider::new);
 		

@@ -99,6 +99,8 @@ public class StatClocksMod implements ModInitializer {
 	public static final TagKey<Item> MINECART = itemTag("boat");
 	
 	public static final TagKey<Item> MUSIC_DISC = itemTag("music_disc");
+	public static final TagKey<Item> DYE = itemTag("dye");
+	public static final TagKey<Item> BANNER_PATTERN = itemTag("banner_pattern");
 	
 	public static final TagKey<Item> FISHABLE = itemTag("fishable");
 	public static final TagKey<Item> FISHABLE_FISH = itemTag("fishable_fish");

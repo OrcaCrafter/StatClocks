@@ -3,13 +3,10 @@ package orca.statclocks.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import orca.statclocks.StatClocksMod;
 import orca.statclocks.components.StatClockPartType;
@@ -114,6 +111,10 @@ public class StatClockRecipeProvider extends FabricRecipeProvider {
 				craftPart(ROCKET_USAGE, output, Items.FIREWORK_ROCKET);
 				craftPart(DISTANCE_RODE, output, Items.SADDLE);
 				craftPart(DISTANCE_FLOATED, output, ItemTags.HARNESSES);
+				craftPart(ITEMS_DEPOSITED, output, ItemTags.BUNDLES);
+				craftPart(DYE_USED, output, StatClocksMod.DYE);
+				craftPart(MINECART_FUELED, output, Items.FURNACE_MINECART);
+				craftPart(SPYED_ON, output, Items.AMETHYST_SHARD);
 				
 				//Reset stat clock part
 				shapeless(RecipeCategory.MISC, StatClocksMod.STAT_CLOCK_PART)

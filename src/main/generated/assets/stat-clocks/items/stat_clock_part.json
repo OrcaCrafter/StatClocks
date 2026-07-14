@@ -281,6 +281,34 @@
               "model": "stat-clocks:item/stat_clock_part_icons/times_finished"
             },
             "when": "stat-clocks:times_finished"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/items_deposited"
+            },
+            "when": "stat-clocks:items_deposited"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/dye_used"
+            },
+            "when": "stat-clocks:dye_used"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/minecart_fueled"
+            },
+            "when": "stat-clocks:minecart_fueled"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/spyed_on"
+            },
+            "when": "stat-clocks:spyed_on"
           }
         ],
         "fallback": {

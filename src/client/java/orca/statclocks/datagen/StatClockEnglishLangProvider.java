@@ -116,7 +116,10 @@ public class StatClockEnglishLangProvider extends FabricLanguageProvider {
 		translatePartType(translationBuilder, VEHICLE_DISTANCE, "Distance Traveled");
 		translatePartType(translationBuilder, TIME_PLAYED, "Time Played For");
 		translatePartType(translationBuilder, TIMES_FINISHED, "Times Finished");
-		
+		translatePartType(translationBuilder, ITEMS_DEPOSITED, "Items Deposited", "%1$s Deposited");
+		translatePartType(translationBuilder, DYE_USED, "Dyes Used", "%1$s Used");
+		translatePartType(translationBuilder, MINECART_FUELED, "Times Fueled", "Times Fueled with %1$s");
+		translatePartType(translationBuilder, SPYED_ON, "Mobs Spyed On", "%1$s Spyed On");
 	}
 	
 	private void translatePartType (FabricLanguageProvider.TranslationBuilder builder, StatClockPartType type, String english, String filter) {

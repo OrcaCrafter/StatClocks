@@ -64,6 +64,8 @@ public class ListenerAdapter {
 		
 		if (statClock == null) return false;
 		
+		statClock = statClock.cloneClockContent();
+		
 		ArrayList<StatClockPartContent> parts = statClock.getParts();
 		
 		if (DETAIL_LOG) StatClocksMod.LOGGER.info("");

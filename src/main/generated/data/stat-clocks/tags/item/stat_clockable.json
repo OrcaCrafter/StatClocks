@@ -311,6 +311,38 @@
     {
       "id": "#stat-clocks:times_finished_allowed_on",
       "required": false
+    },
+    {
+      "id": "#stat-clocks:items_deposited_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:items_deposited_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:dye_used_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:dye_used_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:minecart_fueled_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:minecart_fueled_allowed_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:spyed_on_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:spyed_on_allowed_on",
+      "required": false
     }
   ]
 }

@@ -12,11 +12,13 @@
 		"VillagerMixin",
 		"WanderingTraderMixin",
 		"listener.ArmadilloMixin",
+		"listener.ArmorDyeMixin",
 		"listener.AxeItemMixin",
 		"listener.BeehiveMixin",
 		"listener.BlockMixin",
 		"listener.BoggedMixin",
 		"listener.BrushableBlockEntityMixin",
+		"listener.BundleItemMixin",
 		"listener.CakeBlockMixin",
 		"listener.ConsumableMixin",
 		"listener.CreeperMixin",
@@ -29,7 +31,9 @@
 		"listener.InstrumentItemMixin",
 		"listener.JukeboxBlockEntityMixin",
 		"listener.LivingEntityMixin",
+		"listener.LoomMenuMixin",
 		"listener.MaceItemMixin",
+		"listener.MinecartFurnaceMixin",
 		"listener.MushroomCowMixin",
 		"listener.PlayerMixin",
 		"listener.PumpkinMixin",
@@ -37,10 +41,12 @@
 		"listener.ShearsItemMixin",
 		"listener.SheepMixin",
 		"listener.ShovelItemMixin",
+		"listener.ShulkerBoxBlockEntityMixin",
 		"listener.SnowGolemMixin",
 		"listener.SpyglassItemMixin",
 		"listener.StatEvent",
-		"listener.TntBlockMixin"
+		"listener.TntBlockMixin",
+		"listener.TransmuteRecipeMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

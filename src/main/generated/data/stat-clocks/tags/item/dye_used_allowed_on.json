@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "#minecraft:shulker_boxes",
+      "required": false
+    },
+    {
+      "id": "#minecraft:bundles",
+      "required": false
+    },
+    {
+      "id": "#minecraft:harnesses",
+      "required": false
+    },
+    {
+      "id": "#minecraft:dyeable",
+      "required": false
+    }
+  ]
+}

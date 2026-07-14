@@ -1,0 +1,10 @@
+{
+  "values": [
+    {
+      "id": "#minecraft:chest_boats",
+      "required": false
+    },
+    "minecraft:hopper_minecart",
+    "minecraft:chest_minecart"
+  ]
+}

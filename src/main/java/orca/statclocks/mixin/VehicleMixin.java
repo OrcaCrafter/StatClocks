@@ -1,22 +1,17 @@
 package orca.statclocks.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.vehicle.VehicleEntity;
-import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.phys.Vec3;
-import orca.statclocks.StatClocksMod;
 import orca.statclocks.components.StatClockContent;
 import orca.statclocks.components.StatClockPartContent;
-import orca.statclocks.components.StatClockPartType;
 import orca.statclocks.lists.StatClockPartTypes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -52,8 +47,6 @@ public abstract class VehicleMixin extends Entity {
 			
 			if (content != null) {
 				int distance = (int)Math.round(vec3.length() * 100);
-				
-				StatClocksMod.LOGGER.info("Moved: {} cast to {}cm", vec3.length(), distance);
 				
 				content.incrementCount(distance);
 			}
