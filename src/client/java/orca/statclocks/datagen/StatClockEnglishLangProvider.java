@@ -37,7 +37,9 @@ public class StatClockEnglishLangProvider extends FabricLanguageProvider {
 		translationBuilder.add("stat-clocks.tooltip.filter_type:item", "Filtering for item:");
 		translationBuilder.add("stat-clocks.tooltip.filter_type:block", "Filtering for block:");
 		translationBuilder.add("stat-clocks.tooltip.filter_type:entity", "Filtering for entity:");
-		translationBuilder.add("stat-clocks.tooltip.filter_use_info", "Use on block, item or enty to set");
+		translationBuilder.add("stat-clocks.tooltip.filter_type:player", "Filtering for player:");
+		translationBuilder.add("stat-clocks.tooltip.filter_use_info1", "Use on block, item or entity to set");
+		translationBuilder.add("stat-clocks.tooltip.filter_use_info2", "Crouch click a player to filter for only them");
 		translationBuilder.add("stat-clocks.tooltip.filter_error", "Unknown issues with filter");
 		
 		translationBuilder.add("stat-clocks.tooltip.part_type_filter_tip_1", "Can filter based on %1$s type");

@@ -13,6 +13,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -102,6 +103,13 @@ public class StatClockFilterContent implements ToolTipComponent {
 		
 	}
 	
+	public void Set (Player player) {
+		assert player != null;
+		
+		type = StatClockFilterType.PLAYER;
+		filter = player.getPlainTextName();
+	}
+	
 	public Item getItem () {
 		Optional<Holder.Reference<Item>> check = BuiltInRegistries.ITEM.get(Identifier.read(filter).getOrThrow());
 		
@@ -121,6 +129,10 @@ public class StatClockFilterContent implements ToolTipComponent {
 		return check.map(Holder.Reference::value).orElse(null);
 	}
 	
+	public String getPlayer () {
+		return filter;
+	}
+	
 	public boolean itemPassesFilter (Item filterItem) {
 		return (filterItem == getItem());
 	}
@@ -130,8 +142,11 @@ public class StatClockFilterContent implements ToolTipComponent {
 	}
 	
 	public boolean entityPassesFilter (EntityType<?> filterEntity) {
-		StatClocksMod.LOGGER.info("Entity: {} pass filter: {}? {}", filterEntity, getEntity(), filterEntity == getEntity());
 		return (filterEntity == getEntity());
+	}
+	
+	public boolean playerPassesFilter (Player player) {
+		return player.getPlainTextName().equals(getPlayer());
 	}
 	
 	public Component getItemTranslation () {
@@ -152,6 +167,10 @@ public class StatClockFilterContent implements ToolTipComponent {
 		return entity.getDescription();
 	}
 	
+	public Component getPlayerTranslation () {
+		return Component.literal(filter);
+	}
+	
 	public StatClockFilterType getType () {
 		return type;
 	}
@@ -162,6 +181,7 @@ public class StatClockFilterContent implements ToolTipComponent {
 			case ITEM -> getItemTranslation();
 			case BLOCK -> getBlockTranslation();
 			case ENTITY -> getEntityTranslation();
+			case PLAYER -> getPlayerTranslation();
 			default -> Component.empty();
 		};
 	}
@@ -183,7 +203,8 @@ public class StatClockFilterContent implements ToolTipComponent {
 	@Override
 	public void addToTooltip (ItemStack stack, Item.TooltipContext context, TooltipFlag typeFlag, List<Component> list) {
 		if (type == StatClockFilterType.NONE) {
-			list.add(Component.translatable("stat-clocks.tooltip.filter_use_info"));
+			list.add(Component.translatable("stat-clocks.tooltip.filter_use_info1"));
+			list.add(Component.translatable("stat-clocks.tooltip.filter_use_info2"));
 		} else {
 			list.add(Component.translatable("stat-clocks.tooltip.filter_type:" + type.getName()));
 			list.add(CommonComponents.space().append(getFilterTranslation()));

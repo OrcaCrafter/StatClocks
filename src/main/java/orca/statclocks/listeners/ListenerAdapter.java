@@ -146,12 +146,20 @@ public class ListenerAdapter {
 					yield false;
 				}
 			}
+			case PLAYER -> {
+				if (target instanceof Player player) {
+					yield filter.playerPassesFilter(player);
+				} else if (target instanceof EntityType<?> entityType) {
+					if (entityType.equals(EntityType.PLAYER)) {
+						StatClocksMod.LOGGER.warn("Player filter recieved EntityType<Player> instead of a refrence to the player");
+					}
+				}
+				yield false;
+			}
 			default -> true;
 		};
 		
 		if (!passes) return false;
-		
-		if (DETAIL_LOG) StatClocksMod.LOGGER.info("\tAdded!");
 		
 		part.incrementCount(amount);
 		

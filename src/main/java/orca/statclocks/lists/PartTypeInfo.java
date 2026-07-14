@@ -168,6 +168,11 @@ public class PartTypeInfo {
 		
 		if (filterType == StatClockFilterType.NONE) return false;
 		
+		//Special case
+		if (filterType == StatClockFilterType.ENTITY && filterContent.getType() == StatClockFilterType.PLAYER) {
+			return entityAllowed(EntityType.PLAYER);
+		}
+		
 		if (filterType != filterContent.getType()) return false;
 		
 		return switch (filterType) {

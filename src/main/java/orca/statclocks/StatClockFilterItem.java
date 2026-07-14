@@ -50,6 +50,16 @@ public class StatClockFilterItem extends Item {
 		
 		ItemStack filterItem = player.getItemInHand(interactionHand);
 		
+		if (player.isCrouching() && livingEntity instanceof Player targetPlayer) {
+			StatClockFilterContent filter = StatClockFilterContent.makeEmpty();
+			
+			filter.Set(targetPlayer);
+			
+			filterItem.set(StatClockFilterContent.FILTER_COMPONENT, filter);
+			
+			return InteractionResult.SUCCESS;
+		}
+		
 		StatClockFilterContent filter = StatClockFilterContent.makeEmpty();
 		
 		filter.Set(livingEntity.getType());
