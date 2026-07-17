@@ -27,7 +27,7 @@ public class ArmorDyeMixin {
 			MiscListeners.DYE_USED_LISTENER.applyToPartsNonPlayer(itemStack, dye, 1);
 		}
 		
-		return itemStack;
+		return original.call(itemStack, list);
 	}
 	
 	
