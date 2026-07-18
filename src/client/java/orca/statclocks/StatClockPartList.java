@@ -23,7 +23,7 @@ public class StatClockPartList extends ContainerObjectSelectionList<StatClockPar
 	public static final int ENTRY_HEIGHT = 25;
 	
 	public StatClockPartList (Minecraft minecraft, int width, int height, ItemStack stack, StatClockContent clockContent, Font font) {
-		super(minecraft, width/2 - SIDE_PADDING*2, height - TOP_PADDING - BOTTOM_PADDING, height, ENTRY_HEIGHT);
+		super(minecraft, width/2 - SIDE_PADDING*2, height - TOP_PADDING - BOTTOM_PADDING, TOP_PADDING, ENTRY_HEIGHT);
 		
 		for (StatClockPartContent part : clockContent.getParts()) {
 			addEntry(new Entry(this, width, stack, part, font));
