@@ -107,17 +107,18 @@ public class StatClockPartType implements ToolTipComponent {
 		return filter.equals(compare.filter);
 	}
 	
-	public MutableComponent getComponent (Color color) {
-		Component icon = Component.object(new AtlasSprite(AtlasIds.GUI, id.withPrefix("gui/stat_clock_part_icons/")));
-		Component text;
-		
+	public MutableComponent getText (Color color) {
 		if (filter.getType() == StatClockFilterType.NONE) {
-			text = Component.translatable("stat-clocks.tooltip.part_type:" + id).withColor(color.getRGB());
+			return Component.translatable("stat-clocks.tooltip.part_type:" + id).withColor(color.getRGB());
 			
 		} else {
-			text = Component.translatable("stat-clocks.tooltip.part_type_filtered:" + id, filter.getFilterTranslation().getString()).withColor(color.getRGB());
+			return Component.translatable("stat-clocks.tooltip.part_type_filtered:" + id, filter.getFilterTranslation().getString()).withColor(color.getRGB());
 			
-			//TODO filter icon
+		}
+	}
+	
+	public MutableComponent getIcon () {
+		//TODO filter icon
 //			Component filterIcon = switch (filter.getType()) {
 //				case ITEM -> Component.object(new AtlasSprite(AtlasIds.ITEMS, Identifier.parse(filter.filter).withPrefix("item/")));
 //				case BLOCK -> Component.object(new AtlasSprite(AtlasIds.BLOCKS, Identifier.parse(filter.filter).withPrefix("block/")));
@@ -126,9 +127,12 @@ public class StatClockPartType implements ToolTipComponent {
 //			};
 //
 //			if (filterIcon != null) return Component.empty().append(icon).append(filterIcon).append(" ").append(text);
-		}
 		
-		return Component.empty().append(icon).append(" ").append(text);
+		return Component.object(new AtlasSprite(AtlasIds.GUI, id.withPrefix("gui/stat_clock_part_icons/")));
+	}
+	
+	public MutableComponent getComponent (Color color) {
+		return getIcon().append(" ").append(getText(color));
 	}
 	
 	public PartTypeInfo getInfo () {

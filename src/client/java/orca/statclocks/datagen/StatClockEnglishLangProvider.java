@@ -32,6 +32,7 @@ public class StatClockEnglishLangProvider extends FabricLanguageProvider {
 		
 		translationBuilder.add("stat-clocks.tooltip.blank_clock", "No Parts on Stat Clock");
 		translationBuilder.add("stat-clocks.tooltip.stat_clock_header", "Tool Statisitics");
+		translationBuilder.add("stat-clocks.tooltip.too_many_parts", "... (%1$s More)");
 		translationBuilder.add("stat-clocks.tooltip.clock_tool_type", "Clock is for %1$s");
 		
 		translationBuilder.add("stat-clocks.tooltip.filter_type:item", "Filtering for item:");

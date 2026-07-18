@@ -6,10 +6,12 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -18,12 +20,15 @@ import orca.statclocks.StatClocksMod;
 import orca.statclocks.ToolTipComponent;
 import orca.statclocks.lists.StatClockPartTypes;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 
 public class StatClockContent implements ToolTipComponent {
+	
+	public static final int MAX_TOOL_TIPS = 4;
 	
 	public static void init () {
 	}
@@ -151,8 +156,12 @@ public class StatClockContent implements ToolTipComponent {
 		}
 	}
 	
-	private String getToolType () {
+	public String getToolType () {
 		return toolType;
+	}
+	
+	public Identifier getToolTypeID () {
+		return Identifier.parse(toolType);
 	}
 	
 	public void setParts (ArrayList<StatClockPartContent> parts) {
@@ -228,8 +237,27 @@ public class StatClockContent implements ToolTipComponent {
 			list.add(Component.empty());
 			list.add(Component.translatable("stat-clocks.tooltip.stat_clock_header"));
 			
+			int count = 0;
 			for (StatClockPartContent part : parts) {
-				list.add(part.getComponent(stack));
+				int more = parts.size() - MAX_TOOL_TIPS;
+				
+				if (count++ >= MAX_TOOL_TIPS && more > 1) {
+					list.add(Component.translatable("stat-clocks.tooltip.too_many_parts", more).withColor(Color.gray.getRGB()));
+					break;
+				} else {
+					
+					ItemStack checkStack;
+					
+					if (stack.is(StatClocksMod.STAT_CLOCK)) {
+						Item itemType = BuiltInRegistries.ITEM.getValueOrThrow(ResourceKey.create(Registries.ITEM, getToolTypeID()));
+						
+						checkStack = new ItemStack(itemType);
+					} else {
+						checkStack = stack;
+					}
+					
+					list.add(part.getComponent(checkStack));
+				}
 			}
 		}
 	}
