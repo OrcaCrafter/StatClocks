@@ -1,5 +1,6 @@
 package orca.statclocks;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.FocusableTextWidget;
@@ -15,12 +16,14 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.entity.vehicle.minecart.AbstractMinecart;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.equipment.Equippable;
+import net.minecraft.world.level.Level;
 import orca.statclocks.components.StatClockContent;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
@@ -54,6 +57,9 @@ public class StatClockScreen extends Screen {
 	private long randomSeed;
 	
 	private FocusableTextWidget itemName;
+	private FocusableTextWidget itemType;
+	
+	private final Level level;
 	
 	public StatClockScreen (Screen prior, ItemStack itemStack, StatClockContent content) {
 		super(TITLE);
@@ -70,6 +76,10 @@ public class StatClockScreen extends Screen {
 		
 		this.content = content;
 		
+		assert Minecraft.getInstance().level != null;
+		
+		level = Minecraft.getInstance().level;
+		
 	}
 	
 	public StatClockPartList partList;
@@ -79,10 +89,19 @@ public class StatClockScreen extends Screen {
 		
 		partList = new StatClockPartList(minecraft, this.width, this.height, itemStack, content, font);
 		
-		itemName = FocusableTextWidget.builder(itemStack.getItemName(), font).alwaysShowBorder(false).backgroundFill(FocusableTextWidget.BackgroundFill.ON_FOCUS).build();
+		MutableComponent nameComponent = Component.empty().append(itemStack.getHoverName()).withStyle(itemStack.getRarity().color());
+		
+		itemName = FocusableTextWidget.builder(nameComponent, font).alwaysShowBorder(false).backgroundFill(FocusableTextWidget.BackgroundFill.ON_FOCUS).build();
 		
 		addRenderableWidget(partList);
 		addRenderableWidget(itemName);
+		
+		if (itemStack.getCustomName() != null) {
+			MutableComponent typeComponent = Component.empty().append(itemStack.getItemName()).withStyle(ChatFormatting.ITALIC);
+			
+			itemType = FocusableTextWidget.builder(typeComponent, font).alwaysShowBorder(false).backgroundFill(FocusableTextWidget.BackgroundFill.ON_FOCUS).build();
+			addRenderableWidget(itemType);
+		}
 	}
 	
 	@Override
@@ -103,8 +122,16 @@ public class StatClockScreen extends Screen {
 		partList.setPosition(width/2 + StatClockPartList.SIDE_PADDING,  StatClockPartList.TOP_PADDING);
 		partList.render(graphics, mouseX, mouseY, delta);
 		
-		itemName.setPosition((width*3)/4 - itemName.getWidth()/2, StatClockPartList.TOP_PADDING/2 - itemName.getHeight()/2);
-		itemName.render(graphics, mouseX, mouseY, delta);
+		if (itemType != null) {
+			itemName.setPosition((width*3)/4 - itemName.getWidth()/2, StatClockPartList.TOP_PADDING/2 - itemName.getHeight());
+			itemName.render(graphics, mouseX, mouseY, delta);
+			
+			itemType.setPosition((width*3)/4 - itemType.getWidth()/2, StatClockPartList.TOP_PADDING/2);
+			itemType.render(graphics, mouseX, mouseY, delta);
+		} else {
+			itemName.setPosition((width*3)/4 - itemName.getWidth()/2, StatClockPartList.TOP_PADDING/2 - itemName.getHeight()/2);
+			itemName.render(graphics, mouseX, mouseY, delta);
+		}
 	}
 	
 	@Override
@@ -148,7 +175,9 @@ public class StatClockScreen extends Screen {
 	}
 	
 	private void renderGenericItem (GuiGraphics graphics) {
-		ArmorStand armorStand = EntityType.ARMOR_STAND.create(Minecraft.getInstance().level, EntitySpawnReason.EVENT);
+		ArmorStand armorStand = EntityType.ARMOR_STAND.create(level, EntitySpawnReason.EVENT);
+		
+		if (armorStand == null) return;
 
 		this.<ArmorStand, ArmorStandRenderState>renderSpecificEntity(graphics, EntityType.ARMOR_STAND, armorStand, (renderState) -> {
 			
@@ -164,7 +193,9 @@ public class StatClockScreen extends Screen {
 	}
 	
 	private void renderHumanoidArmor (GuiGraphics graphics, Equippable equippable) {
-		ArmorStand armorStand = EntityType.ARMOR_STAND.create(Minecraft.getInstance().level, EntitySpawnReason.EVENT);
+		ArmorStand armorStand = EntityType.ARMOR_STAND.create(level, EntitySpawnReason.EVENT);
+		
+		if (armorStand == null) return;
 		
 		this.<ArmorStand, ArmorStandRenderState>renderSpecificEntity(graphics, EntityType.ARMOR_STAND, armorStand, (renderState) -> {
 			
@@ -209,7 +240,9 @@ public class StatClockScreen extends Screen {
 		int index = random.nextInt(entityTypes.size());
 		
 		EntityType<?> entityType = entityTypes.get(index).value();
-		Entity entity = entityType.create(Minecraft.getInstance().level, EntitySpawnReason.EVENT);
+		Entity entity = entityType.create(level, EntitySpawnReason.EVENT);
+		
+		if (entity == null) return;
 		
 		this.renderSpecificEntity(graphics, (EntityType<Entity>) entityType, entity, (state) -> {
 			if (state instanceof EquipmentAssigner assigner) {
@@ -232,11 +265,11 @@ public class StatClockScreen extends Screen {
 	}
 	
 	private <T extends Entity> void renderEntity (GuiGraphics graphics, EntityType<T> entityType, BiConsumer<Entity, EntityRenderState> consumer) {
-		T entity = entityType.create(Minecraft.getInstance().level, EntitySpawnReason.EVENT);
+		T entity = entityType.create(level, EntitySpawnReason.EVENT);
 		
-		renderSpecificEntity(graphics, entityType, entity,  (state) -> {
-			consumer.accept(entity, state);
-		});
+		if (entity == null) return;
+		
+		renderSpecificEntity(graphics, entityType, entity,  (state) -> consumer.accept(entity, state));
 	}
 	
 	private <T extends Entity, S extends EntityRenderState> void renderSpecificEntity (GuiGraphics graphics, EntityType<T> entityType, T entity, Consumer<S> stateModifier) {
