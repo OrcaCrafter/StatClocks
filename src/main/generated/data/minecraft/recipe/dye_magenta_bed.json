@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_transmute",
+  "category": "equipment",
+  "group": "bed_dye",
+  "input": "#minecraft:beds",
+  "material": "minecraft:magenta_dye",
+  "result": {
+    "id": "minecraft:magenta_bed"
+  }
+}

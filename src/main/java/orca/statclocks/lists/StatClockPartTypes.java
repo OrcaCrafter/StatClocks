@@ -401,6 +401,11 @@ public class StatClockPartTypes {
 		.setFilterTypeEntity()
 		.close();
 	
+	public static final StatClockPartType TIMES_SLEPT = new PartTypeInfo("times_slept")
+		.markNoListener()
+		.setFilterTypeEntity(StatClocksMod.CAN_SLEEP)
+		.close();
+	
 	public static ItemStack getPriorityHandItem (Player player, Predicate<ItemStack> condition) {
 		ItemStack ret = player.getMainHandItem();
 		

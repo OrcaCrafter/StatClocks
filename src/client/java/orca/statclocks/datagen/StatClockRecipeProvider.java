@@ -115,6 +115,7 @@ public class StatClockRecipeProvider extends FabricRecipeProvider {
 				craftPart(DYE_USED, output, StatClocksMod.DYE);
 				craftPart(MINECART_FUELED, output, Items.FURNACE_MINECART);
 				craftPart(SPYED_ON, output, Items.AMETHYST_SHARD);
+				craftPart(TIMES_SLEPT, output, ItemTags.BEDS);
 				
 				//Reset stat clock part
 				shapeless(RecipeCategory.MISC, StatClocksMod.STAT_CLOCK_PART)

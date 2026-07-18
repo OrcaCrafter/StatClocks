@@ -124,6 +124,7 @@ public class StatClockEnglishLangProvider extends FabricLanguageProvider {
 		translatePartType(translationBuilder, DYE_USED, "Dyes Used", "%1$s Used");
 		translatePartType(translationBuilder, MINECART_FUELED, "Times Fueled", "Times Fueled with %1$s");
 		translatePartType(translationBuilder, SPYED_ON, "Mobs Spyed On", "%1$s Spyed On");
+		translatePartType(translationBuilder, TIMES_SLEPT, "Times Slept In", "Times %1$s Slept In");
 	}
 	
 	private void translatePartType (FabricLanguageProvider.TranslationBuilder builder, StatClockPartType type, String english, String filter) {

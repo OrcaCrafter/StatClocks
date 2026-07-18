@@ -6,6 +6,7 @@
 		"AbstractBoatMixin",
 		"AbstractMinecartMixin",
 		"AnvilMenuMixin",
+		"BedBlockMixin",
 		"GrindstoneMenuMixin",
 		"GrindstoneMenuSlotMixin",
 		"VehicleMixin",

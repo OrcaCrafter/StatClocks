@@ -130,6 +130,8 @@ public class StatClocksMod implements ModInitializer {
 	
 	public static final TagKey<EntityType<?>> SHEARABLE_MOBS = entityTag("shearable_mobs");
 	
+	public static final TagKey<EntityType<?>> CAN_SLEEP = entityTag("can_sleep");
+	
 	public static TagKey<EntityType<?>> entityTag (String name) {
 		return TagKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(MOD_ID, name));
 	}

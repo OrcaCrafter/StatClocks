@@ -15,6 +15,10 @@
     {
       "id": "#minecraft:dyeable",
       "required": false
+    },
+    {
+      "id": "#minecraft:beds",
+      "required": false
     }
   ]
 }

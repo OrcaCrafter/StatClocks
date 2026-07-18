@@ -343,6 +343,14 @@
     {
       "id": "#stat-clocks:spyed_on_allowed_on",
       "required": false
+    },
+    {
+      "id": "#stat-clocks:times_slept_defaults_on",
+      "required": false
+    },
+    {
+      "id": "#stat-clocks:times_slept_allowed_on",
+      "required": false
     }
   ]
 }

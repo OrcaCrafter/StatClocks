@@ -217,13 +217,16 @@ public class StatClockItemTagProvider extends FabricTagProvider.ItemTagProvider 
 		
 		buildPartTags(DYE_USED)
 			.addDefaultItemTags(StatClocksMod.BANNER_PATTERN)
-			.addAllowedItemTags(ItemTags.SHULKER_BOXES, ItemTags.BUNDLES, ItemTags.HARNESSES, ItemTags.DYEABLE);
+			.addAllowedItemTags(ItemTags.SHULKER_BOXES, ItemTags.BUNDLES, ItemTags.HARNESSES, ItemTags.DYEABLE, ItemTags.BEDS);
 		
 		buildPartTags(MINECART_FUELED)
 			.addAllowedItems(Items.FURNACE_MINECART);
 		
 		buildPartTags(SPYED_ON)
 			.addAllowedItems(Items.SPYGLASS);
+		
+		buildPartTags(TIMES_SLEPT)
+			.addDefaultItemTags(ItemTags.BEDS);
 		
 		STAT_PART_TYPES.forEach((id, pair) ->
 			valueLookupBuilder(StatClocksMod.STAT_CLOCKABLE).addOptionalTag(pair.getB().defaultItemsTag).addOptionalTag(pair.getB().allowedItemsTag));

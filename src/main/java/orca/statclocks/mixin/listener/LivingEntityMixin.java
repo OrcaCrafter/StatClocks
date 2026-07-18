@@ -1,5 +1,6 @@
 package orca.statclocks.mixin.listener;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
@@ -21,9 +22,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.storage.loot.LootTable;
+import orca.statclocks.StatClocksMod;
+import orca.statclocks.components.StatClockContent;
+import orca.statclocks.components.StatClockFilterContent;
 import orca.statclocks.listeners.DamageListener;
 import orca.statclocks.listeners.MiscListeners;
+import orca.statclocks.lists.StatClockPartTypes;
 import org.jspecify.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -207,5 +213,53 @@ public abstract class LivingEntityMixin extends Entity {
 		if (!(entity instanceof Player player)) return;
 		
 		MiscListeners.MOB_LOOT_LISTENER.applyToParts(player, weapon, itemStack, itemStack.getCount());
+	}
+	
+	
+	@Inject(method = "startSleeping", at = @At("HEAD"))
+	void startSleeping (BlockPos blockPos, CallbackInfo ci) {
+		BlockEntity blockEntity = level().getBlockEntity(blockPos);
+		
+		StatClocksMod.LOGGER.info("Block Entity: {}", blockEntity);
+		if (blockEntity == null) return;
+		
+		StatClocksMod.LOGGER.info("Block Component Count: {}", blockEntity.components().size());
+		
+		blockEntity.components().forEach(component -> {
+			StatClocksMod.LOGGER.info("   > {}", component.getClass().getSimpleName());
+		});
+		
+		
+		StatClockContent statClock = blockEntity.components().get(StatClockContent.STAT_CLOCK_COMPONENT);
+		
+		StatClocksMod.LOGGER.info("Stat Clock: {}", statClock);
+		if (statClock == null) return;
+		
+		StatClocksMod.LOGGER.info("Part Count: {}", statClock.getParts().size());
+		
+		statClock.getParts().forEach(content -> {
+			if (content.getType().getInfo().equals(StatClockPartTypes.TIMES_SLEPT.getInfo())) {
+				StatClockFilterContent filter = content.getType().filter;
+				
+				LivingEntity thisEntity = (LivingEntity)(Object)this;
+				
+				StatClocksMod.LOGGER.info("Checking: {} for {}", filter.getType(), this.getType());
+				
+				if (switch (filter.getType()) {
+					case NONE -> true;
+					case ENTITY -> filter.entityPassesFilter(this.getType());
+					case PLAYER -> {
+						if (thisEntity instanceof Player player) yield filter.playerPassesFilter(player);
+						StatClocksMod.LOGGER.info("PLAYER ISN'T PLAYER");
+						yield false;
+					}
+					default -> false;
+				}) {
+					content.incrementCount();
+				}
+				
+			}
+		});
+		
 	}
 }

@@ -31,6 +31,8 @@ public class StatClockEntityTagProvider extends FabricTagProvider.EntityTypeTagP
 		addAll(StatClocksMod.IGNITABLE_MOBS, IGNITABLE_MOBS);
 		
 		addAll(StatClocksMod.SHEARABLE_MOBS, SHEARABLE_MOBS);
+		
+		addAll(StatClocksMod.CAN_SLEEP, EntityType.PLAYER, EntityType.VILLAGER);
 	}
 	
 	private void addAll (TagKey<EntityType<?>> tag, EntityType<?>... mobs) {

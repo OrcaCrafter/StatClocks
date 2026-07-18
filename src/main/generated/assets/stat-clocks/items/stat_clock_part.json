@@ -309,6 +309,13 @@
               "model": "stat-clocks:item/stat_clock_part_icons/spyed_on"
             },
             "when": "stat-clocks:spyed_on"
+          },
+          {
+            "model": {
+              "type": "minecraft:model",
+              "model": "stat-clocks:item/stat_clock_part_icons/times_slept"
+            },
+            "when": "stat-clocks:times_slept"
           }
         ],
         "fallback": {
