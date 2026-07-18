@@ -112,5 +112,6 @@
   "stat-clocks.tooltip.unit.second_plural": "Seconds",
   "stat-clocks.tooltip.unit.week": "Week",
   "stat-clocks.tooltip.unit.week_plural": "Weeks",
+  "stat-clocks.view.failed": "No stat clock on item to view",
   "stat-clocks.view.title": "Stat Clock View"
 }

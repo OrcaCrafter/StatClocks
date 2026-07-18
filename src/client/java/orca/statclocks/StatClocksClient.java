@@ -50,7 +50,7 @@ public class StatClocksClient implements ClientModInitializer {
 				StatClockContent clock = held.get(StatClockContent.STAT_CLOCK_COMPONENT);
 				
 				if (clock == null) {
-					client.player.displayClientMessage(Component.translatable("screen.failed_to_open"), true);
+					client.player.displayClientMessage(Component.translatable("stat-clocks.view.failed"), true);
 					return;
 				}
 				

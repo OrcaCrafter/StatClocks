@@ -29,6 +29,7 @@ public class StatClockEnglishLangProvider extends FabricLanguageProvider {
 		translationBuilder.add("item.stat-clocks.stat_clock_remover", "Stat Clock Remover");
 		
 		translationBuilder.add("stat-clocks.view.title", "Stat Clock View");
+		translationBuilder.add("stat-clocks.view.failed", "No stat clock on item to view");
 		
 		translationBuilder.add("stat-clocks.tooltip.blank_clock", "No Parts on Stat Clock");
 		translationBuilder.add("stat-clocks.tooltip.stat_clock_header", "Tool Statisitics");
